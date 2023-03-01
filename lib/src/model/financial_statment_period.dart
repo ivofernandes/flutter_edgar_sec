@@ -1,0 +1,4 @@
+enum FinancialStatementPeriod {
+  annual,
+  quarterly,
+}

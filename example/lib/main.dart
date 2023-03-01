@@ -51,19 +51,23 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               MaterialButton(
                 color: Colors.green,
-                child: Text('Get Financial Statements'),
                   onPressed: _getFinancialStatements,
+                child: const Text('Get Financial Statements'),
               ),
               const SizedBox(height: 20,),
               if(_isLoading)
-                CircularProgressIndicator(),
+                const CircularProgressIndicator(),
 
               Expanded(
                 child: ListView.builder(
                     itemCount: _financialStatements.length,
                     itemBuilder: (context, index){
-                      return Text(_financialStatements[index].toString());
-                }),
+                      return Container(
+                          margin: EdgeInsets.all(10),
+                          child: Text(_financialStatements[index].toString()),
+                      );
+                },
+                ),
               )
             ],
           ),
@@ -74,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _getFinancialStatements() async{
     _isLoading = true;
+    _financialStatements.clear();
     setState(() {});
 
     _financialStatements = await EdgarSecService.getFinancialStatementsForSymbol(_textEditingController.text);
