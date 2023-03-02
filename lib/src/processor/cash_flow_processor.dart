@@ -1,4 +1,4 @@
-import 'package:flutter_edgar_sec/src/model/financial_statement.dart';
+import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 
 /// Cash flow processor
 /// https://seekingalpha.com/symbol/AAPL/cash-flow-statement

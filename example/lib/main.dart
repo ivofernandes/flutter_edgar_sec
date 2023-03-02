@@ -27,22 +27,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  final TextEditingController _textEditingController = TextEditingController(
-    text: 'AAPL'
-  );
+  final TextEditingController _textEditingController = TextEditingController(text: 'AAPL');
   bool _isLoading = false;
-  List<FinancialStatement> _financialStatements = [];
+  CompanyResults _companyResults = CompanyResults.empty();
 
   @override
   Widget build(BuildContext context) {
+    List<int> years = _companyResults.years;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edgar SEC'),
+        title: const Text('Edgar SEC'),
       ),
       body: Center(
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -51,22 +49,31 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               MaterialButton(
                 color: Colors.green,
-                  onPressed: _getFinancialStatements,
+                onPressed: _getFinancialStatements,
                 child: const Text('Get Financial Statements'),
               ),
-              const SizedBox(height: 20,),
-              if(_isLoading)
-                const CircularProgressIndicator(),
-
+              const SizedBox(
+                height: 20,
+              ),
+              if (_isLoading) const CircularProgressIndicator(),
               Expanded(
                 child: ListView.builder(
-                    itemCount: _financialStatements.length,
-                    itemBuilder: (context, index){
-                      return Container(
-                          margin: EdgeInsets.all(10),
-                          child: Text(_financialStatements[index].toString()),
-                      );
-                },
+                  itemCount: years.length,
+                  itemBuilder: (context, index) {
+                    final int year = years[index]!;
+
+                    return Card(
+                      child: Column(
+                        children: [
+                          Text(
+                            year.toString(),
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                          Text(_companyResults.yearlyResults[year]!.toString()),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               )
             ],
@@ -76,12 +83,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<void> _getFinancialStatements() async{
+  Future<void> _getFinancialStatements() async {
     _isLoading = true;
-    _financialStatements.clear();
+    _companyResults = CompanyResults.empty();
     setState(() {});
 
-    _financialStatements = await EdgarSecService.getFinancialStatementsForSymbol(_textEditingController.text);
+    _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(_textEditingController.text);
 
     _isLoading = false;
     setState(() {});
