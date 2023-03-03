@@ -20,6 +20,7 @@ class IncomeStatementProcessor {
 
   static const List<String> supportedFields = [
     ...revenueFields,
+    'CostOfGoodsAndServicesSold',
     'NetIncomeLoss',
     'OperatingIncomeLoss',
   ];
@@ -47,6 +48,9 @@ class IncomeStatementProcessor {
     }
 
     switch (field) {
+      case 'CostOfGoodsAndServicesSold':
+        incomeStatement.costOfGoodsAndServicesSold = value;
+        break;
       case 'NetIncomeLoss':
         incomeStatement.netIncome = value;
         break;
