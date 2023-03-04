@@ -9,7 +9,7 @@ import 'package:flutter_edgar_sec/src/processor/cash_flow_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/income_statement_processor.dart';
 
 /// Logic related to process 10-Q financial statements
-class QuarterProcessor {
+class PeriodProcessor {
   /// Returns a map of quarters financial statements for a given symbol
   static Map<String, FinancialStatement> process(Map<String, dynamic> facts) {
     const String referenceField = 'AssetsCurrent';
@@ -41,7 +41,7 @@ class QuarterProcessor {
   }
 
   /// Distributes the quarters into the yearly results
-  static void distribute(Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
+  static void distributeByQuarter(Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
     for (final quarterStatement in quarterStatements.values) {
       final int year = quarterStatement.year;
 

@@ -1,6 +1,8 @@
 import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
-import 'package:flutter_edgar_sec/src/processor/quarters/quarter_processor.dart';
+import 'package:flutter_edgar_sec/src/processor/quarters/period_processor.dart';
+
+import '../processor/quarters/year_processor.dart';
 
 class CompanyResults {
   final Map<int, YearlyResults> yearlyResults;
@@ -14,11 +16,14 @@ class CompanyResults {
   factory CompanyResults.fromJsonList(Map<String, dynamic> companyFactsJson) {
     final Map<String, dynamic> facts = companyFactsJson['facts']['us-gaap'] as Map<String, dynamic>;
 
-    final Map<String, FinancialStatement> quarters = QuarterProcessor.process(facts);
+    final Map<String, FinancialStatement> quarters = PeriodProcessor.process(facts);
+
+    // might not be needed
+    //final Map<String, FinancialStatement> annual = YearProcessor.process(facts);
 
     // Get all the years available
     final Map<int, YearlyResults> yearlyResults = {};
-    QuarterProcessor.distribute(quarters, yearlyResults);
+    PeriodProcessor.distributeByQuarter(quarters, yearlyResults);
 
     return CompanyResults(
       yearlyResults: yearlyResults,
