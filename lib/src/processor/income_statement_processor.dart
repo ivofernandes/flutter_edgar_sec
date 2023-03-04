@@ -49,7 +49,7 @@ class IncomeStatementProcessor {
 
     switch (field) {
       case 'CostOfGoodsAndServicesSold':
-        incomeStatement.costOfGoodsAndServicesSold = value;
+        incomeStatement.costOfRevenues = value;
         break;
       case 'NetIncomeLoss':
         incomeStatement.netIncome = value;

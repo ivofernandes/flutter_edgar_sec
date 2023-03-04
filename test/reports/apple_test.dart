@@ -19,10 +19,12 @@ void main() {
     final revenueBillions = income2022Q4.revenues.billions;
     final operatingIncomeBillions = income2022Q4.operatingIncome.billions;
     final netIncomeBillions = income2022Q4.netIncome.billions;
+    final costOfRevenueBillions = income2022Q4.costOfRevenues.billions;
 
     assert(revenueBillions == 117.154);
     assert(operatingIncomeBillions == 36.016);
     assert(netIncomeBillions == 29.998);
+    assert(costOfRevenueBillions == 66.822);
 
     // Check derivated values
     final netMargin = income2022Q4.netMargin;

@@ -2,9 +2,10 @@ class IncomeStatement {
   IncomeStatement();
 
   double revenues = 0;
+
   // CostOfGoodsAndServicesSold": {
   // "label": "Cost of Goods and Services Sold",
-  double costOfGoodsAndServicesSold = 0;
+  double costOfRevenues = 0;
   double netIncome = 0;
   double operatingIncome = 0;
 
@@ -15,7 +16,7 @@ class IncomeStatement {
   @override
   String toString() => '''
   revenues: $revenues
-  costOfRevenues: $costOfGoodsAndServicesSold
+  costOfRevenues: $costOfRevenues
   netIncome: $netIncome
   operatingIncome: $operatingIncome
   ''';
