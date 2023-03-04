@@ -4,8 +4,8 @@ import 'package:flutter_edgar_sec/src/service/symbol_to_cik.dart';
 
 class EdgarSecService {
   /// Returns a list of financial statements for a given symbol
-  static Future<CompanyResults> getFinancialStatementsForSymbol(String symbol) {
-    final String cik = SymbolToCik.convert(symbol, leadingZeros: true);
+  static Future<CompanyResults> getFinancialStatementsForSymbol(String symbol) async {
+    final String cik = await SymbolToCik().convert(symbol, leadingZeros: true);
 
     return GetAllDataFromCik.getAllDataFromCik(cik);
   }

@@ -1,10 +1,8 @@
 import 'package:flutter_edgar_sec/src/service/symbol_to_cik.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-
 void main() {
-  test('Test the convert from symbol to cik', () {
+  test('Test the convert from symbol to cik', () async {
     Map<String, String> symbolToCik = {
       'aapl': '320193',
       'msft': '789019',
@@ -18,7 +16,13 @@ void main() {
     };
 
     for (String symbol in symbolToCik.keys) {
-      expect(SymbolToCik.convert(symbol), symbolToCik[symbol]);
+      final String cik = await SymbolToCik().convert(symbol);
+      expect(cik, symbolToCik[symbol]);
     }
+  });
+
+  test('Test leading zeros', () async {
+    final String cik = await SymbolToCik().convert('aapl', leadingZeros: true);
+    expect(cik, '0000320193');
   });
 }

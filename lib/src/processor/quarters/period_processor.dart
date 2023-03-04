@@ -12,12 +12,11 @@ import 'package:flutter_edgar_sec/src/processor/income_statement_processor.dart'
 class PeriodProcessor {
   /// Returns a map of quarters and a map of annual financial statements for a given symbol
   static Map<String, FinancialStatement> process(Map<String, dynamic> facts) {
-    const String referenceField = 'AssetsCurrent';
+    const String referenceField = 'NetIncomeLoss';
     final referenceUnits = facts[referenceField]['units']['USD'] as List;
     final Map<String, FinancialStatement> quarters = {};
     final Map<String, FinancialStatement> annuals = {};
     for (final row in referenceUnits) {
-
       final endDateString = row['end'] as String;
       // Parse date from string with format yyyy-MM-dd
       final endDate = DateTime.parse(endDateString);
@@ -56,7 +55,8 @@ class PeriodProcessor {
   }
 
   /// Distributes the quarters into the yearly results
-  static void distributeByQuarter(Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
+  static void distributeByQuarter(
+      Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
     for (final quarterStatement in quarterStatements.values) {
       final int year = quarterStatement.year;
 

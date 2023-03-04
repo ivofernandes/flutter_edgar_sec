@@ -2,8 +2,6 @@ import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/quarters/period_processor.dart';
 
-import '../processor/quarters/year_processor.dart';
-
 class CompanyResults {
   final Map<int, YearlyResults> yearlyResults;
 

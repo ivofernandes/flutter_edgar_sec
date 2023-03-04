@@ -10,23 +10,28 @@ import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 
 class IncomeStatementProcessor {
   /// Revenue: https://xbrl.us/forums/topic/how-to-find-a-complete-list-of-similar-concept/
-  static const List<String> revenueFields = [
+  static const Set<String> revenueFields = {
     'RevenueFromContractWithCustomerExcludingAssessedTax',
     'SalesRevenueGoodsNet',
     'SalesRevenueNet',
     'TotalRevenuesAndOtherIncome',
     'RevenueFromContractWithCustomerIncludingAssessedTax'
-  ];
+  };
 
-  static const List<String> supportedFields = [
-    ...revenueFields,
+  // Cost of revenue fields
+  static const Set<String> costOfRevenueFields = {
     'CostOfGoodsAndServicesSold',
+    'CostOfRevenue',
+  };
+
+  static const Set<String> supportedFields = {
+    ...revenueFields,
+    ...costOfRevenueFields,
     'NetIncomeLoss',
     'OperatingIncomeLoss',
-  ];
+  };
 
   static void process(Map<String, dynamic> facts, Map<String, FinancialStatement> index) {
-
     //TODO - NF -> we must include annuals here!
 
     for (final field in supportedFields) {
@@ -50,10 +55,12 @@ class IncomeStatementProcessor {
       return;
     }
 
+    if (costOfRevenueFields.contains(field)) {
+      incomeStatement.costOfRevenues = value;
+      return;
+    }
+
     switch (field) {
-      case 'CostOfGoodsAndServicesSold':
-        incomeStatement.costOfRevenues = value;
-        break;
       case 'NetIncomeLoss':
         incomeStatement.netIncome = value;
         break;
