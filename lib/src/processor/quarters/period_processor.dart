@@ -8,19 +8,21 @@ import 'package:flutter_edgar_sec/src/processor/balance_sheet_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/cash_flow_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/income_statement_processor.dart';
 
-/// Logic related to process 10-Q financial statements
+/// Logic related to process 10-Q and 10-K financial statements
 class PeriodProcessor {
-  /// Returns a map of quarters financial statements for a given symbol
+  /// Returns a map of quarters and a map of annual financial statements for a given symbol
   static Map<String, FinancialStatement> process(Map<String, dynamic> facts) {
     const String referenceField = 'AssetsCurrent';
     final referenceUnits = facts[referenceField]['units']['USD'] as List;
     final Map<String, FinancialStatement> quarters = {};
+    final Map<String, FinancialStatement> annuals = {};
     for (final row in referenceUnits) {
-      if (row['form'] == '10-Q') {
-        final endDateString = row['end'] as String;
-        // Parse date from string with format yyyy-MM-dd
-        final endDate = DateTime.parse(endDateString);
 
+      final endDateString = row['end'] as String;
+      // Parse date from string with format yyyy-MM-dd
+      final endDate = DateTime.parse(endDateString);
+
+      if (row['form'] == '10-Q') {
         final financialStatement = FinancialStatement(
           date: endDate,
           period: FinancialStatementPeriod.quarterly,
@@ -30,9 +32,22 @@ class PeriodProcessor {
         );
 
         quarters[endDateString] = financialStatement;
+      } else if (row['form'] == '10-K') {
+        final financialStatement = FinancialStatement(
+          date: endDate,
+          period: FinancialStatementPeriod.annual,
+          incomeStatement: IncomeStatement(),
+          balanceSheet: BalanceSheet(),
+          cashFlowStatement: CashFlowStatement(),
+        );
+
+        // fill an annual data structure
+        annuals[endDateString] = financialStatement;
       }
     }
 
+    // these should be changed to quarters and annual
+    // so we can iterate only 1 time
     IncomeStatementProcessor.process(facts, quarters);
     BalanceSheetProcessor.process(facts, quarters);
     CashFlowProcessor.process(facts, quarters);

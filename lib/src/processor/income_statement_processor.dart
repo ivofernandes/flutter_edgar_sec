@@ -26,6 +26,9 @@ class IncomeStatementProcessor {
   ];
 
   static void process(Map<String, dynamic> facts, Map<String, FinancialStatement> index) {
+
+    //TODO - NF -> we must include annuals here!
+
     for (final field in supportedFields) {
       // Filter the quarters, i.e. rows that are 10-Q
       final quarters = BaseProcessor.getQuarterRows(facts, field, index);
