@@ -2,26 +2,26 @@ import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/quarters/period_processor.dart';
 
+/// A class that represents all the financial statements for a given company
 class CompanyResults {
+  /// A map of all the financial statements for this company, organized by year
   final Map<int, YearlyResults> yearlyResults;
+
+  /// Returns a list of all the years that have financial data on this company
+  List<int> get years => yearlyResults.keys.toList();
+
+  /// Returns a list of all the quarters that are already reported for this company
+  List<FinancialStatement> get quarters =>
+      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList();
 
   const CompanyResults({
     required this.yearlyResults,
   });
 
-  List<int> get years => yearlyResults.keys.toList();
-
   factory CompanyResults.fromJsonList(Map<String, dynamic> companyFactsJson) {
     final Map<String, dynamic> facts = companyFactsJson['facts']['us-gaap'] as Map<String, dynamic>;
 
-    final Map<String, FinancialStatement> quarters = PeriodProcessor.process(facts);
-
-    // might not be needed
-    //final Map<String, FinancialStatement> annual = YearProcessor.process(facts);
-
-    // Get all the years available
-    final Map<int, YearlyResults> yearlyResults = {};
-    PeriodProcessor.distributeByQuarter(quarters, yearlyResults);
+    final Map<int, YearlyResults> yearlyResults = PeriodProcessor.process(facts);
 
     return CompanyResults(
       yearlyResults: yearlyResults,

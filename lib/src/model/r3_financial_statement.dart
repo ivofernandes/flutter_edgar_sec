@@ -4,19 +4,30 @@ import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart'
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 
 class FinancialStatement {
+  /// The date of the financial statement
   final DateTime date;
 
-  int get year => date.year;
-
-  int get month => date.month;
-
-  int get quarter => date.month ~/ 3;
-
+  /// The period of the financial statement: quarterly or annual
   final FinancialStatementPeriod period;
 
+  /// The income statement of the financial statement
   final IncomeStatement incomeStatement;
+
+  /// The balance sheet of the financial statement
   final BalanceSheet balanceSheet;
+
+  /// The cash flow statement of the financial statement
   final CashFlowStatement cashFlowStatement;
+
+  /// Calculated fields
+  /// Calculates the year of the financial statement
+  int get year => date.year;
+
+  /// Calculates the month of the financial statement
+  int get month => date.month;
+
+  /// Calculates the quarter of the financial statement
+  int get quarter => date.month ~/ 3;
 
   FinancialStatement({
     required this.date,

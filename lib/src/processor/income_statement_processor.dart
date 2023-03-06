@@ -31,12 +31,16 @@ class IncomeStatementProcessor {
     'OperatingIncomeLoss',
   };
 
-  static void process(Map<String, dynamic> facts, Map<String, FinancialStatement> index) {
+  static void process(
+    Map<String, dynamic> facts,
+    Map<String, FinancialStatement> index,
+    String typeOfForm,
+  ) {
     //TODO - NF -> we must include annuals here!
 
     for (final field in supportedFields) {
       // Filter the quarters, i.e. rows that are 10-Q
-      final quarters = BaseProcessor.getQuarterRows(facts, field, index);
+      final quarters = BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
 
       for (final quarter in quarters) {
         final endDateString = quarter['end'];

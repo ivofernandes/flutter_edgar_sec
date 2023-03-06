@@ -13,9 +13,6 @@ void main() {
 
     final YearlyResults results2022 = results.yearlyResults[2022]!;
 
-    //TODO take the return to test the year processor
-    return;
-
     assert(results2022.fullYear != null);
     final IncomeStatement income2022 = results2022.fullYear!.incomeStatement;
 

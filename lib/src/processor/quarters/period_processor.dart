@@ -11,7 +11,7 @@ import 'package:flutter_edgar_sec/src/processor/income_statement_processor.dart'
 /// Logic related to process 10-Q and 10-K financial statements
 class PeriodProcessor {
   /// Returns a map of quarters and a map of annual financial statements for a given symbol
-  static Map<String, FinancialStatement> process(Map<String, dynamic> facts) {
+  static Map<int, YearlyResults> process(Map<String, dynamic> facts) {
     const String referenceField = 'NetIncomeLoss';
     final referenceUnits = facts[referenceField]['units']['USD'] as List;
     final Map<String, FinancialStatement> quarters = {};
@@ -47,11 +47,24 @@ class PeriodProcessor {
 
     // these should be changed to quarters and annual
     // so we can iterate only 1 time
-    IncomeStatementProcessor.process(facts, quarters);
-    BalanceSheetProcessor.process(facts, quarters);
-    CashFlowProcessor.process(facts, quarters);
+    IncomeStatementProcessor.process(facts, quarters, '10-Q');
+    BalanceSheetProcessor.process(facts, quarters, '10-Q');
+    CashFlowProcessor.process(facts, quarters, '10-Q');
 
-    return quarters;
+    // Process the annuals
+    IncomeStatementProcessor.process(facts, annuals, '10-K');
+    BalanceSheetProcessor.process(facts, annuals, '10-K');
+    CashFlowProcessor.process(facts, annuals, '10-K');
+
+    // might not be needed
+    //final Map<String, FinancialStatement> annual = YearProcessor.process(facts);
+
+    // Get all the years available
+    final Map<int, YearlyResults> yearlyResults = {};
+    PeriodProcessor.distributeByQuarter(quarters, yearlyResults);
+    PeriodProcessor.distributeByYear(annuals, yearlyResults);
+
+    return yearlyResults;
   }
 
   /// Distributes the quarters into the yearly results
@@ -79,6 +92,18 @@ class PeriodProcessor {
           yearlyResults[year]!.q4 = quarterStatement;
           break;
       }
+    }
+  }
+
+  static void distributeByYear(Map<String, FinancialStatement> annuals, Map<int, YearlyResults> yearlyResults) {
+    for (final annualStatement in annuals.values) {
+      final int year = annualStatement.year;
+
+      if (!yearlyResults.containsKey(year)) {
+        yearlyResults[year] = YearlyResults();
+      }
+
+      yearlyResults[year]!.fullYear = annualStatement;
     }
   }
 }
