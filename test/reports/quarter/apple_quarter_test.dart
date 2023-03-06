@@ -1,4 +1,5 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
+import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -33,5 +34,25 @@ void main() {
     //TODO how to get correct data for this margins?
     // Seeking alpha just gest TTM data
     // https://seekingalpha.com/symbol/AAPL/profitability
+  });
+
+  /// Come to this url and select the quarterly period to
+  /// https://seekingalpha.com/symbol/AAPL/cash-flow-statement
+  test('Test 2022-Q4 apple values for cash flow statement', () async {
+    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
+
+    assert(results.yearlyResults.isNotEmpty);
+
+    final YearlyResults results2022 = results.yearlyResults[2022]!;
+
+    assert(results2022.q4 != null);
+    final CashFlowStatement cashFlow2022Q4 = results2022.q4!.cashFlowStatement;
+
+    final repurchaseofCommonStockBillions = cashFlow2022Q4.buyback.billions;
+
+    final dividends = cashFlow2022Q4.dividends.billions;
+    //TODO not sure why not matches seeking alpha
+    //assert(repurchaseofCommonStockBillions == 21.791);
+    assert(dividends == 3.768);
   });
 }

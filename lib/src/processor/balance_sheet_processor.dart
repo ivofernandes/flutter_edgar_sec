@@ -1,14 +1,16 @@
-import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
+import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 
 /// Processes the balance sheet from the json response
 /// https://seekingalpha.com/symbol/AAPL/balance-sheet
 class BalanceSheetProcessor {
-  static void process(
-      Map<String, dynamic> facts, Map<String, FinancialStatement> index) {
-    final List<String> supportedFields = ['AssetsCurrent'];
+  static final List<String> supportedFields = ['AssetsCurrent'];
 
+  static void process(
+    Map<String, dynamic> facts,
+    Map<String, FinancialStatement> index,
+  ) {
     for (final field in supportedFields) {
       // Filter the quarters, i.e. rows that are 10-Q
       final quarters = BaseProcessor.getQuarterRows(facts, field, index);

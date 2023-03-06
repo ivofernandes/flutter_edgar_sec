@@ -1,12 +1,12 @@
 class CashFlowStatement {
-  double buyBacks = 0;
+  double buyback = 0;
   double dividends = 0;
 
   CashFlowStatement();
 
   @override
   String toString() => '''
-  buyBacks: $buyBacks
+  buyBacks: $buyback
   dividends: $dividends
   ''';
 }
