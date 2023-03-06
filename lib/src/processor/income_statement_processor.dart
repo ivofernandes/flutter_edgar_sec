@@ -31,7 +31,7 @@ class IncomeStatementProcessor {
     'OperatingIncomeLoss',
   };
 
-  static void process(Map<String, dynamic> facts, Map<String, FinancialStatement> index) {
+  static void process(Map<String, dynamic> facts, Map<String, FinancialStatement> index, Map<String, FinancialStatement> annuals) {
     //TODO - NF -> we must include annuals here!
 
     for (final field in supportedFields) {

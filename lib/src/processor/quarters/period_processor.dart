@@ -47,9 +47,9 @@ class PeriodProcessor {
 
     // these should be changed to quarters and annual
     // so we can iterate only 1 time
-    IncomeStatementProcessor.process(facts, quarters);
-    BalanceSheetProcessor.process(facts, quarters);
-    CashFlowProcessor.process(facts, quarters);
+    IncomeStatementProcessor.process(facts, quarters, annuals);
+    BalanceSheetProcessor.process(facts, quarters, annuals);
+    CashFlowProcessor.process(facts, quarters, annuals);
 
     return quarters;
   }

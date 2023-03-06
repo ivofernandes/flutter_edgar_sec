@@ -14,14 +14,16 @@ class CompanyResults {
   factory CompanyResults.fromJsonList(Map<String, dynamic> companyFactsJson) {
     final Map<String, dynamic> facts = companyFactsJson['facts']['us-gaap'] as Map<String, dynamic>;
 
-    final Map<String, FinancialStatement> quarters = PeriodProcessor.process(facts);
+    // final Map<String, FinancialStatement> quarters = PeriodProcessor.process(facts);
+    // periodResults contains both quarters and annuals
+    final Map<String, FinancialStatement> periodResults = PeriodProcessor.process(facts);
 
     // might not be needed
     //final Map<String, FinancialStatement> annual = YearProcessor.process(facts);
 
     // Get all the years available
     final Map<int, YearlyResults> yearlyResults = {};
-    PeriodProcessor.distributeByQuarter(quarters, yearlyResults);
+    PeriodProcessor.distributeByQuarter(periodResults, yearlyResults);
 
     return CompanyResults(
       yearlyResults: yearlyResults,

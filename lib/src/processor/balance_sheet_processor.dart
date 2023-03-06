@@ -6,21 +6,43 @@ import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 /// https://seekingalpha.com/symbol/AAPL/balance-sheet
 class BalanceSheetProcessor {
   static void process(
-      Map<String, dynamic> facts, Map<String, FinancialStatement> index) {
-    final List<String> supportedFields = ['AssetsCurrent'];
+      Map<String, dynamic> facts, Map<String, FinancialStatement> index, Map<String, FinancialStatement> indexAnnuals) {
+
+    final List<String> supportedFields = [
+      'AssetsCurrent',
+      'LiabilitiesCurrent'
+    ];
+
+    print('supportedFields -> '+ supportedFields.toString());
 
     for (final field in supportedFields) {
       // Filter the quarters, i.e. rows that are 10-Q
-      final quarters = BaseProcessor.getQuarterRows(facts, field, index);
+      processQuarters(facts, field, index);
 
-      for (final quarter in quarters) {
-        final endDateString = quarter['end'];
-        final value = quarter['val'] as num;
-        final financialStatement = index[endDateString]!;
-        final balanceSheet = financialStatement.balanceSheet;
+      // Filter the annuals, i.e., rows that are 10-K
+      // final annuals = BaseProcessor.getQuarterRows(facts, field, indexAnnuals);
+      //
+      // for (final quarter in quarters) {
+      //   final endDateString = quarter['end'];
+      //   final value = quarter['val'] as num;
+      //   final financialStatement = index[endDateString]!;
+      //   final balanceSheet = financialStatement.balanceSheet;
+      //
+      //   _mapValue(field, value.toDouble(), balanceSheet);
+      // }
+    }
+  }
 
-        _mapValue(field, value.toDouble(), balanceSheet);
-      }
+  static void processQuarters(Map<String, dynamic> facts, String field, Map<String, FinancialStatement> index) {
+    final quarters = BaseProcessor.getQuarterRows(facts, field, index);
+
+    for (final quarter in quarters) {
+      final endDateString = quarter['end'];
+      final value = quarter['val'] as num;
+      final financialStatement = index[endDateString]!;
+      final balanceSheet = financialStatement.balanceSheet;
+
+      _mapValue(field, value.toDouble(), balanceSheet);
     }
   }
 
