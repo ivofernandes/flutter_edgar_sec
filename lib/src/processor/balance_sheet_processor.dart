@@ -5,7 +5,17 @@ import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 /// Processes the balance sheet from the json response
 /// https://seekingalpha.com/symbol/AAPL/balance-sheet
 class BalanceSheetProcessor {
-  static final List<String> supportedFields = ['AssetsCurrent'];
+
+  // Cash % Short term Investments
+  static const Set<String> cashShortTermInvestments = {
+    'CashAndCashEquivalentsAtCarryingValue', // Cash And Equivalents
+    '',
+  };
+
+  static const Set<String> supportedFields = {
+    ...cashShortTermInvestments,
+    'AssetsCurrent'
+  };
 
   static void process(
     Map<String, dynamic> facts,

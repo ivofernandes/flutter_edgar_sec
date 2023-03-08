@@ -1,4 +1,5 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
+import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,6 +16,7 @@ void main() {
 
     assert(results2022.fullYear != null);
     final IncomeStatement income2022 = results2022.fullYear!.incomeStatement;
+    final BalanceSheet balance2022 = results2022.fullYear!.balanceSheet;
 
     final revenueBillions = income2022.revenues.billions;
     final operatingIncomeBillions = income2022.operatingIncome.billions;
@@ -26,6 +28,8 @@ void main() {
     final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
+    final cashAndEquivalent = balance2022.cashAndEquivalents.billions;
+
     assert(revenueBillions == 394.328);
     assert(operatingIncomeBillions == 119.437);
     assert(netIncomeBillions == 99.803);
@@ -35,6 +39,8 @@ void main() {
     assert(sellingGeneralAdministrativeBillions == 25.094);
     assert(researchDevelopmentBillions == 26.251);
     assert(operatingExpenseBillions == 51.345);
+
+    assert(cashAndEquivalent == 23.646);
 
     // Check derivated values
     final netMargin = income2022.netMargin;
