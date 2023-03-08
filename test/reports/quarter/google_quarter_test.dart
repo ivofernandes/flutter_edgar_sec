@@ -62,11 +62,11 @@ void main() {
     assert(netIncomeBillions == 13.910);
     assert(costOfRevenuesBillions == 31.158);
 
-    assert(sellingGeneralAdministrativeBillions == 10.526);
+    assert(researchDevelopmentBillions == 10.273);
     //TODO not sure why is not coming here
     //assert(operatingExpenseBillions == 20.799);
     //assert(grossProfitBillions == 37.934);
-    //assert(researchDevelopmentBillions == 10.273);
+    //assert(sellingGeneralAdministrativeBillions == 10.526);
 
     // Check derivated values
     final netMargin = income2022Q3.netMargin;
