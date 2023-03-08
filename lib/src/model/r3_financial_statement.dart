@@ -29,6 +29,9 @@ class FinancialStatement {
   /// Calculates the quarter of the financial statement
   int get quarter => date.month ~/ 3;
 
+  /// Calculates the title of the quarter financial statement
+  String get quarterPeriod => '$year-Q$quarter';
+
   FinancialStatement({
     required this.date,
     required this.period,

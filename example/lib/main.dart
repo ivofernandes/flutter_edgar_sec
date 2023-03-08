@@ -57,25 +57,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               if (_isLoading) const CircularProgressIndicator(),
               Expanded(
-                child: ListView.builder(
-                  itemCount: years.length,
-                  itemBuilder: (context, index) {
-                    final int year = years[index]!;
-
-                    return Card(
-                      child: Column(
-                        children: [
-                          Text(
-                            year.toString(),
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
-                          Text(_companyResults.yearlyResults[year]!.toString()),
-                        ],
-                      ),
-                    );
-                  },
+                child: CompanyTableUI(
+                  companyResults: _companyResults,
                 ),
-              )
+              ),
             ],
           ),
         ),

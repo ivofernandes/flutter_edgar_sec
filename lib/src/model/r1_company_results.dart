@@ -4,6 +4,7 @@ import 'package:flutter_edgar_sec/src/processor/quarters/period_processor.dart';
 
 /// A class that represents all the financial statements for a given company
 class CompanyResults {
+
   /// A map of all the financial statements for this company, organized by year
   final Map<int, YearlyResults> yearlyResults;
 
@@ -28,7 +29,8 @@ class CompanyResults {
     );
   }
 
-  static CompanyResults empty() => const CompanyResults(
+  static CompanyResults empty() =>
+      const CompanyResults(
         yearlyResults: {},
       );
 

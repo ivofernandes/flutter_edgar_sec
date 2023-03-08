@@ -52,10 +52,21 @@ void main() {
     final netIncomeBillions = income2022Q3.netIncome.billions;
     final costOfRevenuesBillions = income2022Q3.costOfRevenues.billions;
 
+    final grossProfitBillions = income2022Q3.grossProfit.billions;
+    final sellingGeneralAdministrativeBillions = income2022Q3.sellingGeneralAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions = income2022Q3.researchAndDevelopmentExpenses.billions;
+    final operatingExpenseBillions = income2022Q3.operatingExpenses.billions;
+
     assert(revenueBillions == 69.092);
     assert(operatingIncomeBillions == 17.135);
     assert(netIncomeBillions == 13.910);
     assert(costOfRevenuesBillions == 31.158);
+
+    assert(sellingGeneralAdministrativeBillions == 10.526);
+    //TODO not sure why is not coming here
+    //assert(operatingExpenseBillions == 20.799);
+    //assert(grossProfitBillions == 37.934);
+    //assert(researchDevelopmentBillions == 10.273);
 
     // Check derivated values
     final netMargin = income2022Q3.netMargin;

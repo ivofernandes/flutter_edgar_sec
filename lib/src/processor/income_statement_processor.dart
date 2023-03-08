@@ -29,6 +29,10 @@ class IncomeStatementProcessor {
     ...costOfRevenueFields,
     'NetIncomeLoss',
     'OperatingIncomeLoss',
+    'ResearchAndDevelopmentExpense',
+    'GrossProfit',
+    'SellingGeneralAndAdministrativeExpense',
+    'OperatingExpenses',
   };
 
   static void process(
@@ -70,6 +74,18 @@ class IncomeStatementProcessor {
         break;
       case 'OperatingIncomeLoss':
         incomeStatement.operatingIncome = value;
+        break;
+      case 'ResearchAndDevelopmentExpense':
+        incomeStatement.researchAndDevelopmentExpenses = value;
+        break;
+      case 'GrossProfit':
+        incomeStatement.grossProfit = value;
+        break;
+      case 'SellingGeneralAndAdministrativeExpense':
+        incomeStatement.sellingGeneralAndAdministrativeExpenses = value;
+        break;
+      case 'OperatingExpenses':
+        incomeStatement.operatingExpenses = value;
         break;
     }
   }

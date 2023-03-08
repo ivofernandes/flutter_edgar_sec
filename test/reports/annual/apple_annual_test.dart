@@ -21,10 +21,20 @@ void main() {
     final netIncomeBillions = income2022.netIncome.billions;
     final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
+    final grossProfitBillions = income2022.grossProfit.billions;
+    final sellingGeneralAdministrativeBillions = income2022.sellingGeneralAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    final operatingExpenseBillions = income2022.operatingExpenses.billions;
+
     assert(revenueBillions == 394.328);
     assert(operatingIncomeBillions == 119.437);
     assert(netIncomeBillions == 99.803);
     assert(costOfRevenueBillions == 223.546);
+
+    assert(grossProfitBillions == 170.782);
+    assert(sellingGeneralAdministrativeBillions == 25.094);
+    assert(researchDevelopmentBillions == 26.251);
+    assert(operatingExpenseBillions == 51.345);
 
     // Check derivated values
     final netMargin = income2022.netMargin;
