@@ -1,11 +1,14 @@
 class BalanceSheet {
 
-  double cashAndEquivalents = 0;
+  double cashAndCashEquivalents = 0;
 
   double currentAssets = 0;
 
   BalanceSheet();
 
   @override
-  String toString() => 'currentAssets: $currentAssets';
+  String toString() => '''
+  cashAndCashEquivalents: $cashAndCashEquivalents,
+  currentAssets: $currentAssets
+  ''';
 }

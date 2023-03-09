@@ -28,7 +28,7 @@ void main() {
     final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
-    final cashAndEquivalent = balance2022.cashAndEquivalents.billions;
+    final cashAndCashEquivalents = balance2022.cashAndCashEquivalents.billions;
 
     assert(revenueBillions == 394.328);
     assert(operatingIncomeBillions == 119.437);
@@ -40,7 +40,7 @@ void main() {
     assert(researchDevelopmentBillions == 26.251);
     assert(operatingExpenseBillions == 51.345);
 
-    assert(cashAndEquivalent == 23.646);
+    assert(cashAndCashEquivalents == 23.646);
 
     // Check derivated values
     final netMargin = income2022.netMargin;

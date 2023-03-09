@@ -7,13 +7,13 @@ import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 class BalanceSheetProcessor {
 
   // Cash % Short term Investments
-  static const Set<String> cashShortTermInvestments = {
+  static const Set<String> cashAndShortTermInvestments = {
     'CashAndCashEquivalentsAtCarryingValue', // Cash And Equivalents
     '',
   };
 
   static const Set<String> supportedFields = {
-    ...cashShortTermInvestments,
+    ...cashAndShortTermInvestments,
     'AssetsCurrent'
   };
 
@@ -43,7 +43,18 @@ class BalanceSheetProcessor {
   }
 
   static void _mapValue(String field, double value, BalanceSheet balanceSheet) {
+
+    // print('field: '+field);
+
+    if (cashAndShortTermInvestments.contains(field)) {
+      balanceSheet.cashAndCashEquivalents = value;
+      return;
+    }
+
     switch (field) {
+      // case 'CashAndCashEquivalentsAtCarryingValue':
+      //   balanceSheet.cashAndCashEquivalents = value;
+      //   break;
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;
         break;
