@@ -51,6 +51,10 @@ class BalanceSheetProcessor {
   // "label": "Accounts Receivable, after Allowance for Credit Loss, Current",
   // "description": "Amount, after allowance for credit loss, of right to consideration from customer for product sold and service rendered in normal course of business, classified as current.",
 
+  // "NontradeReceivablesCurrent"
+  // "label": "Nontrade Receivables, Current",
+  // "description": "The sum of amounts currently receivable other than from customers. For classified balance sheets, represents the current amount receivable, that is amounts expected to be collected within one year or the normal operating cycle, if longer.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -62,7 +66,10 @@ class BalanceSheetProcessor {
     // SEC EDGAR's field names               // Seeking Alpha's Names
     'CashAndCashEquivalentsAtCarryingValue', // Cash And Equivalents
     ...shortTermInvestments,                 // Short Term Investments
+
     'AccountsReceivableNetCurrent',          // Accounts Receivable
+    'NontradeReceivablesCurrent',            //
+
     'AssetsCurrent',                         // Total Current Assets
   };
 
@@ -100,7 +107,7 @@ class BalanceSheetProcessor {
   static void _mapValue(String field, double value, BalanceSheet balanceSheet) {
 
     if (shortTermInvestments.contains(field)) {
-      print('setting the field '+ field + ' with value '+value.toString());
+      // print('setting the field '+ field + ' with value '+value.toString());
       balanceSheet.shortTermInvestments = value;
       return;
     }
@@ -111,6 +118,10 @@ class BalanceSheetProcessor {
         break;
       case 'AccountsReceivableNetCurrent':
         balanceSheet.accountsReceivable = value;
+        break;
+      case 'NontradeReceivablesCurrent':
+        print('setting the field '+ field + ' with value '+value.toString());
+        balanceSheet.otherReceivables = value;
         break;
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;

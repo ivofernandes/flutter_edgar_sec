@@ -7,6 +7,7 @@ class BalanceSheet {
 
   // Receivables division
   double accountsReceivable = 0;
+  double otherReceivables = 0;
 
   double currentAssets = 0;
 
@@ -21,6 +22,7 @@ class BalanceSheet {
   cashAndCashEquivalents: $cashAndCashEquivalents,
   shortTermInvestments: $shortTermInvestments,
   accountsReceivable: $accountsReceivable,
+  otherReceivables: $otherReceivables,
   currentAssets: $currentAssets
   ''';
 }
