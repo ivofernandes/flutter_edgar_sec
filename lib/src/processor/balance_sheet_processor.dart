@@ -48,17 +48,16 @@ class BalanceSheetProcessor {
   // "description": "Amount of investment in marketable security, classified as current.",
 
   // Cash % Short term Investments
-  // static const Set<String> cashAndShortTermInvestments = {
-  //   // SEC EDGAR's field names               // Seeking Alpha's Names
-  //   'CashAndCashEquivalentsAtCarryingValue', // Cash And Equivalents
-  //   // 'AvailableForSaleSecuritiesCurrent',     // Short Term Investments - Incomplete
-  //   'MarketableSecuritiesCurrent',           // Short Term Investments
-  // };
+  static const Set<String> shortTermInvestments = {
+    // SEC EDGAR's field names               // Seeking Alpha's Names
+    'AvailableForSaleSecuritiesCurrent',     // Short Term Investments - from 2008 to 2018
+    'MarketableSecuritiesCurrent',           // Short Term Investments - from 2018 to ...
+  };
 
   static const Set<String> supportedFields = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
     'CashAndCashEquivalentsAtCarryingValue', // Cash And Equivalents
-    'MarketableSecuritiesCurrent',           // Short Term Investments
+    ...shortTermInvestments,                 // Short Term Investments
 
 
     'AssetsCurrent'                          // Total Current Assets
@@ -88,7 +87,7 @@ class BalanceSheetProcessor {
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        //print('index: '+ financialStatement.period.toString());
+        print('period -> '+financialStatement.period.toString()+' '+financialStatement.year.toString());
 
         _mapValue(field, value.toDouble(), balanceSheet);
       }
@@ -97,21 +96,15 @@ class BalanceSheetProcessor {
 
   static void _mapValue(String field, double value, BalanceSheet balanceSheet) {
 
-    //print('field: '+field);
-
-    // if (cashAndShortTermInvestments.contains(field)) {
-    //   balanceSheet.cashAndCashEquivalents = value;
-    //   return;
-    // }
+    if (shortTermInvestments.contains(field)) {
+      print('setting the field '+ field + ' with value '+value.toString());
+      balanceSheet.shortTermInvestments = value;
+      return;
+    }
 
     switch (field) {
       case 'CashAndCashEquivalentsAtCarryingValue':
-        print('setting CashAndCashEquivalentsAtCarryingValue with '+'perid '+value.toString());
         balanceSheet.cashAndCashEquivalents = value;
-        break;
-      case 'MarketableSecuritiesCurrent':
-        print('setting MarketableSecuritiesCurrent with '+value.toString());
-        balanceSheet.shortTermInvestments = value;
         break;
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;
