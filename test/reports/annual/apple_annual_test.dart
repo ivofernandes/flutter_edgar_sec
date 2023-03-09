@@ -32,6 +32,7 @@ void main() {
     final cashAndCashEquivalents = balance2022.cashAndCashEquivalents.billions;
     final shortTermInvestments = balance2022.shortTermInvestments.billions;
     final tradingAssetSecurities = balance2022.tradingAssetSecurities.billions;
+    final totalCashAndCashEquivalents = balance2022.totalCashAndShortTermInvestments.billions;
 
     final accountsReceivable = balance2022.accountsReceivable.billions;
     final otherReceivables = balance2022.otherReceivables.billions;
@@ -52,6 +53,8 @@ void main() {
     assert(cashAndCashEquivalents == 23.646);
     assert(shortTermInvestments == 24.658);
     // assert(tradingAssetSecurities == ????);
+    //FIXME - NF - it will be wrong for the years that have tradingAssetSecurities
+    assert(totalCashAndCashEquivalents == 48.304);
 
     // Receivables
     assert(accountsReceivable == 28.184);

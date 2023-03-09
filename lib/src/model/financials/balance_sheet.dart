@@ -11,7 +11,7 @@ class BalanceSheet {
 
   double currentAssets = 0;
 
-  // Calculated margins
+  // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments => cashAndCashEquivalents
       + shortTermInvestments + tradingAssetSecurities;
 
@@ -21,6 +21,7 @@ class BalanceSheet {
   String toString() => '''
   cashAndCashEquivalents: $cashAndCashEquivalents,
   shortTermInvestments: $shortTermInvestments,
+  Total Cash Eqs: $totalCashAndShortTermInvestments,
   accountsReceivable: $accountsReceivable,
   otherReceivables: $otherReceivables,
   currentAssets: $currentAssets

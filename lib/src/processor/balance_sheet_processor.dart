@@ -97,7 +97,7 @@ class BalanceSheetProcessor {
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        print('period -> '+financialStatement.period.toString()+' '+financialStatement.year.toString());
+        //print('period -> '+financialStatement.period.toString()+' '+financialStatement.year.toString());
 
         _mapValue(field, value.toDouble(), balanceSheet);
       }
@@ -120,7 +120,7 @@ class BalanceSheetProcessor {
         balanceSheet.accountsReceivable = value;
         break;
       case 'NontradeReceivablesCurrent':
-        print('setting the field '+ field + ' with value '+value.toString());
+        //print('setting the field '+ field + ' with value '+value.toString());
         balanceSheet.otherReceivables = value;
         break;
       case 'AssetsCurrent':
