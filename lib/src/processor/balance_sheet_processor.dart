@@ -47,6 +47,10 @@ class BalanceSheetProcessor {
   // "label": "Marketable Securities, Current",
   // "description": "Amount of investment in marketable security, classified as current.",
 
+  // "AccountsReceivableNetCurrent"
+  // "label": "Accounts Receivable, after Allowance for Credit Loss, Current",
+  // "description": "Amount, after allowance for credit loss, of right to consideration from customer for product sold and service rendered in normal course of business, classified as current.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -58,9 +62,8 @@ class BalanceSheetProcessor {
     // SEC EDGAR's field names               // Seeking Alpha's Names
     'CashAndCashEquivalentsAtCarryingValue', // Cash And Equivalents
     ...shortTermInvestments,                 // Short Term Investments
-
-
-    'AssetsCurrent'                          // Total Current Assets
+    'AccountsReceivableNetCurrent',          // Accounts Receivable
+    'AssetsCurrent',                         // Total Current Assets
   };
 
   static void process(
@@ -105,6 +108,9 @@ class BalanceSheetProcessor {
     switch (field) {
       case 'CashAndCashEquivalentsAtCarryingValue':
         balanceSheet.cashAndCashEquivalents = value;
+        break;
+      case 'AccountsReceivableNetCurrent':
+        balanceSheet.accountsReceivable = value;
         break;
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;

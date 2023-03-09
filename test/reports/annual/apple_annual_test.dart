@@ -31,6 +31,10 @@ void main() {
     // BalanceSheet's fields
     final cashAndCashEquivalents = balance2022.cashAndCashEquivalents.billions;
     final shortTermInvestments = balance2022.shortTermInvestments.billions;
+    final tradingAssetSecurities = balance2022.tradingAssetSecurities.billions;
+
+    final accountsReceivable = balance2022.accountsReceivable.billions;
+
 
     // Income Statement's asserts
     assert(revenueBillions == 394.328);
@@ -47,6 +51,10 @@ void main() {
     // Cash n Equivalents
     assert(cashAndCashEquivalents == 23.646);
     assert(shortTermInvestments == 24.658);
+    // assert(tradingAssetSecurities == ????);
+
+    // Receivables
+    assert(accountsReceivable == 28.184);
 
     // Check derivated values
     final netMargin = income2022.netMargin;
