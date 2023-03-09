@@ -28,8 +28,11 @@ void main() {
     final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
+    // BalanceSheet's fields
     final cashAndCashEquivalents = balance2022.cashAndCashEquivalents.billions;
+    final shortTermInvestments = balance2022.shortTermInvestments.billions;
 
+    // Income Statement's asserts
     assert(revenueBillions == 394.328);
     assert(operatingIncomeBillions == 119.437);
     assert(netIncomeBillions == 99.803);
@@ -40,7 +43,10 @@ void main() {
     assert(researchDevelopmentBillions == 26.251);
     assert(operatingExpenseBillions == 51.345);
 
+    // BalanceSheet's asserts
+    // Cash n Equivalents
     assert(cashAndCashEquivalents == 23.646);
+    assert(shortTermInvestments == 24.658);
 
     // Check derivated values
     final netMargin = income2022.netMargin;
