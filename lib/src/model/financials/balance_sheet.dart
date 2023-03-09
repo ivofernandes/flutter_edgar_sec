@@ -9,6 +9,8 @@ class BalanceSheet {
   double accountsReceivable = 0;
   double otherReceivables = 0;
 
+  // Current Assets
+  double inventory = 0;
   double currentAssets = 0;
 
   // Calculated total cash n cash equivalents
@@ -24,6 +26,7 @@ class BalanceSheet {
   Total Cash Eqs: $totalCashAndShortTermInvestments,
   accountsReceivable: $accountsReceivable,
   otherReceivables: $otherReceivables,
+  inventory: $inventory,
   currentAssets: $currentAssets
   ''';
 }

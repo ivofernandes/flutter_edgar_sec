@@ -37,6 +37,8 @@ void main() {
     final accountsReceivable = balance2022.accountsReceivable.billions;
     final otherReceivables = balance2022.otherReceivables.billions;
 
+    final inventory = balance2022.inventory.billions;
+
     // Income Statement's asserts
     assert(revenueBillions == 394.328);
     assert(operatingIncomeBillions == 119.437);
@@ -59,6 +61,9 @@ void main() {
     // Receivables
     assert(accountsReceivable == 28.184);
     assert(otherReceivables == 32.748);
+
+    // Current Assets
+    assert(inventory == 4.946);
 
     // Check derivated values
     final netMargin = income2022.netMargin;

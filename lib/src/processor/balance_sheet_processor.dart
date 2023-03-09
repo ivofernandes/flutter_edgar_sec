@@ -55,6 +55,10 @@ class BalanceSheetProcessor {
   // "label": "Nontrade Receivables, Current",
   // "description": "The sum of amounts currently receivable other than from customers. For classified balance sheets, represents the current amount receivable, that is amounts expected to be collected within one year or the normal operating cycle, if longer.",
 
+  // "InventoryNet"
+  // "label": "Inventory, Net",
+  // "description": "Amount after valuation and LIFO reserves of inventory expected to be sold, or consumed within one year or operating cycle, if longer.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -64,11 +68,14 @@ class BalanceSheetProcessor {
 
   static const Set<String> supportedFields = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
+                         //Total Cash & ST Investments
     'CashAndCashEquivalentsAtCarryingValue', // Cash And Equivalents
     ...shortTermInvestments,                 // Short Term Investments
-
+                         //Receivables
     'AccountsReceivableNetCurrent',          // Accounts Receivable
-    'NontradeReceivablesCurrent',            //
+    'NontradeReceivablesCurrent',            // Other Receivables
+                         //Current Assets
+    'InventoryNet',                          // Inventory
 
     'AssetsCurrent',                         // Total Current Assets
   };
@@ -122,6 +129,9 @@ class BalanceSheetProcessor {
       case 'NontradeReceivablesCurrent':
         //print('setting the field '+ field + ' with value '+value.toString());
         balanceSheet.otherReceivables = value;
+        break;
+      case 'InventoryNet':
+        balanceSheet.inventory = value;
         break;
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;
