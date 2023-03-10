@@ -22,53 +22,51 @@ class _CompanyTableUIState extends State<CompanyTableUI> {
   int selectedStatement = 0;
 
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.companyResults.years.length + 1,
-      itemBuilder: (context, i) {
-        if (i == 0) {
-          // This is the only part that will remain in the end
-          return SizedBox(
-            height: 200,
-            width: 500,
-            child: InteractiveViewer(
-              boundaryMargin: const EdgeInsets.only(bottom: 750),
-              minScale: 0.1,
-              maxScale: 5,
-              constrained: false,
-              child: Column(
-                children: [
-                  CompanyTableOptions(
-                    period: period,
-                  ),
-                  CompanyDataTable(
-                    companyResults: widget.companyResults,
-                    period: period,
-                    selectedStatement: selectedStatement,
-                  ),
-                ],
+  Widget build(BuildContext context) => ListView.builder(
+        itemCount: widget.companyResults.years.length + 1,
+        itemBuilder: (context, i) {
+          if (i == 0) {
+            // This is the only part that will remain in the end
+            return SizedBox(
+              height: 200,
+              width: 500,
+              child: InteractiveViewer(
+                boundaryMargin: const EdgeInsets.only(bottom: 750),
+                minScale: 0.1,
+                maxScale: 5,
+                constrained: false,
+                child: Column(
+                  children: [
+                    CompanyTableOptions(
+                      period: period,
+                    ),
+                    CompanyDataTable(
+                      companyResults: widget.companyResults,
+                      period: period,
+                      selectedStatement: selectedStatement,
+                    ),
+                  ],
+                ),
               ),
+            );
+          }
+
+          // This part is just for easier logging
+          int index = i - 1;
+
+          final int year = widget.companyResults.years[index];
+
+          return Card(
+            child: Column(
+              children: [
+                Text(
+                  year.toString(),
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                Text(widget.companyResults.yearlyResults[year]!.toString()),
+              ],
             ),
           );
-        }
-
-        // This part is just for easier logging
-        int index = i - 1;
-
-        final int year = widget.companyResults.years[index]!;
-
-        return Card(
-          child: Column(
-            children: [
-              Text(
-                year.toString(),
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              Text(widget.companyResults.yearlyResults[year]!.toString()),
-            ],
-          ),
-        );
-      },
-    );
-  }
+        },
+      );
 }

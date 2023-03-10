@@ -15,7 +15,7 @@ void main() {
       'wmt': '104169',
     };
 
-    for (String symbol in symbolToCik.keys) {
+    for (final String symbol in symbolToCik.keys) {
       final String cik = await SymbolToCik().convert(symbol);
       expect(cik, symbolToCik[symbol]);
     }

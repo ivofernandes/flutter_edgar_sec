@@ -38,6 +38,7 @@ class SymbolToCik {
     return '$leadingZeros$s';
   }
 
+  /// https://www.sec.gov/include/ticker.txt
   Future<void> ensureConversionIsCreated() async {
     if (symbolToCik.isEmpty) {
       final String content = await http.read(Uri.https('www.sec.gov', '/include/ticker.txt'));

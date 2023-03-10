@@ -33,7 +33,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<int> years = _companyResults.years;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edgar SEC'),

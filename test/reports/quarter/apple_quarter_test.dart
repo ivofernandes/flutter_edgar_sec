@@ -41,9 +41,9 @@ void main() {
     final netMargin = income2022Q4.netMargin;
     final operatingMargin = income2022Q4.operatingMargin;
 
-    //TODO how to get correct data for this margins?
-    // Seeking alpha just gest TTM data
-    // https://seekingalpha.com/symbol/AAPL/profitability
+    // To get % seeking alpha has a view with percentage of revenue instead of absolute values
+    assert(netMargin.toStringAsFixed(4) == '0.2561');
+    assert(operatingMargin.toStringAsFixed(4) == '0.3074');
   });
 
   /// Come to this url and select the quarterly period to

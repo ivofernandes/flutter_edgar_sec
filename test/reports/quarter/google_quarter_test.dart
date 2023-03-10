@@ -72,6 +72,8 @@ void main() {
     final netMargin = income2022Q3.netMargin;
     final operatingMargin = income2022Q3.operatingMargin;
 
+    assert(netMargin.toStringAsFixed(4) == '0.2013');
+    assert(operatingMargin.toStringAsFixed(4) == '0.2480');
     //TODO how to get correct data for this margins?
     // Seeking alpha just gest TTM data
     // https://seekingalpha.com/symbol/AAPL/profitability

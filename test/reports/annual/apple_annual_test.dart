@@ -42,6 +42,13 @@ void main() {
     final restrictedCash = balance2022.restrictedCash.billions;
 
     // Income Statement's asserts
+    final interestExpensesBillions = income2022.interestExpenses.billions;
+    final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
+    final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
+
+    final ebitBillions = income2022.EBIT.billions;
+    assert(ebitBillions == operatingIncomeBillions);
+
     assert(revenueBillions == 394.328);
     assert(operatingIncomeBillions == 119.437);
     assert(netIncomeBillions == 99.803);
@@ -69,12 +76,15 @@ void main() {
     assert(deferredTaxAssets == 0); // no deferredTaxAssets for the year 2022
     assert(restrictedCash == 0);    // no restrictedCash for the year 2022
 
+    assert(interestExpensesBillions == 2.931);
+    assert(otherNonOperatingIncomeExpenseBillions == -0.228);
+    //assert(incomeTaxExpenseBillions == 19.3);
+
     // Check derivated values
     final netMargin = income2022.netMargin;
     final operatingMargin = income2022.operatingMargin;
 
-    //TODO how to get correct data for this margins?
-    // Seeking alpha just gest TTM data
-    // https://seekingalpha.com/symbol/AAPL/profitability
+    assert(netMargin.toStringAsFixed(4) == '0.2531');
+    assert(operatingMargin.toStringAsFixed(4) == '0.3029');
   });
 }

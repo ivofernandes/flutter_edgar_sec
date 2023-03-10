@@ -33,6 +33,10 @@ class IncomeStatementProcessor {
     'GrossProfit',
     'SellingGeneralAndAdministrativeExpense',
     'OperatingExpenses',
+    'InterestExpense',
+    'OtherNonoperatingIncomeExpense',
+    'IncomeTaxesPaidNet',
+    'IncomeTaxExpenseBenefit',
   };
 
   static void process(
@@ -86,6 +90,15 @@ class IncomeStatementProcessor {
         break;
       case 'OperatingExpenses':
         incomeStatement.operatingExpenses = value;
+        break;
+      case 'InterestExpense':
+        incomeStatement.interestExpenses = value;
+        break;
+      case 'OtherNonoperatingIncomeExpense':
+        incomeStatement.otherNonOperatingIncomeExpense = value;
+        break;
+      case 'incomeTaxExpenseBenefit':
+        incomeStatement.incomeTaxExpense += value;
         break;
     }
   }
