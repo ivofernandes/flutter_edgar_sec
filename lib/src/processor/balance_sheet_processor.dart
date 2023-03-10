@@ -59,6 +59,10 @@ class BalanceSheetProcessor {
   // "label": "Inventory, Net",
   // "description": "Amount after valuation and LIFO reserves of inventory expected to be sold, or consumed within one year or operating cycle, if longer.",
 
+  // "DeferredTaxAssetsNetCurrent"
+  // "label": "Deferred Tax Assets, Net of Valuation Allowance, Current",
+  // "description": "Amount after allocation of valuation allowances of deferred tax asset attributable to deductible temporary differences and carryforwards classified as current.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -76,6 +80,8 @@ class BalanceSheetProcessor {
     'NontradeReceivablesCurrent',            // Other Receivables
                          //Current Assets
     'InventoryNet',                          // Inventory
+    'DeferredTaxAssetsNetCurrent'            // Deferred Tax Assets Current
+
 
     'AssetsCurrent',                         // Total Current Assets
   };
@@ -132,6 +138,9 @@ class BalanceSheetProcessor {
         break;
       case 'InventoryNet':
         balanceSheet.inventory = value;
+        break;
+      case 'DeferredTaxAssetsNetCurrent':
+        balanceSheet.deferredTaxAssets = value;
         break;
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;

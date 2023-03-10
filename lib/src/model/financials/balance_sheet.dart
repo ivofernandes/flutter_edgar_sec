@@ -11,6 +11,8 @@ class BalanceSheet {
 
   // Current Assets
   double inventory = 0;
+  double deferredTaxAssets = 0;
+
   double currentAssets = 0;
 
   // Calculated total cash n cash equivalents
@@ -27,6 +29,7 @@ class BalanceSheet {
   accountsReceivable: $accountsReceivable,
   otherReceivables: $otherReceivables,
   inventory: $inventory,
+  deferredTaxAssets: $deferredTaxAssets,
   currentAssets: $currentAssets
   ''';
 }

@@ -38,6 +38,7 @@ void main() {
     final otherReceivables = balance2022.otherReceivables.billions;
 
     final inventory = balance2022.inventory.billions;
+    final deferredTaxAssets = balance2022.deferredTaxAssets.billions;
 
     // Income Statement's asserts
     assert(revenueBillions == 394.328);
@@ -64,6 +65,7 @@ void main() {
 
     // Current Assets
     assert(inventory == 4.946);
+    assert(deferredTaxAssets == 0); // no deferredTaxAssets for the year 2022
 
     // Check derivated values
     final netMargin = income2022.netMargin;
