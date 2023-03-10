@@ -63,6 +63,10 @@ class BalanceSheetProcessor {
   // "label": "Deferred Tax Assets, Net of Valuation Allowance, Current",
   // "description": "Amount after allocation of valuation allowances of deferred tax asset attributable to deductible temporary differences and carryforwards classified as current.",
 
+  // "RestrictedCashAndCashEquivalentsAtCarryingValue"
+  // "label": "Restricted Cash and Cash Equivalents, Current",
+  // "description": "Amount of cash and cash equivalents restricted as to withdrawal or usage, classified as current. Cash includes, but is not limited to, currency on hand, demand deposits with banks or financial institutions, and other accounts with general characteristics of demand deposits. Cash equivalents include, but are not limited to, short-term, highly liquid investments that are both readily convertible to known amounts of cash and so near their maturity that they present insignificant risk of changes in value because of changes in interest rates.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -81,7 +85,7 @@ class BalanceSheetProcessor {
                          //Current Assets
     'InventoryNet',                          // Inventory
     'DeferredTaxAssetsNetCurrent'            // Deferred Tax Assets Current
-
+    'RestrictedCashAndCashEquivalentsAtCarryingValue' // Restricted Cash
 
     'AssetsCurrent',                         // Total Current Assets
   };
@@ -141,6 +145,9 @@ class BalanceSheetProcessor {
         break;
       case 'DeferredTaxAssetsNetCurrent':
         balanceSheet.deferredTaxAssets = value;
+        break;
+      case 'RestrictedCashAndCashEquivalentsAtCarryingValue':
+        balanceSheet.restrictedCash = value;
         break;
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;

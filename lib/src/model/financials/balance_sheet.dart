@@ -12,6 +12,7 @@ class BalanceSheet {
   // Current Assets
   double inventory = 0;
   double deferredTaxAssets = 0;
+  double restrictedCash = 0;
 
   double currentAssets = 0;
 
@@ -30,6 +31,7 @@ class BalanceSheet {
   otherReceivables: $otherReceivables,
   inventory: $inventory,
   deferredTaxAssets: $deferredTaxAssets,
+  restrictedCash: $restrictedCash,
   currentAssets: $currentAssets
   ''';
 }
