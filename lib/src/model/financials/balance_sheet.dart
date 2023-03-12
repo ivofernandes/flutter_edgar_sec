@@ -1,4 +1,11 @@
 class BalanceSheet {
+  static List<String> labels = [
+    'Cash & Cash Equivalents',
+    'Short Term Investments',
+    'Accounts Receivables',
+    'Other Receivables',
+    'Inventory',
+  ];
 
   // Cash & Short Term Investments division
   double cashAndCashEquivalents = 0;
@@ -17,8 +24,7 @@ class BalanceSheet {
   double currentAssets = 0;
 
   // Calculated total cash n cash equivalents
-  double get totalCashAndShortTermInvestments => cashAndCashEquivalents
-      + shortTermInvestments + tradingAssetSecurities;
+  double get totalCashAndShortTermInvestments => cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
 
   BalanceSheet();
 

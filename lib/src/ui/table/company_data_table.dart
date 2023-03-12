@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
+import 'package:flutter_edgar_sec/src/model/enums/financial_type.dart';
 import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
@@ -8,17 +9,20 @@ import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/ui/table/rows/balance_sheet_rows.dart';
 import 'package:flutter_edgar_sec/src/ui/table/rows/cash_flow_statement_rows.dart';
 import 'package:flutter_edgar_sec/src/ui/table/rows/income_statement_rows.dart';
+import 'package:horizontal_data_table/horizontal_data_table.dart';
 
 /// Create the data table with the company data
 class CompanyDataTable extends StatelessWidget {
   final CompanyResults companyResults;
   final FinancialStatementPeriod period;
-  final int selectedStatement;
+  final FinancialType selectedFinancial;
+  final double columnWidth;
 
   const CompanyDataTable({
     required this.companyResults,
     required this.period,
-    required this.selectedStatement,
+    required this.selectedFinancial,
+    this.columnWidth = 100,
   });
 
   @override
@@ -29,22 +33,21 @@ class CompanyDataTable extends StatelessWidget {
       return const Center(child: Text('No data available'));
     }
 
-    return DataTable(
-      columns: [
-        // Empty column for the labels
-        DataColumn(
-          label: const Text(''),
-        ),
-        // Columns with the time period
-        ...reports
-            .map(
-              (FinancialStatement report) => DataColumn(
-                label: Text(report.quarterPeriod),
-              ),
-            )
-            .toList()
-      ],
-      rows: getRowsForReports(reports, selectedStatement),
+    return HorizontalDataTable(
+      leftHandSideColumnWidth: 100,
+      rightHandSideColumnWidth: columnWidth * reports.length,
+      isFixedHeader: true,
+      headerWidgets: _getTitleWidget(reports),
+      leftSideItemBuilder: (context, index) => _generateFirstColumnRow(reports, index),
+      rightSideItemBuilder: (context, index) => _generateRightHandSideColumnRow(reports, index),
+      itemCount: 10,
+      rowSeparatorWidget: const Divider(
+        color: Colors.black38,
+        height: 1.0,
+        thickness: 0.0,
+      ),
+      leftHandSideColBackgroundColor: Theme.of(context).canvasColor,
+      rightHandSideColBackgroundColor: Theme.of(context).canvasColor,
     );
   }
 
@@ -69,5 +72,78 @@ class CompanyDataTable extends StatelessWidget {
 
       return CashFlowStatementRows.getRows(cashFlowStatements);
     }
+  }
+
+  List<Widget> _getTitleWidget(List<FinancialStatement> reports) {
+    return [
+      _getTitleItemWidget('', 100),
+      ...reports.map(
+        (FinancialStatement report) => _getTitleItemWidget(report.quarterPeriod, 100),
+      )
+    ];
+  }
+
+  Widget _getTitleItemWidget(String label, double width) {
+    return Container(
+      width: width,
+      height: 56,
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+      alignment: Alignment.centerLeft,
+      child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Widget _generateFirstColumnRow(List<FinancialStatement> reports, int index) {
+    final List<String> labels = reports.first.getLabelsForFinancialStatement(selectedFinancial);
+    final String label = labels[index];
+    return Container(
+      width: 100,
+      height: 52,
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+      alignment: Alignment.centerLeft,
+      child: Tooltip(
+        message: label,
+        child: Text(label),
+      ),
+    );
+  }
+
+  Widget _generateRightHandSideColumnRow(List<FinancialStatement> reports, int index) {
+    return InteractiveViewer(
+      child: Row(
+        children: <Widget>[
+          Container(
+            width: 100,
+            height: 52,
+            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+            child: Row(
+              children: <Widget>[Text('values')],
+            ),
+          ),
+          Container(
+            width: 200,
+            height: 52,
+            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+            child: Text('values'),
+          ),
+          Container(
+            width: 100,
+            height: 52,
+            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+            child: Text('values'),
+          ),
+          Container(
+            width: 200,
+            height: 52,
+            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+            child: Text('values'),
+          ),
+        ],
+      ),
+    );
   }
 }

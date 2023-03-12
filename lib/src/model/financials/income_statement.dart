@@ -1,4 +1,22 @@
 class IncomeStatement {
+  static List<String> labels = [
+    'Revenues',
+    'Cost of Revenues',
+    'Operating Income',
+    'Gross Profit',
+    'Research and Development Expenses',
+    'Selling General and Admin Expenses',
+    'Operating Expenses',
+    'Net Income',
+    'interest Expenses',
+    'Other Non Operating Income Expenses',
+    'Income tax Expense',
+    'Net Margin',
+    'Operating Margin',
+    'EBIT',
+    'Interest Coverage Ratio',
+  ];
+
   IncomeStatement();
 
   /// The aggregate amount of revenues earned by the company during the reporting period.

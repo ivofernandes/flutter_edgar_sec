@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
+import 'package:flutter_edgar_sec/src/model/enums/financial_type.dart';
 import 'package:flutter_edgar_sec/src/model/r1_company_results.dart';
 import 'package:flutter_edgar_sec/src/ui/options/company_table_options.dart';
 import 'package:flutter_edgar_sec/src/ui/table/company_data_table.dart';
@@ -19,7 +20,7 @@ class CompanyTableUI extends StatefulWidget {
 class _CompanyTableUIState extends State<CompanyTableUI> {
   FinancialStatementPeriod period = FinancialStatementPeriod.quarterly;
 
-  int selectedStatement = 0;
+  FinancialType selectedStatement = FinancialType.incomeStatement;
 
   @override
   Widget build(BuildContext context) => ListView.builder(
@@ -30,20 +31,20 @@ class _CompanyTableUIState extends State<CompanyTableUI> {
             return SizedBox(
               height: 200,
               width: 500,
-              child: InteractiveViewer(
-                boundaryMargin: const EdgeInsets.only(bottom: 750),
-                minScale: 0.1,
-                maxScale: 5,
-                constrained: false,
+              child: SizedBox(
+                height: 1000,
+                width: 1000,
                 child: Column(
                   children: [
                     CompanyTableOptions(
                       period: period,
                     ),
-                    CompanyDataTable(
-                      companyResults: widget.companyResults,
-                      period: period,
-                      selectedStatement: selectedStatement,
+                    Expanded(
+                      child: CompanyDataTable(
+                        companyResults: widget.companyResults,
+                        period: period,
+                        selectedFinancial: selectedStatement,
+                      ),
                     ),
                   ],
                 ),

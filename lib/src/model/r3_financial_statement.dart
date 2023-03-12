@@ -1,4 +1,5 @@
 import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
+import 'package:flutter_edgar_sec/src/model/enums/financial_type.dart';
 import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
@@ -52,4 +53,15 @@ class FinancialStatement {
     cashFlowStatement: 
     $cashFlowStatement
     ''';
+
+  List<String> getLabelsForFinancialStatement(FinancialType selectedFinancial) {
+    switch (selectedFinancial) {
+      case FinancialType.incomeStatement:
+        return IncomeStatement.labels;
+      case FinancialType.balanceSheet:
+        return BalanceSheet.labels;
+      case FinancialType.cashFlowStatement:
+        return CashFlowStatement.labels;
+    }
+  }
 }
