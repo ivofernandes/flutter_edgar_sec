@@ -13,15 +13,22 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 
 /// Create the data table with the company data
 class CompanyDataTable extends StatelessWidget {
+  /// Actual data for the table
   final CompanyResults companyResults;
+
+  /// The period of the financial statement: quarterly or annual
   final FinancialStatementPeriod period;
-  final FinancialType selectedFinancial;
+
+  /// The type of the financial statement: income statement, balance sheet or cash flow statement
+  final FinancialType financialType;
+
+  /// The width of the columns
   final double columnWidth;
 
   const CompanyDataTable({
     required this.companyResults,
     required this.period,
-    required this.selectedFinancial,
+    required this.financialType,
     this.columnWidth = 100,
   });
 
@@ -43,8 +50,8 @@ class CompanyDataTable extends StatelessWidget {
       itemCount: 10,
       rowSeparatorWidget: const Divider(
         color: Colors.black38,
-        height: 1.0,
-        thickness: 0.0,
+        height: 1,
+        thickness: 0,
       ),
       leftHandSideColBackgroundColor: Theme.of(context).canvasColor,
       rightHandSideColBackgroundColor: Theme.of(context).canvasColor,
@@ -74,27 +81,23 @@ class CompanyDataTable extends StatelessWidget {
     }
   }
 
-  List<Widget> _getTitleWidget(List<FinancialStatement> reports) {
-    return [
-      _getTitleItemWidget('', 100),
-      ...reports.map(
-        (FinancialStatement report) => _getTitleItemWidget(report.quarterPeriod, 100),
-      )
-    ];
-  }
+  List<Widget> _getTitleWidget(List<FinancialStatement> reports) => [
+        _getTitleItemWidget('', 100),
+        ...reports.map(
+          (FinancialStatement report) => _getTitleItemWidget(report.quarterPeriod, 100),
+        )
+      ];
 
-  Widget _getTitleItemWidget(String label, double width) {
-    return Container(
-      width: width,
-      height: 56,
-      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.centerLeft,
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
-    );
-  }
+  Widget _getTitleItemWidget(String label, double width) => Container(
+        width: width,
+        height: 56,
+        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+        alignment: Alignment.centerLeft,
+        child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+      );
 
   Widget _generateFirstColumnRow(List<FinancialStatement> reports, int index) {
-    final List<String> labels = reports.first.getLabelsForFinancialStatement(selectedFinancial);
+    final List<String> labels = reports.first.getLabelsForFinancialStatement(financialType);
     final String label = labels[index];
     return Container(
       width: 100,
@@ -108,42 +111,27 @@ class CompanyDataTable extends StatelessWidget {
     );
   }
 
-  Widget _generateRightHandSideColumnRow(List<FinancialStatement> reports, int index) {
-    return InteractiveViewer(
-      child: Row(
-        children: <Widget>[
-          Container(
-            width: 100,
-            height: 52,
-            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
-            child: Row(
-              children: <Widget>[Text('values')],
-            ),
-          ),
-          Container(
-            width: 200,
-            height: 52,
-            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
-            child: Text('values'),
-          ),
-          Container(
-            width: 100,
-            height: 52,
-            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
-            child: Text('values'),
-          ),
-          Container(
-            width: 200,
-            height: 52,
-            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
-            child: Text('values'),
-          ),
-        ],
-      ),
-    );
+  Widget _generateRightHandSideColumnRow(List<FinancialStatement> reports, int index) => Row(
+        children: reports
+            .map(
+              (report) => Container(
+                width: 100,
+                height: 52,
+                padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                alignment: Alignment.centerLeft,
+                child: Text(getDataForReport(report, index)),
+              ),
+            )
+            .toList(),
+      );
+
+  String getDataForReport(FinancialStatement report, int index) {
+    if (financialType == FinancialType.incomeStatement) {
+      return report.incomeStatement.getValueForIndex(index);
+    } else if (financialType == FinancialType.balanceSheet) {
+      return report.balanceSheet.getValueForIndex(index);
+    } else {
+      return report.cashFlowStatement.getValueForIndex(index);
+    }
   }
 }

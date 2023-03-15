@@ -1,3 +1,5 @@
+import 'package:flutter_edgar_sec/src/utils/number_utils.dart';
+
 class BalanceSheet {
   static List<String> labels = [
     'Cash & Cash Equivalents',
@@ -6,6 +8,25 @@ class BalanceSheet {
     'Other Receivables',
     'Inventory',
   ];
+
+  String getValueForIndex(int index) {
+    final String name = labels[index];
+
+    switch (name) {
+      case 'Cash & Cash Equivalents':
+        return cashAndCashEquivalents.reportFormat;
+      case 'Short Term Investments':
+        return shortTermInvestments.reportFormat;
+      case 'Accounts Receivables':
+        return accountsReceivable.reportFormat;
+      case 'Other Receivables':
+        return otherReceivables.reportFormat;
+      case 'Inventory':
+        return inventory.reportFormat;
+      default:
+        return '';
+    }
+  }
 
   // Cash & Short Term Investments division
   double cashAndCashEquivalents = 0;
