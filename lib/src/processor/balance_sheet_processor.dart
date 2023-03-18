@@ -89,9 +89,9 @@ class BalanceSheetProcessor {
     'NontradeReceivablesCurrent',            // Other Receivables
                          //Current Assets
     'InventoryNet',                          // Inventory
-    'DeferredTaxAssetsNetCurrent'            // Deferred Tax Assets Current
-    'RestrictedCashAndCashEquivalentsAtCarryingValue' // Restricted Cash
-    'OtherAssetsCurrent'                     // Other Current Assets
+    'DeferredTaxAssetsNetCurrent',           // Deferred Tax Assets Current
+    'RestrictedCashAndCashEquivalentsAtCarryingValue', // Restricted Cash
+    'OtherAssetsCurrent',                     // Other Current Assets
     'AssetsCurrent',                         // Total Current Assets
   };
 
@@ -109,16 +109,25 @@ class BalanceSheetProcessor {
         typeOfForm: typeOfForm,
       );
 
+      // if(field == "OtherAssetsCurrent") {
+      //   print('++++++++++++++++++++++++++++++++++++++++++++++++');
+      //   print('++++++++++++++++++++++++++++++++++++++++++++++++');
+      //   print('++++++++++++++++++++++++++++++++++++++++++++++++');
+      //   print('setting the field '+ field + ' with value ');
+      // }
+
+      print('FIELD = '+ field);
+
       for (final period in periods) {
         final endDateString = period['end'];
         final value = period['val'] as num;
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        print('typeOfForm: '+typeOfForm);
+        // print('typeOfForm: '+typeOfForm);
 
-        if(financialStatement.period == FinancialStatementPeriod.annual)
-          print('period -> '+financialStatement.period.toString()+' '+financialStatement.year.toString());
+        // if(financialStatement.period == FinancialStatementPeriod.annual)
+        //   print('period -> '+financialStatement.period.toString()+' '+financialStatement.year.toString());
 
         _mapValue(field, value.toDouble(), balanceSheet);
       }
@@ -133,14 +142,14 @@ class BalanceSheetProcessor {
       return;
     }
 
-    print('Field --->>> '+ field + ' with value '+value.toString());
+    // print('Field --->>> '+ field + ' with value '+value.toString());
 
     switch (field) {
       case 'OtherAssetsCurrent':
-        print('++++++++++++++++++++++++++++++++++++++++++++++++');
-        print('++++++++++++++++++++++++++++++++++++++++++++++++');
-        print('++++++++++++++++++++++++++++++++++++++++++++++++');
-        print('setting the field '+ field + ' with value '+value.toString());
+        // print('++++++++++++++++++++++++++++++++++++++++++++++++');
+        // print('++++++++++++++++++++++++++++++++++++++++++++++++');
+        // print('++++++++++++++++++++++++++++++++++++++++++++++++');
+        // print('setting the field '+ field + ' with value '+value.toString());
         balanceSheet.otherCurrentAssets = value;
         break;
       case 'CashAndCashEquivalentsAtCarryingValue':
@@ -161,7 +170,6 @@ class BalanceSheetProcessor {
       case 'RestrictedCashAndCashEquivalentsAtCarryingValue':
         balanceSheet.restrictedCash = value;
         break;
-
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;
         break;
