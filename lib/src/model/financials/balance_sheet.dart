@@ -20,6 +20,7 @@ class BalanceSheet {
   double inventory = 0;
   double deferredTaxAssets = 0;
   double restrictedCash = 0;
+  double otherCurrentAssets = 0;
 
   double currentAssets = 0;
 
@@ -27,6 +28,8 @@ class BalanceSheet {
   double get totalCashAndShortTermInvestments => cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
 
   BalanceSheet();
+
+  set (double otherAssetsCurrent) {}
 
   @override
   String toString() => '''
@@ -38,6 +41,7 @@ class BalanceSheet {
   inventory: $inventory,
   deferredTaxAssets: $deferredTaxAssets,
   restrictedCash: $restrictedCash,
+  otherCurrentAssets: $otherCurrentAssets,
   currentAssets: $currentAssets
   ''';
 }

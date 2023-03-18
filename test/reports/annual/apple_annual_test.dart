@@ -40,6 +40,7 @@ void main() {
     final inventory = balance2022.inventory.billions;
     final deferredTaxAssets = balance2022.deferredTaxAssets.billions;
     final restrictedCash = balance2022.restrictedCash.billions;
+    final otherCurrentAssets = balance2022.otherCurrentAssets.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
@@ -75,6 +76,8 @@ void main() {
     assert(inventory == 4.946);
     assert(deferredTaxAssets == 0); // no deferredTaxAssets for the year 2022
     assert(restrictedCash == 0);    // no restrictedCash for the year 2022
+    print('otherCurrentAssets: '+ otherCurrentAssets.toString());
+    assert(otherCurrentAssets == 21.223);
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);

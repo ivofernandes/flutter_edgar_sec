@@ -1,3 +1,4 @@
+import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
 import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
@@ -67,6 +68,10 @@ class BalanceSheetProcessor {
   // "label": "Restricted Cash and Cash Equivalents, Current",
   // "description": "Amount of cash and cash equivalents restricted as to withdrawal or usage, classified as current. Cash includes, but is not limited to, currency on hand, demand deposits with banks or financial institutions, and other accounts with general characteristics of demand deposits. Cash equivalents include, but are not limited to, short-term, highly liquid investments that are both readily convertible to known amounts of cash and so near their maturity that they present insignificant risk of changes in value because of changes in interest rates.",
 
+  // "OtherAssetsCurrent"
+  // "label": "Other Assets, Current",
+  // "description": "Amount of current assets classified as other.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -86,7 +91,7 @@ class BalanceSheetProcessor {
     'InventoryNet',                          // Inventory
     'DeferredTaxAssetsNetCurrent'            // Deferred Tax Assets Current
     'RestrictedCashAndCashEquivalentsAtCarryingValue' // Restricted Cash
-
+    'OtherAssetsCurrent'                     // Other Current Assets
     'AssetsCurrent',                         // Total Current Assets
   };
 
@@ -104,17 +109,16 @@ class BalanceSheetProcessor {
         typeOfForm: typeOfForm,
       );
 
-
-
-      //TODO - NF - should we change "quarter" for "period"? because period can
-      //TODO - represent a quarter or annual
       for (final period in periods) {
         final endDateString = period['end'];
         final value = period['val'] as num;
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        //print('period -> '+financialStatement.period.toString()+' '+financialStatement.year.toString());
+        print('typeOfForm: '+typeOfForm);
+
+        if(financialStatement.period == FinancialStatementPeriod.annual)
+          print('period -> '+financialStatement.period.toString()+' '+financialStatement.year.toString());
 
         _mapValue(field, value.toDouble(), balanceSheet);
       }
@@ -129,7 +133,16 @@ class BalanceSheetProcessor {
       return;
     }
 
+    print('Field --->>> '+ field + ' with value '+value.toString());
+
     switch (field) {
+      case 'OtherAssetsCurrent':
+        print('++++++++++++++++++++++++++++++++++++++++++++++++');
+        print('++++++++++++++++++++++++++++++++++++++++++++++++');
+        print('++++++++++++++++++++++++++++++++++++++++++++++++');
+        print('setting the field '+ field + ' with value '+value.toString());
+        balanceSheet.otherCurrentAssets = value;
+        break;
       case 'CashAndCashEquivalentsAtCarryingValue':
         balanceSheet.cashAndCashEquivalents = value;
         break;
@@ -137,7 +150,6 @@ class BalanceSheetProcessor {
         balanceSheet.accountsReceivable = value;
         break;
       case 'NontradeReceivablesCurrent':
-        //print('setting the field '+ field + ' with value '+value.toString());
         balanceSheet.otherReceivables = value;
         break;
       case 'InventoryNet':
@@ -149,6 +161,7 @@ class BalanceSheetProcessor {
       case 'RestrictedCashAndCashEquivalentsAtCarryingValue':
         balanceSheet.restrictedCash = value;
         break;
+
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;
         break;
