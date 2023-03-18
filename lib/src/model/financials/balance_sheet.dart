@@ -10,6 +10,10 @@ class BalanceSheet {
   ];
 
   String getValueForIndex(int index) {
+    if (index >= labels.length) {
+      return '';
+    }
+
     final String name = labels[index];
 
     switch (name) {

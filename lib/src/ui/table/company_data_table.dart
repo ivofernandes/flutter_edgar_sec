@@ -1,53 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
 import 'package:flutter_edgar_sec/src/model/enums/financial_type.dart';
-import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
-import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r1_company_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
-import 'package:flutter_edgar_sec/src/ui/table/rows/balance_sheet_rows.dart';
-import 'package:flutter_edgar_sec/src/ui/table/rows/cash_flow_statement_rows.dart';
-import 'package:flutter_edgar_sec/src/ui/table/rows/income_statement_rows.dart';
+import 'package:flutter_edgar_sec/src/ui/table/settings/settings_button.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 
 /// Create the data table with the company data
-class CompanyDataTable extends StatelessWidget {
+class CompanyDataTable extends StatefulWidget {
   /// Actual data for the table
   final CompanyResults companyResults;
 
   /// The period of the financial statement: quarterly or annual
-  final FinancialStatementPeriod period;
+  final FinancialStatementPeriod periodDefault;
 
   /// The type of the financial statement: income statement, balance sheet or cash flow statement
-  final FinancialType financialType;
+  final FinancialType financialTypeDefault;
 
   /// The width of the columns
   final double columnWidth;
 
   const CompanyDataTable({
     required this.companyResults,
-    required this.period,
-    required this.financialType,
+    required this.periodDefault,
+    required this.financialTypeDefault,
     this.columnWidth = 100,
   });
 
   @override
+  State<CompanyDataTable> createState() => _CompanyDataTableState();
+}
+
+class _CompanyDataTableState extends State<CompanyDataTable> {
+  FinancialStatementPeriod period = FinancialStatementPeriod.annual;
+  FinancialType financialType = FinancialType.incomeStatement;
+
+  @override
+  void initState() {
+    super.initState();
+
+    period = widget.periodDefault;
+    financialType = widget.financialTypeDefault;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<FinancialStatement> reports = companyResults.quarters;
+    final List<FinancialStatement> reports = widget.companyResults.quarters;
 
     if (reports.isEmpty) {
       return const Center(child: Text('No data available'));
     }
 
+    final firstRow = _getTitleWidget(reports);
+    final List<String> labels = reports.first.getLabelsForFinancialStatement(financialType);
+
     return HorizontalDataTable(
       leftHandSideColumnWidth: 100,
-      rightHandSideColumnWidth: columnWidth * reports.length,
+      rightHandSideColumnWidth: widget.columnWidth * reports.length,
       isFixedHeader: true,
-      headerWidgets: _getTitleWidget(reports),
+      headerWidgets: firstRow,
       leftSideItemBuilder: (context, index) => _generateFirstColumnRow(reports, index),
       rightSideItemBuilder: (context, index) => _generateRightHandSideColumnRow(reports, index),
-      itemCount: 10,
+      itemCount: labels.length,
       rowSeparatorWidget: const Divider(
         color: Colors.black38,
         height: 1,
@@ -58,31 +72,24 @@ class CompanyDataTable extends StatelessWidget {
     );
   }
 
-  /// Create the rows for the data table, depending on the selected statement
-  /// For 0: Income Statement
-  /// For 1: Balance Sheet
-  /// For 2: Cash Flow Statement
-  List<DataRow> getRowsForReports(List<FinancialStatement> reports, int selectedStatement) {
-    if (selectedStatement == 0) {
-      final List<IncomeStatement> incomeStatements =
-          reports.map((FinancialStatement report) => report.incomeStatement).toList();
-
-      return IncomeStatementRows.getRows(incomeStatements);
-    }
-    if (selectedStatement == 1) {
-      final List<BalanceSheet> balanceSheets = reports.map((FinancialStatement report) => report.balanceSheet).toList();
-
-      return BalanceSheetRows.getRows(balanceSheets);
-    } else {
-      final List<CashFlowStatement> cashFlowStatements =
-          reports.map((FinancialStatement report) => report.cashFlowStatement).toList();
-
-      return CashFlowStatementRows.getRows(cashFlowStatements);
-    }
-  }
-
   List<Widget> _getTitleWidget(List<FinancialStatement> reports) => [
-        _getTitleItemWidget('', 100),
+        SizedBox(
+          width: 100,
+          height: 56,
+          child: SettingsButton(
+            financialStatementPeriod: period,
+            financialType: financialType,
+            onFinancialStatementPeriodChanged: (newPeriod) {
+              period = newPeriod;
+              setState(() {});
+              //TODO implement the annual table
+            },
+            onFinancialTypeChanged: (newType) {
+              financialType = newType;
+              setState(() {});
+            },
+          ),
+        ),
         ...reports.map(
           (FinancialStatement report) => _getTitleItemWidget(report.quarterPeriod, 100),
         )

@@ -42,8 +42,8 @@ class _CompanyTableUIState extends State<CompanyTableUI> {
                     Expanded(
                       child: CompanyDataTable(
                         companyResults: widget.companyResults,
-                        period: period,
-                        financialType: selectedStatement,
+                        periodDefault: period,
+                        financialTypeDefault: selectedStatement,
                       ),
                     ),
                   ],
