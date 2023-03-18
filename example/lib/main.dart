@@ -45,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               TextField(
                 controller: _textEditingController,
+                onSubmitted: (String value) {
+                  _getFinancialStatements();
+                },
               ),
               MaterialButton(
                 color: Colors.green,

@@ -29,7 +29,7 @@ class _CompanyTableUIState extends State<CompanyTableUI> {
           if (i == 0) {
             // This is the only part that will remain in the end
             return SizedBox(
-              height: 200,
+              height: 400,
               width: 500,
               child: SizedBox(
                 height: 1000,
@@ -42,8 +42,8 @@ class _CompanyTableUIState extends State<CompanyTableUI> {
                     Expanded(
                       child: CompanyDataTable(
                         companyResults: widget.companyResults,
-                        period: period,
-                        selectedFinancial: selectedStatement,
+                        periodDefault: period,
+                        financialTypeDefault: selectedStatement,
                       ),
                     ),
                   ],

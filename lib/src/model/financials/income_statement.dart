@@ -1,3 +1,5 @@
+import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
+
 class IncomeStatement {
   static List<String> labels = [
     'Revenues',
@@ -16,6 +18,45 @@ class IncomeStatement {
     'EBIT',
     'Interest Coverage Ratio',
   ];
+
+  /// This is just an abstraction for the frontend, and needs to match the labels array
+  String getValueForIndex(int index) {
+    final String name = labels[index];
+    switch (name) {
+      case 'Revenues':
+        return revenues.reportFormat;
+      case 'Cost of Revenues':
+        return costOfRevenues.reportFormat;
+      case 'Operating Income':
+        return operatingIncome.reportFormat;
+      case 'Gross Profit':
+        return grossProfit.reportFormat;
+      case 'Research and Development Expenses':
+        return researchAndDevelopmentExpenses.reportFormat;
+      case 'Selling General and Admin Expenses':
+        return sellingGeneralAndAdministrativeExpenses.reportFormat;
+      case 'Operating Expenses':
+        return operatingExpenses.reportFormat;
+      case 'Net Income':
+        return netIncome.reportFormat;
+      case 'interest Expenses':
+        return interestExpenses.reportFormat;
+      case 'Other Non Operating Income Expenses':
+        return otherNonOperatingIncomeExpense.reportFormat;
+      case 'Income tax Expense':
+        return incomeTaxExpense.reportFormat;
+      case 'Net Margin':
+        return netMargin.reportFormat;
+      case 'Operating Margin':
+        return operatingMargin.reportFormat;
+      case 'EBIT':
+        return EBIT.reportFormat;
+      case 'Interest Coverage Ratio':
+        return interestCoverageRatio.reportFormat;
+      default:
+        return '';
+    }
+  }
 
   IncomeStatement();
 
