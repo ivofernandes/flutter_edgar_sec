@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
 import 'package:flutter_edgar_sec/src/model/enums/financial_type.dart';
 import 'package:flutter_edgar_sec/src/model/r1_company_results.dart';
-import 'package:flutter_edgar_sec/src/ui/options/company_table_options.dart';
 import 'package:flutter_edgar_sec/src/ui/table/company_data_table.dart';
 
 /// Basic company table UI, like the one of most of the stock apps
