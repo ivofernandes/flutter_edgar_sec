@@ -23,51 +23,17 @@ class _CompanyTableUIState extends State<CompanyTableUI> {
   FinancialType selectedStatement = FinancialType.incomeStatement;
 
   @override
-  Widget build(BuildContext context) => ListView.builder(
-        itemCount: widget.companyResults.years.length + 1,
-        itemBuilder: (context, i) {
-          if (i == 0) {
-            // This is the only part that will remain in the end
-            return SizedBox(
-              height: 400,
-              width: 500,
-              child: SizedBox(
-                height: 1000,
-                width: 1000,
-                child: Column(
-                  children: [
-                    CompanyTableOptions(
-                      period: period,
-                    ),
-                    Expanded(
-                      child: CompanyDataTable(
-                        companyResults: widget.companyResults,
-                        periodDefault: period,
-                        financialTypeDefault: selectedStatement,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }
-
-          // This part is just for easier logging
-          int index = i - 1;
-
-          final int year = widget.companyResults.years[index];
-
-          return Card(
-            child: Column(
-              children: [
-                Text(
-                  year.toString(),
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                Text(widget.companyResults.yearlyResults[year]!.toString()),
-              ],
-            ),
-          );
-        },
+  Widget build(BuildContext context) => SizedBox(
+        height: 400,
+        width: 500,
+        child: SizedBox(
+          height: 1000,
+          width: 1000,
+          child: CompanyDataTable(
+            companyResults: widget.companyResults,
+            periodDefault: period,
+            financialTypeDefault: selectedStatement,
+          ),
+        ),
       );
 }

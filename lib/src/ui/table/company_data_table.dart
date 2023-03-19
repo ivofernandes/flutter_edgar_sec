@@ -45,7 +45,9 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
 
   @override
   Widget build(BuildContext context) {
-    final List<FinancialStatement> reports = widget.companyResults.quarters;
+    /// Get the correct list of reports, can be quarterly or annual
+    final List<FinancialStatement> reports =
+        period.isQuarter ? widget.companyResults.quarters : widget.companyResults.yearReports;
 
     if (reports.isEmpty) {
       return const Center(child: Text('No data available'));
@@ -82,7 +84,6 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
             onFinancialStatementPeriodChanged: (newPeriod) {
               period = newPeriod;
               setState(() {});
-              //TODO implement the annual table
             },
             onFinancialTypeChanged: (newType) {
               financialType = newType;
@@ -91,7 +92,8 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
           ),
         ),
         ...reports.map(
-          (FinancialStatement report) => _getTitleItemWidget(report.quarterPeriod, 100),
+          (FinancialStatement report) =>
+              _getTitleItemWidget(period.isQuarter ? report.quarterPeriod : report.annualPeriod, 100),
         )
       ];
 

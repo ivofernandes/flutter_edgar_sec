@@ -16,7 +16,11 @@ class CompanyResults {
 
   /// Returns a list of all the quarters that are already reported for this company
   List<FinancialStatement> get quarters =>
-      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList();
+      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList()..sort();
+
+  /// Returns a list of all yearly reports that are already reported for this company
+  List<FinancialStatement> get yearReports =>
+      yearlyResults.values.map((e) => e.yearReport).expand((element) => element).toList()..sort();
 
   const CompanyResults({
     required this.yearlyResults,

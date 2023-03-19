@@ -4,7 +4,7 @@ import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 
-class FinancialStatement {
+class FinancialStatement implements Comparable<FinancialStatement> {
   /// The date of the financial statement
   final DateTime date;
 
@@ -33,6 +33,9 @@ class FinancialStatement {
   /// Calculates the title of the quarter financial statement
   String get quarterPeriod => '$year-Q$quarter';
 
+  /// Calculates the title of the annual financial statement
+  String get annualPeriod => year.toString();
+
   FinancialStatement({
     required this.date,
     required this.period,
@@ -54,6 +57,7 @@ class FinancialStatement {
     $cashFlowStatement
     ''';
 
+  /// Get the correct list of labels for the financial statement
   List<String> getLabelsForFinancialStatement(FinancialType selectedFinancial) {
     switch (selectedFinancial) {
       case FinancialType.incomeStatement:
@@ -64,4 +68,7 @@ class FinancialStatement {
         return CashFlowStatement.labels;
     }
   }
+
+  @override
+  int compareTo(FinancialStatement other) => date.compareTo(other.date);
 }

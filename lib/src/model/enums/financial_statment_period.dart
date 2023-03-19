@@ -1,4 +1,6 @@
 enum FinancialStatementPeriod {
   annual,
-  quarterly,
+  quarterly;
+
+  bool get isQuarter => this == FinancialStatementPeriod.quarterly;
 }
