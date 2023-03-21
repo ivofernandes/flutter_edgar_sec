@@ -47,7 +47,11 @@ class BalanceSheet {
   double restrictedCash = 0;
   double otherCurrentAssets = 0;
 
+  // Total Current Assets
   double currentAssets = 0;
+
+  // Long Term Assets
+  double grossPropertyPlantEquipment = 0;
 
   // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments =>
@@ -68,6 +72,7 @@ class BalanceSheet {
   deferredTaxAssets: $deferredTaxAssets,
   restrictedCash: $restrictedCash,
   otherCurrentAssets: $otherCurrentAssets,
-  currentAssets: $currentAssets
+  currentAssets: $currentAssets,
+  grossPropertyPlantEquipment: $grossPropertyPlantEquipment
   ''';
 }

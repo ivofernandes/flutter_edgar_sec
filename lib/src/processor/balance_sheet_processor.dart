@@ -72,6 +72,19 @@ class BalanceSheetProcessor {
   // "label": "Other Assets, Current",
   // "description": "Amount of current assets classified as other.",
 
+  // "AssetsCurrent"
+  // "label": "Assets, Current",
+  // "description": "Sum of the carrying amounts as of the balance sheet date of all assets that are expected to be realized in cash, sold, or consumed within one year (or the normal operating cycle, if longer). Assets are probable future economic benefits obtained or controlled by an entity as a result of past transactions or events.",
+
+  //Add these two fields to get the "Gross Property, Plant & Equipment" field
+  // PropertyPlantAndEquipmentGross
+  // "label": "Property, Plant and Equipment, Gross",
+  // "description": "Amount before accumulated depreciation, depletion and amortization of physical assets used in the normal conduct of business and not intended for resale. Examples include, but are not limited to, land, buildings, machinery and equipment, office equipment, and furniture and fixtures.",
+  // +
+  // "OperatingLeaseRightOfUseAsset": {
+  // "label": "Operating Lease, Right-of-Use Asset",
+  // "description": "Amount of lessee's right to use underlying asset under operating lease.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -91,8 +104,11 @@ class BalanceSheetProcessor {
     'InventoryNet',                          // Inventory
     'DeferredTaxAssetsNetCurrent',           // Deferred Tax Assets Current
     'RestrictedCashAndCashEquivalentsAtCarryingValue', // Restricted Cash
-    'OtherAssetsCurrent',                     // Other Current Assets
+    'OtherAssetsCurrent',                    // Other Current Assets
     'AssetsCurrent',                         // Total Current Assets
+                         //Long Term Assets
+    'PropertyPlantAndEquipmentGross',        // Gross Property, Plant & Equipment
+    'OperatingLeaseRightOfUseAsset',         // Gross Property, Plant & Equipment
   };
 
   static void process(
@@ -116,7 +132,7 @@ class BalanceSheetProcessor {
       //   print('setting the field '+ field + ' with value ');
       // }
 
-      print('FIELD = '+ field);
+      // print('FIELD = '+ field);
 
       for (final period in periods) {
         final endDateString = period['end'];
@@ -146,10 +162,6 @@ class BalanceSheetProcessor {
 
     switch (field) {
       case 'OtherAssetsCurrent':
-        // print('++++++++++++++++++++++++++++++++++++++++++++++++');
-        // print('++++++++++++++++++++++++++++++++++++++++++++++++');
-        // print('++++++++++++++++++++++++++++++++++++++++++++++++');
-        // print('setting the field '+ field + ' with value '+value.toString());
         balanceSheet.otherCurrentAssets = value;
         break;
       case 'CashAndCashEquivalentsAtCarryingValue':
@@ -172,6 +184,14 @@ class BalanceSheetProcessor {
         break;
       case 'AssetsCurrent':
         balanceSheet.currentAssets = value;
+        break;
+      case 'PropertyPlantAndEquipmentGross':
+        balanceSheet.grossPropertyPlantEquipment =
+            balanceSheet.grossPropertyPlantEquipment + value;
+        break;
+      case 'OperatingLeaseRightOfUseAsset':
+        balanceSheet.grossPropertyPlantEquipment =
+            balanceSheet.grossPropertyPlantEquipment + value;
         break;
     }
   }

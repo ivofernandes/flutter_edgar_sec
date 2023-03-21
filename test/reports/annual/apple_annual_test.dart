@@ -48,6 +48,8 @@ void main() {
 
     final totalCurrentAssets = balance2022.currentAssets.billions;
 
+    final grossPropertyPlantEquipment = balance2022.grossPropertyPlantEquipment.billions;
+
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
     final otherNonOperatingIncomeExpenseBillions =
@@ -86,6 +88,10 @@ void main() {
     assert(restrictedCash == 0); // no restrictedCash for the year 2022
     assert(otherCurrentAssets == 21.223);
     assert(totalCurrentAssets == 135.405);
+
+    // Long Term Assets
+    assert(grossPropertyPlantEquipment == 124.874);
+
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);
