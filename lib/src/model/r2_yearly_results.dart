@@ -1,7 +1,6 @@
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 
 class YearlyResults {
-
   /// The report for the  first quarter of the year
   FinancialStatement? q1;
 
@@ -52,7 +51,7 @@ class YearlyResults {
     }
     return result;
   }
-  
+
   @override
   String toString() => '''
     q1: $q1\n

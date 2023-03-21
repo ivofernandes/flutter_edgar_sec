@@ -5,7 +5,8 @@ import 'package:flutter_edgar_sec/src/model/enums/financial_type.dart';
 class SettingsButton extends StatelessWidget {
   final FinancialStatementPeriod financialStatementPeriod;
   final FinancialType financialType;
-  final ValueChanged<FinancialStatementPeriod> onFinancialStatementPeriodChanged;
+  final ValueChanged<FinancialStatementPeriod>
+      onFinancialStatementPeriodChanged;
   final ValueChanged<FinancialType> onFinancialTypeChanged;
 
   const SettingsButton({

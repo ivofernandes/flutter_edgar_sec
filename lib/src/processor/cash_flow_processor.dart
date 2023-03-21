@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
+import 'package:flutter_edgar_sec/src/utils/number_utils.dart';
 
 /// Cash flow processor
 /// https://seekingalpha.com/symbol/AAPL/cash-flow-statement
@@ -27,6 +29,35 @@ class CashFlowProcessor {
     Map<String, FinancialStatement> index,
     String typeOfForm,
   ) {
+    // Auxiliar code to find the fields that are not mapped
+    List<String> factsKeys = facts.keys.toList();
+    for (final field in factsKeys) {
+      final periods =
+          BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
+
+      for (final period in periods) {
+        final String endDateString = period['end'] as String;
+        final double value = (period['val'] as num).toDouble();
+        final valueBillions = value.billions;
+
+        if (typeOfForm == '10-K') {
+          final DateTime endDate = DateTime.parse(endDateString);
+          final bool matchField = field.toLowerCase().contains('repurchase');
+          final bool matchDate = endDate.year == 2021;
+          final bool match = matchField && matchDate;
+          if (match && matchDate) {
+            debugPrint('Found $field @ $endDateString = $valueBillions');
+
+            final financialStatement = index[endDateString]!;
+            final cashFlowStatement = financialStatement.cashFlowStatement;
+
+            _mapValue(field, value.toDouble(), cashFlowStatement);
+          }
+        }
+      }
+    } // end for factsKeys
+
+    /// Process the supported fields
     for (final field in supportedFields) {
       // Filter the quarters, i.e. rows that are 10-Q
       final quarters = BaseProcessor.getRows(
@@ -47,7 +78,8 @@ class CashFlowProcessor {
     }
   }
 
-  static void _mapValue(String field, double value, CashFlowStatement cashFlowStatement) {
+  static void _mapValue(
+      String field, double value, CashFlowStatement cashFlowStatement) {
     if (dividendsFields.contains(field)) {
       cashFlowStatement.dividends += value;
       return;

@@ -46,23 +46,27 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
   @override
   Widget build(BuildContext context) {
     /// Get the correct list of reports, can be quarterly or annual
-    final List<FinancialStatement> reports =
-        period.isQuarter ? widget.companyResults.quarters : widget.companyResults.yearReports;
+    final List<FinancialStatement> reports = period.isQuarter
+        ? widget.companyResults.quarters
+        : widget.companyResults.yearReports;
 
     if (reports.isEmpty) {
       return const Center(child: Text('No data available'));
     }
 
     final firstRow = _getTitleWidget(reports);
-    final List<String> labels = reports.first.getLabelsForFinancialStatement(financialType);
+    final List<String> labels =
+        reports.first.getLabelsForFinancialStatement(financialType);
 
     return HorizontalDataTable(
       leftHandSideColumnWidth: 100,
       rightHandSideColumnWidth: widget.columnWidth * reports.length,
       isFixedHeader: true,
       headerWidgets: firstRow,
-      leftSideItemBuilder: (context, index) => _generateFirstColumnRow(reports, index),
-      rightSideItemBuilder: (context, index) => _generateRightHandSideColumnRow(reports, index),
+      leftSideItemBuilder: (context, index) =>
+          _generateFirstColumnRow(reports, index),
+      rightSideItemBuilder: (context, index) =>
+          _generateRightHandSideColumnRow(reports, index),
       itemCount: labels.length,
       rowSeparatorWidget: const Divider(
         color: Colors.black38,
@@ -92,8 +96,9 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
           ),
         ),
         ...reports.map(
-          (FinancialStatement report) =>
-              _getTitleItemWidget(period.isQuarter ? report.quarterPeriod : report.annualPeriod, 100),
+          (FinancialStatement report) => _getTitleItemWidget(
+              period.isQuarter ? report.quarterPeriod : report.annualPeriod,
+              100),
         )
       ];
 
@@ -106,7 +111,8 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
       );
 
   Widget _generateFirstColumnRow(List<FinancialStatement> reports, int index) {
-    final List<String> labels = reports.first.getLabelsForFinancialStatement(financialType);
+    final List<String> labels =
+        reports.first.getLabelsForFinancialStatement(financialType);
     final String label = labels[index];
     return Container(
       width: 100,
@@ -120,7 +126,9 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
     );
   }
 
-  Widget _generateRightHandSideColumnRow(List<FinancialStatement> reports, int index) => Row(
+  Widget _generateRightHandSideColumnRow(
+          List<FinancialStatement> reports, int index) =>
+      Row(
         children: reports
             .map(
               (report) => Container(

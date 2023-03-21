@@ -50,11 +50,12 @@ class BalanceSheet {
   double currentAssets = 0;
 
   // Calculated total cash n cash equivalents
-  double get totalCashAndShortTermInvestments => cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
+  double get totalCashAndShortTermInvestments =>
+      cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
 
   BalanceSheet();
 
-  set (double otherAssetsCurrent) {}
+  set(double otherAssetsCurrent) {}
 
   @override
   String toString() => '''

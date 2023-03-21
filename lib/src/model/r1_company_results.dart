@@ -15,22 +15,31 @@ class CompanyResults {
   }
 
   /// Returns a list of all the quarters that are already reported for this company
-  List<FinancialStatement> get quarters =>
-      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList()..sort();
+  List<FinancialStatement> get quarters => yearlyResults.values
+      .map((e) => e.quarters)
+      .expand((element) => element)
+      .toList()
+    ..sort();
 
   /// Returns a list of all yearly reports that are already reported for this company
-  List<FinancialStatement> get yearReports =>
-      yearlyResults.values.map((e) => e.yearReport).expand((element) => element).toList()..sort();
+  List<FinancialStatement> get yearReports => yearlyResults.values
+      .map((e) => e.yearReport)
+      .expand((element) => element)
+      .toList()
+    ..sort();
 
   const CompanyResults({
     required this.yearlyResults,
   });
 
   factory CompanyResults.fromJsonList(Map<String, dynamic> companyFactsJson) {
-    final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
-    final Map<String, dynamic> facts = factsNode['us-gaap'] as Map<String, dynamic>;
+    final Map<String, dynamic> factsNode =
+        companyFactsJson['facts'] as Map<String, dynamic>;
+    final Map<String, dynamic> facts =
+        factsNode['us-gaap'] as Map<String, dynamic>;
 
-    final Map<int, YearlyResults> yearlyResults = PeriodProcessor.process(facts);
+    final Map<int, YearlyResults> yearlyResults =
+        PeriodProcessor.process(facts);
 
     return CompanyResults(
       yearlyResults: yearlyResults,

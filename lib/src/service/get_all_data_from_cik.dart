@@ -12,7 +12,8 @@ class GetAllDataFromCik {
     final response = await http.get(uri);
 
     if (response.statusCode == 200) {
-      final companyFactsJson = json.decode(response.body) as Map<String, dynamic>;
+      final companyFactsJson =
+          json.decode(response.body) as Map<String, dynamic>;
 
       return CompanyResults.fromJsonList(companyFactsJson);
     }

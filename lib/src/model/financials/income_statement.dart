@@ -10,7 +10,7 @@ class IncomeStatement {
     'Selling General and Admin Expenses',
     'Operating Expenses',
     'Net Income',
-    'interest Expenses',
+    'Interest Expenses',
     'Other Non Operating Income Expenses',
     'Income tax Expense',
     'Net Margin',
@@ -39,7 +39,7 @@ class IncomeStatement {
         return operatingExpenses.reportFormat;
       case 'Net Income':
         return netIncome.reportFormat;
-      case 'interest Expenses':
+      case 'Interest Expenses':
         return interestExpenses.reportFormat;
       case 'Other Non Operating Income Expenses':
         return otherNonOperatingIncomeExpense.reportFormat;

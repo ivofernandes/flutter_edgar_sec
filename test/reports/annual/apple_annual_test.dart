@@ -8,7 +8,8 @@ void main() {
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/AAPL/income-statement
   test('Test 2022 apple values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -24,15 +25,18 @@ void main() {
     final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
     final grossProfitBillions = income2022.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022.sellingGeneralAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022.sellingGeneralAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
     // BalanceSheet's fields
     final cashAndCashEquivalents = balance2022.cashAndCashEquivalents.billions;
     final shortTermInvestments = balance2022.shortTermInvestments.billions;
     final tradingAssetSecurities = balance2022.tradingAssetSecurities.billions;
-    final totalCashAndCashEquivalents = balance2022.totalCashAndShortTermInvestments.billions;
+    final totalCashAndCashEquivalents =
+        balance2022.totalCashAndShortTermInvestments.billions;
 
     final accountsReceivable = balance2022.accountsReceivable.billions;
     final otherReceivables = balance2022.otherReceivables.billions;
@@ -44,7 +48,8 @@ void main() {
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;
@@ -75,13 +80,13 @@ void main() {
     // Current Assets
     assert(inventory == 4.946);
     assert(deferredTaxAssets == 0); // no deferredTaxAssets for the year 2022
-    assert(restrictedCash == 0);    // no restrictedCash for the year 2022
-    print('otherCurrentAssets: '+ otherCurrentAssets.toString());
+    assert(restrictedCash == 0); // no restrictedCash for the year 2022
+    print('otherCurrentAssets: ' + otherCurrentAssets.toString());
     assert(otherCurrentAssets == 21.223);
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);
-    //assert(incomeTaxExpenseBillions == 19.3);
+    assert(incomeTaxExpenseBillions == 19.3);
 
     // Check derivated values
     final netMargin = income2022.netMargin;

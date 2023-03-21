@@ -23,7 +23,9 @@ class SymbolToCik {
     final String symbol = symbolParam.toLowerCase();
 
     if (symbolToCik.containsKey(symbol)) {
-      return leadingZeros ? addLeadingZeros(symbolToCik[symbol]!) : symbolToCik[symbol]!;
+      return leadingZeros
+          ? addLeadingZeros(symbolToCik[symbol]!)
+          : symbolToCik[symbol]!;
     }
 
     return '';
@@ -41,7 +43,8 @@ class SymbolToCik {
   /// https://www.sec.gov/include/ticker.txt
   Future<void> ensureConversionIsCreated() async {
     if (symbolToCik.isEmpty) {
-      final String content = await http.read(Uri.https('www.sec.gov', '/include/ticker.txt'));
+      final String content =
+          await http.read(Uri.https('www.sec.gov', '/include/ticker.txt'));
       final List<String> lines = content.split('\n');
 
       for (String line in lines) {

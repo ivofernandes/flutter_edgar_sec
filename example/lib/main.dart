@@ -27,7 +27,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _textEditingController = TextEditingController(text: 'AAPL');
+  final TextEditingController _textEditingController =
+      TextEditingController(text: 'AAPL');
   bool _isLoading = false;
   CompanyResults _companyResults = CompanyResults.empty();
 
@@ -75,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
     _companyResults = CompanyResults.empty();
     setState(() {});
 
-    _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(_textEditingController.text);
+    _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(
+        _textEditingController.text);
 
     _isLoading = false;
     setState(() {});
