@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   /// Come to this url to get the correct values for the test
+  /// Official source for the financial data -> https://www.apple.com/newsroom/pdfs/FY23_Q1_Consolidated_Financial_Statements.pdf
   /// https://seekingalpha.com/symbol/AAPL/income-statement
   test('Test 2022 apple values for income statement', () async {
     final CompanyResults results =
