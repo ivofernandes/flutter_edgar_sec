@@ -85,6 +85,10 @@ class BalanceSheetProcessor {
   // "label": "Operating Lease, Right-of-Use Asset",
   // "description": "Amount of lessee's right to use underlying asset under operating lease.",
 
+  // "AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment"
+  // "label": "Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment",
+  // "description": "Amount of accumulated depreciation, depletion and amortization for physical assets used in the normal conduct of business to produce goods and services.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -109,6 +113,9 @@ class BalanceSheetProcessor {
                          //Long Term Assets
     'PropertyPlantAndEquipmentGross',        // Gross Property, Plant & Equipment
     'OperatingLeaseRightOfUseAsset',         // Gross Property, Plant & Equipment
+    'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment', // Acc Depreciation
+
+
   };
 
   static void process(
@@ -192,6 +199,9 @@ class BalanceSheetProcessor {
       case 'OperatingLeaseRightOfUseAsset':
         balanceSheet.grossPropertyPlantEquipment =
             balanceSheet.grossPropertyPlantEquipment + value;
+        break;
+      case 'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment':
+        balanceSheet.accumulatedDepreciation = value;
         break;
     }
   }

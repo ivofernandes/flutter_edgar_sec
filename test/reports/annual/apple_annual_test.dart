@@ -49,6 +49,7 @@ void main() {
     final totalCurrentAssets = balance2022.currentAssets.billions;
 
     final grossPropertyPlantEquipment = balance2022.grossPropertyPlantEquipment.billions;
+    final accumulatedDepreciation = balance2022.accumulatedDepreciation.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
@@ -91,7 +92,7 @@ void main() {
 
     // Long Term Assets
     assert(grossPropertyPlantEquipment == 124.874);
-
+    assert(accumulatedDepreciation == 72.340);
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);
