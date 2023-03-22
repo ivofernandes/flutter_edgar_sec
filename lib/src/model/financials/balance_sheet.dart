@@ -53,6 +53,7 @@ class BalanceSheet {
   // Long Term Assets
   double grossPropertyPlantEquipment = 0;
   double accumulatedDepreciation = 0;
+  double netPropertyPlantEquipment = 0;
 
   // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments =>
@@ -75,6 +76,7 @@ class BalanceSheet {
   otherCurrentAssets: $otherCurrentAssets,
   currentAssets: $currentAssets,
   grossPropertyPlantEquipment: $grossPropertyPlantEquipment,
-  accumulatedDepreciation: $accumulatedDepreciation
+  accumulatedDepreciation: $accumulatedDepreciation,
+  netPropertyPlantEquipment: $netPropertyPlantEquipment,
   ''';
 }

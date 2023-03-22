@@ -31,16 +31,20 @@ void main() {
         income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
-    // BalanceSheet's fields
+    // -------------- BalanceSheet's fields --------------------- //
+
+    // Cash and Equivalents
     final cashAndCashEquivalents = balance2022.cashAndCashEquivalents.billions;
     final shortTermInvestments = balance2022.shortTermInvestments.billions;
     final tradingAssetSecurities = balance2022.tradingAssetSecurities.billions;
     final totalCashAndCashEquivalents =
         balance2022.totalCashAndShortTermInvestments.billions;
 
+    // Receivables
     final accountsReceivable = balance2022.accountsReceivable.billions;
     final otherReceivables = balance2022.otherReceivables.billions;
 
+    // Current Assets
     final inventory = balance2022.inventory.billions;
     final deferredTaxAssets = balance2022.deferredTaxAssets.billions;
     final restrictedCash = balance2022.restrictedCash.billions;
@@ -48,8 +52,12 @@ void main() {
 
     final totalCurrentAssets = balance2022.currentAssets.billions;
 
+    // Long Term Assets
     final grossPropertyPlantEquipment = balance2022.grossPropertyPlantEquipment.billions;
     final accumulatedDepreciation = balance2022.accumulatedDepreciation.billions;
+    final netPropertyPlantEquipment = balance2022.netPropertyPlantEquipment.billions;
+
+    // -------------------------------------- //
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
@@ -93,6 +101,10 @@ void main() {
     // Long Term Assets
     assert(grossPropertyPlantEquipment == 124.874);
     assert(accumulatedDepreciation == 72.340);
+    print("grossPropertyPlantEquipment: "+grossPropertyPlantEquipment.toString());
+    print("accumulatedDepreciation: "+accumulatedDepreciation.toString());
+    print("netPropertyPlantEquipment: "+netPropertyPlantEquipment.toString());
+    assert(netPropertyPlantEquipment == 42.117);
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);

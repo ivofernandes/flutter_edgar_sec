@@ -89,6 +89,10 @@ class BalanceSheetProcessor {
   // "label": "Accumulated Depreciation, Depletion and Amortization, Property, Plant, and Equipment",
   // "description": "Amount of accumulated depreciation, depletion and amortization for physical assets used in the normal conduct of business to produce goods and services.",
 
+  // "PropertyPlantAndEquipmentNet"
+  // "label": "Property, Plant and Equipment, Net",
+  // "description": "Amount after accumulated depreciation, depletion and amortization of physical assets used in the normal conduct of business to produce goods and services and not intended for resale. Examples include, but are not limited to, land, buildings, machinery and equipment, office equipment, and furniture and fixtures.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -114,7 +118,7 @@ class BalanceSheetProcessor {
     'PropertyPlantAndEquipmentGross',        // Gross Property, Plant & Equipment
     'OperatingLeaseRightOfUseAsset',         // Gross Property, Plant & Equipment
     'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment', // Acc Depreciation
-
+    'PropertyPlantAndEquipmentNet',          // Net Property, Plant & Equipment
 
   };
 
@@ -202,6 +206,9 @@ class BalanceSheetProcessor {
         break;
       case 'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment':
         balanceSheet.accumulatedDepreciation = value;
+        break;
+      case 'PropertyPlantAndEquipmentNet':
+        balanceSheet.netPropertyPlantEquipment = value;
         break;
     }
   }
