@@ -106,6 +106,10 @@ class BalanceSheetProcessor {
   // "label": "Goodwill",
   // "description": "Amount after accumulated impairment loss of an asset representing future economic benefits arising from other assets acquired in a business combination that are not individually identified and separately recognized.",
 
+  // "IntangibleAssetsNetExcludingGoodwill"
+  // "label": "Intangible Assets, Net (Excluding Goodwill)",
+  // "description": "Sum of the carrying amounts of all intangible assets, excluding goodwill, as of the balance sheet date, net of accumulated amortization and impairment charges.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -140,7 +144,7 @@ class BalanceSheetProcessor {
     'PropertyPlantAndEquipmentNet',          // Net Property, Plant & Equipment
     ...longTermInvestments,                  // Long Term Investments
     'Goodwill',                              // Goodwill
-
+    'IntangibleAssetsNetExcludingGoodwill',  // Other Intangibles excluding Goodwill
   };
 
   static void process(
@@ -157,25 +161,16 @@ class BalanceSheetProcessor {
         typeOfForm: typeOfForm,
       );
 
-      // if(field == "OtherAssetsCurrent") {
-      //   print('++++++++++++++++++++++++++++++++++++++++++++++++');
-      //   print('++++++++++++++++++++++++++++++++++++++++++++++++');
-      //   print('++++++++++++++++++++++++++++++++++++++++++++++++');
-      //   print('setting the field '+ field + ' with value ');
-      // }
-
-      // print('FIELD = '+ field);
-
       for (final period in periods) {
         final endDateString = period['end'];
         final value = period['val'] as num;
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        // print('typeOfForm: '+typeOfForm);
-
-        // if(financialStatement.period == FinancialStatementPeriod.annual)
-        //   print('period -> '+financialStatement.period.toString()+' '+financialStatement.year.toString());
+        // if(financialStatement.period == FinancialStatementPeriod.annual && field == 'IntangibleAssetsNetExcludingGoodwill') {
+        //   print('period -> ' + financialStatement.period.toString() + ' ' +
+        //       financialStatement.year.toString()+ '   ->>> '+value.toString());
+        // }
 
         _mapValue(field, value.toDouble(), balanceSheet);
       }
@@ -238,6 +233,9 @@ class BalanceSheetProcessor {
         break;
       case 'Goodwill':
         balanceSheet.goodwill = value;
+        break;
+      case 'IntangibleAssetsNetExcludingGoodwill':
+        balanceSheet.otherIntangibles = value;
         break;
     }
   }

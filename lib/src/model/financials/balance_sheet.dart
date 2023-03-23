@@ -56,6 +56,7 @@ class BalanceSheet {
   double netPropertyPlantEquipment = 0;
   double longTermInvestments = 0;
   double goodwill = 0;
+  double otherIntangibles = 0;
 
   // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments =>
@@ -82,5 +83,6 @@ class BalanceSheet {
   netPropertyPlantEquipment: $netPropertyPlantEquipment,
   longTermInvestments: $longTermInvestments,
   goodwill: $goodwill,
+  otherIntangibles: $otherIntangibles,
   ''';
 }
