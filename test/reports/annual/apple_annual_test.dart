@@ -60,6 +60,8 @@ void main() {
     final longTermInvestments = balance2022.longTermInvestments.billions;
     final goodwill = balance2022.goodwill.billions;
     final otherIntangibles = balance2022.otherIntangibles.billions;
+    final otherLongTermAssets = balance2022.otherLongTermAssets.billions;
+    final totalAssets = balance2022.totalAssets.billions;
 
     // -------------------------------------- //
 
@@ -109,6 +111,10 @@ void main() {
     assert(longTermInvestments == 120.805);
     assert(goodwill == 0);
     assert(otherIntangibles == 0);
+    assert(otherLongTermAssets == 54.428);
+
+    // Total Assets
+    assert(totalAssets == 352.755);
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);

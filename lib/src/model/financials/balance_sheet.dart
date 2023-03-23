@@ -57,6 +57,10 @@ class BalanceSheet {
   double longTermInvestments = 0;
   double goodwill = 0;
   double otherIntangibles = 0;
+  double otherLongTermAssets = 0;
+
+  // Total Assets
+  double totalAssets = 0;
 
   // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments =>
@@ -84,5 +88,7 @@ class BalanceSheet {
   longTermInvestments: $longTermInvestments,
   goodwill: $goodwill,
   otherIntangibles: $otherIntangibles,
+  otherLongTermAssets: $otherCurrentAssets,
+  totalAssets: $totalAssets,
   ''';
 }

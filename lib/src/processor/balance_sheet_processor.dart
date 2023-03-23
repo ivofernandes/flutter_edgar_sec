@@ -110,6 +110,10 @@ class BalanceSheetProcessor {
   // "label": "Intangible Assets, Net (Excluding Goodwill)",
   // "description": "Sum of the carrying amounts of all intangible assets, excluding goodwill, as of the balance sheet date, net of accumulated amortization and impairment charges.",
 
+  // "OtherAssetsNoncurrent"
+  // "label": "Other Assets, Noncurrent",
+  // "description": "Amount of noncurrent assets classified as other.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -145,6 +149,10 @@ class BalanceSheetProcessor {
     ...longTermInvestments,                  // Long Term Investments
     'Goodwill',                              // Goodwill
     'IntangibleAssetsNetExcludingGoodwill',  // Other Intangibles excluding Goodwill
+    'OtherAssetsNoncurrent',                 // Other Long Term Assets
+
+    'LiabilitiesAndStockholdersEquity',      // Total Assets
+
   };
 
   static void process(
@@ -167,10 +175,10 @@ class BalanceSheetProcessor {
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        // if(financialStatement.period == FinancialStatementPeriod.annual && field == 'IntangibleAssetsNetExcludingGoodwill') {
-        //   print('period -> ' + financialStatement.period.toString() + ' ' +
-        //       financialStatement.year.toString()+ '   ->>> '+value.toString());
-        // }
+        if(financialStatement.period == FinancialStatementPeriod.annual && field == 'LiabilitiesAndStockholdersEquity') {
+          print('period -> ' + financialStatement.period.toString() + ' ' +
+              financialStatement.year.toString()+ '   ->>> '+value.toString());
+        }
 
         _mapValue(field, value.toDouble(), balanceSheet);
       }
@@ -236,6 +244,12 @@ class BalanceSheetProcessor {
         break;
       case 'IntangibleAssetsNetExcludingGoodwill':
         balanceSheet.otherIntangibles = value;
+        break;
+      case 'OtherAssetsNoncurrent':
+        balanceSheet.otherLongTermAssets = value;
+        break;
+      case 'LiabilitiesAndStockholdersEquity':
+        balanceSheet.totalAssets = value;
         break;
     }
   }
