@@ -81,7 +81,7 @@ class BalanceSheetProcessor {
   // "label": "Property, Plant and Equipment, Gross",
   // "description": "Amount before accumulated depreciation, depletion and amortization of physical assets used in the normal conduct of business and not intended for resale. Examples include, but are not limited to, land, buildings, machinery and equipment, office equipment, and furniture and fixtures.",
   // +
-  // "OperatingLeaseRightOfUseAsset": {
+  // "OperatingLeaseRightOfUseAsset"
   // "label": "Operating Lease, Right-of-Use Asset",
   // "description": "Amount of lessee's right to use underlying asset under operating lease.",
 
@@ -98,9 +98,13 @@ class BalanceSheetProcessor {
   // "label": "Available-for-sale Securities, Noncurrent",
   // "description": "Investments in debt and equity securities which are categorized neither as held-to-maturity nor trading and which are intended to be sold or mature more than one year from the balance sheet date or operating cycle, if longer. Such securities are reported at fair value; unrealized gains (losses) related to Available-for-sale Securities are excluded from earnings and reported in a separate component of shareholders' equity (other comprehensive income), unless the Available-for-sale security is designated as a hedge or is determined to have had an other than temporary decline in fair value below its amortized cost basis. All or a portion of the unrealized holding gain (loss) of an Available-for-sale security that is designated as being hedged in a fair value hedge is recognized in earnings during the period of the hedge, as are other than temporary declines in fair value below the cost basis for investments in equity securities and debt securities that an entity intends to sell or it is more likely than not that it will be required to sell before the recovery of its amortized cost basis. Other than temporary declines in fair value below the cost basis for debt securities categorized as Available-for-sale that an entity does not intend to sell and for which it is not more likely than not that the entity will be required to sell before the recovery of its amortized cost basis are bifurcated into credit losses and losses related to all other factors. Other than temporary declines in fair value below cost basis related to credit losses are recognized in earnings, and losses related to all other factors are recognized in other comprehensive income.",
   // +
-  // "MarketableSecuritiesNoncurrent": {
+  // "MarketableSecuritiesNoncurrent"
   // "label": "Marketable Securities, Noncurrent",
   // "description": "Amount of investment in marketable security, classified as noncurrent.",
+
+  // "Goodwill":
+  // "label": "Goodwill",
+  // "description": "Amount after accumulated impairment loss of an asset representing future economic benefits arising from other assets acquired in a business combination that are not individually identified and separately recognized.",
 
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
@@ -135,6 +139,8 @@ class BalanceSheetProcessor {
     'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment', // Acc Depreciation
     'PropertyPlantAndEquipmentNet',          // Net Property, Plant & Equipment
     ...longTermInvestments,                  // Long Term Investments
+    'Goodwill',                              // Goodwill
+
   };
 
   static void process(
@@ -230,9 +236,9 @@ class BalanceSheetProcessor {
       case 'PropertyPlantAndEquipmentNet':
         balanceSheet.netPropertyPlantEquipment = value;
         break;
-      // case '':
-      //   balanceSheet.longTermInvestments = value;
-      //   break;
+      case 'Goodwill':
+        balanceSheet.goodwill = value;
+        break;
     }
   }
 }
