@@ -65,6 +65,7 @@ void main() {
 
     // Current Liabilities
     final accountsPayable = balance2022.accountsPayable.billions;
+    final accruedExpenses = balance2022.accruedExpenses.billions;
 
     // -------------------------------------- //
 
@@ -121,7 +122,7 @@ void main() {
 
     // Current Liabilities
     assert(accountsPayable == 64.115);
-
+    assert(accruedExpenses == 0);
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);

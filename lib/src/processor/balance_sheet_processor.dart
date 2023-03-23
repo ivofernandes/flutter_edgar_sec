@@ -115,9 +115,14 @@ class BalanceSheetProcessor {
   // "description": "Amount of noncurrent assets classified as other.",
 
   // Current Liabilities
+
   // "AccountsPayableCurrent"
   // "label": "Accounts Payable, Current",
   // "description": "Carrying value as of the balance sheet date of liabilities incurred (and for which invoices have typically been received) and payable to vendors for goods and services received that are used in an entity's business. Used to reflect the current portion of the liabilities (due within one year or within the normal operating cycle if longer).",
+
+  // "AccruedLiabilitiesCurrent"
+  // "label": "Accrued Liabilities, Current",
+  // "description": "Carrying value as of the balance sheet date of obligations incurred and payable, pertaining to costs that are statutory in nature, are incurred on contractual obligations, or accumulate over time and for which invoices have not yet been received or will not be rendered. Examples include taxes, interest, rent and utilities. Used to reflect the current portion of the liabilities (due within one year or within the normal operating cycle if longer).",
 
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
@@ -160,6 +165,7 @@ class BalanceSheetProcessor {
 
                          //Current Liabilities
     'AccountsPayableCurrent',               // Accounts Payable
+    'AccruedLiabilitiesCurrent',            // Accrued Expenses
   };
 
   static void process(
@@ -183,7 +189,7 @@ class BalanceSheetProcessor {
         final balanceSheet = financialStatement.balanceSheet;
 
         if(financialStatement.period == FinancialStatementPeriod.annual
-            && field == 'AccountsPayableCurrent') {
+            && field == 'AccruedLiabilitiesCurrent') {
           print('period -> ' + financialStatement.period.toString() + ' ' +
               financialStatement.year.toString()+ '   ->>> '+value.toString());
         }
@@ -261,6 +267,9 @@ class BalanceSheetProcessor {
         break;
       case 'AccountsPayableCurrent':
         balanceSheet.accountsPayable = value;
+        break;
+      case 'AccruedLiabilitiesCurrent':
+        balanceSheet.accruedExpenses = value;
         break;
     }
   }
