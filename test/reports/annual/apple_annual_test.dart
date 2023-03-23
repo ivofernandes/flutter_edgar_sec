@@ -57,6 +57,7 @@ void main() {
     final grossPropertyPlantEquipment = balance2022.grossPropertyPlantEquipment.billions;
     final accumulatedDepreciation = balance2022.accumulatedDepreciation.billions;
     final netPropertyPlantEquipment = balance2022.netPropertyPlantEquipment.billions;
+    final longTermInvestments = balance2022.longTermInvestments.billions;
 
     // -------------------------------------- //
 
@@ -102,10 +103,8 @@ void main() {
     // Long Term Assets
     assert(grossPropertyPlantEquipment == 124.874);
     assert(accumulatedDepreciation == 72.340);
-    print("grossPropertyPlantEquipment: "+grossPropertyPlantEquipment.toString());
-    print("accumulatedDepreciation: "+accumulatedDepreciation.toString());
-    print("netPropertyPlantEquipment: "+netPropertyPlantEquipment.toString());
     assert(netPropertyPlantEquipment == 42.117);
+    assert(longTermInvestments == 120.805);
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);
