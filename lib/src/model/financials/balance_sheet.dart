@@ -62,6 +62,9 @@ class BalanceSheet {
   // Total Assets
   double totalAssets = 0;
 
+  // Current Liabilities
+  double accountsPayable = 0;
+
   // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments =>
       cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
@@ -90,5 +93,6 @@ class BalanceSheet {
   otherIntangibles: $otherIntangibles,
   otherLongTermAssets: $otherCurrentAssets,
   totalAssets: $totalAssets,
+  accountsPayable: $accountsPayable,
   ''';
 }

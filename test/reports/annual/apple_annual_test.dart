@@ -63,6 +63,9 @@ void main() {
     final otherLongTermAssets = balance2022.otherLongTermAssets.billions;
     final totalAssets = balance2022.totalAssets.billions;
 
+    // Current Liabilities
+    final accountsPayable = balance2022.accountsPayable.billions;
+
     // -------------------------------------- //
 
     // Income Statement's asserts
@@ -115,6 +118,10 @@ void main() {
 
     // Total Assets
     assert(totalAssets == 352.755);
+
+    // Current Liabilities
+    assert(accountsPayable == 64.115);
+
 
     assert(interestExpensesBillions == 2.931);
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);

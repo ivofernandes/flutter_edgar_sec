@@ -114,6 +114,11 @@ class BalanceSheetProcessor {
   // "label": "Other Assets, Noncurrent",
   // "description": "Amount of noncurrent assets classified as other.",
 
+  // Current Liabilities
+  // "AccountsPayableCurrent"
+  // "label": "Accounts Payable, Current",
+  // "description": "Carrying value as of the balance sheet date of liabilities incurred (and for which invoices have typically been received) and payable to vendors for goods and services received that are used in an entity's business. Used to reflect the current portion of the liabilities (due within one year or within the normal operating cycle if longer).",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -153,6 +158,8 @@ class BalanceSheetProcessor {
 
     'LiabilitiesAndStockholdersEquity',      // Total Assets
 
+                         //Current Liabilities
+    'AccountsPayableCurrent',               // Accounts Payable
   };
 
   static void process(
@@ -175,7 +182,8 @@ class BalanceSheetProcessor {
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        if(financialStatement.period == FinancialStatementPeriod.annual && field == 'LiabilitiesAndStockholdersEquity') {
+        if(financialStatement.period == FinancialStatementPeriod.annual
+            && field == 'AccountsPayableCurrent') {
           print('period -> ' + financialStatement.period.toString() + ' ' +
               financialStatement.year.toString()+ '   ->>> '+value.toString());
         }
@@ -250,6 +258,9 @@ class BalanceSheetProcessor {
         break;
       case 'LiabilitiesAndStockholdersEquity':
         balanceSheet.totalAssets = value;
+        break;
+      case 'AccountsPayableCurrent':
+        balanceSheet.accountsPayable = value;
         break;
     }
   }
