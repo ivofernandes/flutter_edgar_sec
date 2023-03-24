@@ -128,6 +128,10 @@ class BalanceSheetProcessor {
   // "label": "Commercial Paper",
   // "description": "Carrying value as of the balance sheet date of short-term borrowings using unsecured obligations issued by banks, corporations and other borrowers to investors. The maturities of these money market securities generally do not exceed 270 days.",
 
+  // "LongTermDebtCurrent"
+  // "label": "Long-term Debt, Current Maturities",
+  // "description": "Amount, after unamortized (discount) premium and debt issuance costs, of long-term debt, classified as current. Includes, but not limited to, notes payable, bonds payable, debentures, mortgage loans and commercial paper. Excludes capital lease obligations.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -171,6 +175,7 @@ class BalanceSheetProcessor {
     'AccountsPayableCurrent',               // Accounts Payable
     'AccruedLiabilitiesCurrent',            // Accrued Expenses
     'CommercialPaper',                      // Short term Borrowings
+    'LongTermDebtCurrent',                  // Current Portion of LT Debt
   };
 
   static void process(
@@ -278,6 +283,9 @@ class BalanceSheetProcessor {
         break;
       case 'CommercialPaper':
         balanceSheet.shortTermBorrowings = value;
+        break;
+      case 'LongTermDebtCurrent':
+        balanceSheet.currentPortionLtDebt = value;
         break;
     }
   }

@@ -66,6 +66,7 @@ class BalanceSheet {
   double accountsPayable = 0;
   double accruedExpenses = 0;
   double shortTermBorrowings = 0;
+  double currentPortionLtDebt = 0;
 
   // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments =>
@@ -98,5 +99,6 @@ class BalanceSheet {
   accountsPayable: $accountsPayable,
   accruedExpenses: $accruedExpenses,
   shortTermBorrowings: $shortTermBorrowings,
+  currentPortionLtDebt: $currentPortionLtDebt,
   ''';
 }
