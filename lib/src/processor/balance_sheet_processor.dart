@@ -124,6 +124,10 @@ class BalanceSheetProcessor {
   // "label": "Accrued Liabilities, Current",
   // "description": "Carrying value as of the balance sheet date of obligations incurred and payable, pertaining to costs that are statutory in nature, are incurred on contractual obligations, or accumulate over time and for which invoices have not yet been received or will not be rendered. Examples include taxes, interest, rent and utilities. Used to reflect the current portion of the liabilities (due within one year or within the normal operating cycle if longer).",
 
+  // "CommercialPaper"
+  // "label": "Commercial Paper",
+  // "description": "Carrying value as of the balance sheet date of short-term borrowings using unsecured obligations issued by banks, corporations and other borrowers to investors. The maturities of these money market securities generally do not exceed 270 days.",
+
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
@@ -166,6 +170,7 @@ class BalanceSheetProcessor {
                          //Current Liabilities
     'AccountsPayableCurrent',               // Accounts Payable
     'AccruedLiabilitiesCurrent',            // Accrued Expenses
+    'CommercialPaper',                      // Short term Borrowings
   };
 
   static void process(
@@ -270,6 +275,9 @@ class BalanceSheetProcessor {
         break;
       case 'AccruedLiabilitiesCurrent':
         balanceSheet.accruedExpenses = value;
+        break;
+      case 'CommercialPaper':
+        balanceSheet.shortTermBorrowings = value;
         break;
     }
   }
