@@ -34,7 +34,7 @@ class IncomeStatement {
       case 'Research and Development Expenses':
         return researchAndDevelopmentExpenses.reportFormat;
       case 'Selling General and Admin Expenses':
-        return sellingGeneralAndAdministrativeExpenses.reportFormat;
+        return generalAndAdministrativeExpenses.reportFormat;
       case 'Operating Expenses':
         return operatingExpenses.reportFormat;
       case 'Net Income':
@@ -82,7 +82,7 @@ class IncomeStatement {
   double researchAndDevelopmentExpenses = 0;
 
   /// SG&A
-  double sellingGeneralAndAdministrativeExpenses = 0;
+  double generalAndAdministrativeExpenses = 0;
 
   /// R&D + SG&A
   double operatingExpenses = 0;
@@ -116,7 +116,7 @@ class IncomeStatement {
   operatingIncome: $operatingIncome
   grossProfit: $grossProfit
   researchAndDevelopmentExpense: $researchAndDevelopmentExpenses
-  sellingGeneralAndAdministrativeExpense: $sellingGeneralAndAdministrativeExpenses
+  sellingGeneralAndAdministrativeExpense: $generalAndAdministrativeExpenses
   operatingExpenses: $operatingExpenses
   interestExpenses: $interestExpenses
   otherNonOperatingIncomeExpense: $otherNonOperatingIncomeExpense

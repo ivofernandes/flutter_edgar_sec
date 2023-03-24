@@ -6,9 +6,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   /// Come to this url to get the correct values for the test
-  /// https://seekingalpha.com/symbol/GOOG/income-statement
-  test('Test 2021 Google values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+  /// https://seekingalpha.com/symbol/AMZN/income-statement
+  /// pdf:
+  /// https://s2.q4cdn.com/299287126/files/doc_financials/2022/ar/Amazon-2021-Annual-Report.pdf
+  ///
+  /// html:
+  /// https://www.sec.gov/Archives/edgar/data/1018724/000101872422000005/amzn-20211231.htm
+  test('Test 2021 Amazon values for income statement', () async {
+    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AMZN');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -36,36 +41,34 @@ void main() {
     final ebitBillions = income2021.EBIT.billions;
     assert(ebitBillions == operatingIncomeBillions);
 
-    assert(revenueBillions == 257.637);
-    assert(operatingIncomeBillions == 78.714);
-    assert(netIncomeBillions == 76.033);
-    assert(costOfRevenueBillions == 110.939);
+    assert(revenueBillions == 469.822);
+    assert(operatingIncomeBillions == 24.879);
+    assert(netIncomeBillions == 33.364);
+    assert(costOfRevenueBillions == 272.344);
 
     // TODO map
-    //assert(grossProfitBillions == 146.698);
-    //assert(sellingGeneralAdministrativeBillions == 36.422);
-    assert(researchDevelopmentBillions == 31.562);
-    //assert(operatingExpenseBillions == 67.984);
+    //assert(grossProfitBillions == 197.478);
+    //assert(sellingGeneralAdministrativeBillions == 8.823);
+    //assert(researchDevelopmentBillions == 56.052);
+    //assert(operatingExpenseBillions == 172.599);
 
-    assert(interestExpensesBillions == 0.346);
+    assert(interestExpensesBillions == 1.809);
 
-    //TODO why is wrong?
-    // assert(otherNonOperatingIncomeExpenseBillions == -1.497);
-    //assert(incomeTaxExpenseBillions == 14.701);
+    //assert(otherNonOperatingIncomeExpenseBillions == -0.019);
+    assert(incomeTaxExpenseBillions == 4.791);
 
     // Check derivated values
     final netMargin = income2021.netMargin;
     final operatingMargin = income2021.operatingMargin;
 
-    assert(netMargin.toStringAsFixed(4) == '0.2951');
-    assert(operatingMargin.toStringAsFixed(4) == '0.3055');
+    assert(netMargin.toStringAsFixed(4) == '0.0710');
+    assert(operatingMargin.toStringAsFixed(4) == '0.0530');
   });
 
   /// Come to this url to get the correct values for the test
-  /// https://seekingalpha.com/symbol/GOOG/cash-flow-statement
-  /// https://www.sec.gov/Archives/edgar/data/1652044/000165204423000016/goog-20221231.htm#ia96e4fb0476549c99dc3a2b2368f643f_343
-  test('Test 2021 Google values for cash flow', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+  /// https://seekingalpha.com/symbol/AMZN/cash-flow-statement
+  test('Test 2021 Amazon values for cash flow', () async {
+    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AMZN');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -78,8 +81,7 @@ void main() {
     final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
 
     final dividends = cashFlowStatement2021.dividends.billions;
-    //TODO not sure why not matches seeking alpha
-    //assert(repurchaseofCommonStockBillions == 59.296);
+    assert(repurchaseofCommonStockBillions == 0);
     assert(dividends == 0);
   });
 }
