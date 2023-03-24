@@ -15,7 +15,7 @@ class CashFlowProcessor {
 
   static const Set<String> buyBackFields = {
     //'StockRepurchasedAndRetiredDuringPeriodValue',
-    'PaymentsForRepurchaseOfCommonStock',
+    'PaymentsForRepurchaseOfCommonStock'
   };
 
   static const Set<String> supportedFields = {
@@ -30,10 +30,9 @@ class CashFlowProcessor {
     String typeOfForm,
   ) {
     // Auxiliar code to find the fields that are not mapped
-    List<String> factsKeys = facts.keys.toList();
+    final List<String> factsKeys = facts.keys.toList();
     for (final field in factsKeys) {
-      final periods =
-          BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
+      final periods = BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
 
       for (final period in periods) {
         final String endDateString = period['end'] as String;
@@ -42,16 +41,16 @@ class CashFlowProcessor {
 
         if (typeOfForm == '10-K') {
           final DateTime endDate = DateTime.parse(endDateString);
-          final bool matchField = field.toLowerCase().contains('repurchase');
+          final bool matchField = field.toLowerCase().contains('repurchase') || field.toLowerCase().contains('stock');
           final bool matchDate = endDate.year == 2021;
           final bool match = matchField && matchDate;
-          if (match && matchDate) {
+          if (match) {
             debugPrint('Found $field @ $endDateString = $valueBillions');
 
             final financialStatement = index[endDateString]!;
             final cashFlowStatement = financialStatement.cashFlowStatement;
 
-            _mapValue(field, value.toDouble(), cashFlowStatement);
+            _mapValue(field, value, cashFlowStatement);
           }
         }
       }
@@ -78,15 +77,14 @@ class CashFlowProcessor {
     }
   }
 
-  static void _mapValue(
-      String field, double value, CashFlowStatement cashFlowStatement) {
+  static void _mapValue(String field, double value, CashFlowStatement cashFlowStatement) {
     if (dividendsFields.contains(field)) {
       cashFlowStatement.dividends += value;
       return;
     }
 
     if (buyBackFields.contains(field)) {
-      cashFlowStatement.buyback += value;
+      cashFlowStatement.buyback = value;
       return;
     }
 

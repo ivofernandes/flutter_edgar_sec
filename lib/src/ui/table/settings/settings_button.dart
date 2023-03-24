@@ -5,17 +5,16 @@ import 'package:flutter_edgar_sec/src/model/enums/financial_type.dart';
 class SettingsButton extends StatelessWidget {
   final FinancialStatementPeriod financialStatementPeriod;
   final FinancialType financialType;
-  final ValueChanged<FinancialStatementPeriod>
-      onFinancialStatementPeriodChanged;
+  final ValueChanged<FinancialStatementPeriod> onFinancialStatementPeriodChanged;
   final ValueChanged<FinancialType> onFinancialTypeChanged;
 
   const SettingsButton({
-    Key? key,
     required this.financialStatementPeriod,
     required this.financialType,
     required this.onFinancialStatementPeriodChanged,
     required this.onFinancialTypeChanged,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) => IconButton(
