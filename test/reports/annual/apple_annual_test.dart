@@ -64,6 +64,7 @@ void main() {
     final accruedExpenses = balance2022.accruedExpenses.billions;
     final shortTermBorrowings = balance2022.shortTermBorrowings.billions;
     final currentPortionLtDebt = balance2022.currentPortionLtDebt.billions;
+    final unearnedRevenueCurrent = balance2022.unearnedRevenueCurrent.billions;
 
     // -------------------------------------- //
 
@@ -121,7 +122,7 @@ void main() {
     assert(accruedExpenses == 0);
     assert(shortTermBorrowings == 9.982);
     assert(currentPortionLtDebt == 11.128);
-
+    assert(unearnedRevenueCurrent == 7.912);
 
 
     assert(interestExpensesBillions == 2.931);
