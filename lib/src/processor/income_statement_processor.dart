@@ -50,13 +50,21 @@ class IncomeStatementProcessor {
     'IncomeTaxExpenseBenefit',
   };
 
+  /// The fields that have been processed
+  static Set<String> processed = {};
+
   /// Process the income statement
   /// @param facts: the facts from the SEC json response
   /// @param index: the index to find the financial statements
   /// @typeOfForm: 10-Q or 10-K
-  static void process(Map<String, dynamic> facts,
-      Map<String, FinancialStatement> index,
-      String typeOfForm,) {
+  static void process(
+    Map<String, dynamic> facts,
+    Map<String, FinancialStatement> index,
+    String typeOfForm,
+  ) {
+    // Reset the processed fields
+    processed = {};
+
     DebugFields.debugFields(facts, index, typeOfForm, supportedFields);
     // Auxiliar code to find the fields that are not mapped
     final List<String> factsKeys = facts.keys.toList();
@@ -89,7 +97,6 @@ class IncomeStatementProcessor {
       }
     } // end for factsKeys
 
-
     /// Process the supported fields
     for (final field in supportedFields) {
       // Filter the quarters or the annuals, i.e. rows that are 10-Q or 10-K
@@ -107,11 +114,34 @@ class IncomeStatementProcessor {
     }
   }
 
-
+//size = 9
   /// Map the value to the correct field
   static void _mapValue(String field, double value, IncomeStatement incomeStatement, period) {
+    // If there is no value, return. It's not be processed anyway
+    if (value == 0) {
+      return;
+    }
+
+    // Check if the field has been processed
+    final String key = '${field}_${period['fy']}_${period['fp']}';
+
+    if (key.contains('2022_Q3') && key.contains('Revenue')) {
+      print('Field $key = $value');
+    }
+
+    if (processed.contains(key)) {
+      print('Field $key already processed, will ignore $value');
+      //return;
+    }
+
+    processed.add(key);
+
     // Process the field
     if (revenueFields.contains(field)) {
+      final endDateString = period['end'] as String;
+      if (endDateString == '2021-12-31') {
+        debugPrint('Found REV $field @ $endDateString = ${value.billions}');
+      }
       incomeStatement.revenues = value;
     } else if (costOfRevenueFields.contains(field)) {
       incomeStatement.costOfRevenues = value;
