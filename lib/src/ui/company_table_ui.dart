@@ -8,8 +8,9 @@ import 'package:flutter_edgar_sec/src/ui/table/company_data_table.dart';
 class CompanyTableUI extends StatefulWidget {
   final CompanyResults companyResults;
 
-  CompanyTableUI({
+  const CompanyTableUI({
     required this.companyResults,
+    super.key,
   });
 
   @override

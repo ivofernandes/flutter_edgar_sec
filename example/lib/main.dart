@@ -27,10 +27,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _textEditingController =
-      TextEditingController(text: 'AAPL');
-  bool _isLoading = false;
-  CompanyResults _companyResults = CompanyResults.empty();
+  final TextEditingController _textEditingController = TextEditingController(text: 'AAPL');
 
   @override
   Widget build(BuildContext context) {
@@ -47,21 +44,21 @@ class _MyHomePageState extends State<MyHomePage> {
               TextField(
                 controller: _textEditingController,
                 onSubmitted: (String value) {
-                  _getFinancialStatements();
+                  setState(() {});
                 },
               ),
               MaterialButton(
                 color: Colors.green,
-                onPressed: _getFinancialStatements,
+                onPressed: () => setState(() {}),
                 child: const Text('Get Financial Statements'),
               ),
               const SizedBox(
                 height: 20,
               ),
-              if (_isLoading) const CircularProgressIndicator(),
               Expanded(
-                child: CompanyTableUI(
-                  companyResults: _companyResults,
+                child: EdgarTableUI(
+                  symbol: _textEditingController.text,
+                  key: UniqueKey(),
                 ),
               ),
             ],
@@ -69,17 +66,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-
-  Future<void> _getFinancialStatements() async {
-    _isLoading = true;
-    _companyResults = CompanyResults.empty();
-    setState(() {});
-
-    _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(
-        _textEditingController.text);
-
-    _isLoading = false;
-    setState(() {});
   }
 }
