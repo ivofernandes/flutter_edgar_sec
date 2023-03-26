@@ -114,7 +114,6 @@ class IncomeStatementProcessor {
     }
   }
 
-//size = 9
   /// Map the value to the correct field
   static void _mapValue(String field, double value, IncomeStatement incomeStatement, period) {
     // If there is no value, return. It's not be processed anyway
@@ -125,13 +124,14 @@ class IncomeStatementProcessor {
     // Check if the field has been processed
     final String key = '${field}_${period['fy']}_${period['fp']}';
 
-    if (key.contains('2022_Q3') && key.contains('Revenue')) {
+    if (key.contains('2021_FY') && field == 'DeferredTaxAssetsInProcessResearchAndDevelopment') {
       print('Field $key = $value');
     }
 
+    bool alreadyProcessed = false;
     if (processed.contains(key)) {
-      print('Field $key already processed, will ignore $value');
-      //return;
+      //print('Field $key already processed, will ignore $value');
+      alreadyProcessed = true;
     }
 
     processed.add(key);
@@ -145,7 +145,7 @@ class IncomeStatementProcessor {
       incomeStatement.revenues = value;
     } else if (costOfRevenueFields.contains(field)) {
       incomeStatement.costOfRevenues = value;
-    } else if (generalAndAdministrativeFields.contains(field)) {
+    } else if (generalAndAdministrativeFields.contains(field) && !alreadyProcessed) {
       final endDateString = period['end'] as String;
       if (endDateString == '2021-12-31') {
         debugPrint('Found GAS $field @ $endDateString = ${value.billions}');

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Test the convert from symbol to cik', () async {
-    Map<String, String> symbolToCik = {
+    final Map<String, String> symbolToCik = {
       'aapl': '320193',
       'msft': '789019',
       'brk-b': '1067983',

@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
       home: const MyHomePage(),
@@ -34,6 +35,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edgar SEC'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.bar_chart),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => ChartPage(),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Container(
@@ -65,6 +76,32 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class ChartPage extends StatelessWidget {
+  const ChartPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Chart'),
+      ),
+      body: Center(
+        child: Container(
+          margin: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const CompanyChartUI(symbol: 'AAPL'),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

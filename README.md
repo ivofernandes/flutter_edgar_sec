@@ -25,3 +25,5 @@ EdgarTableUI(
 ```
 
 # Contributing
+If you want to contribute to this project, please fork it and submit a pull request:
+https://github.com/ivofernandes/flutter_edgar_sec

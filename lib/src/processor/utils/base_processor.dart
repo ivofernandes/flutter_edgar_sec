@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 /// Stuff generic to all processors
 class BaseProcessor {
   /// Filter the quarters, i.e. rows that are 10-Q
-  static List<dynamic> getRows(
+  static List<Map<String, dynamic>> getRows(
     Map<String, dynamic> facts,
     String field,
     Map<String, FinancialStatement> index, {
@@ -30,8 +30,18 @@ class BaseProcessor {
       return [];
     }
 
-    final List<dynamic> periods = [];
-    final units = getFactsUnits['USD'] as List<dynamic>;
+    final List<dynamic> units = getFactsUnits['USD'] as List<dynamic>;
+
+    return _getValidPeriods(units, index, typeOfForm);
+  }
+
+  /// Validate and finalize periods
+  static List<Map<String, dynamic>> _getValidPeriods(
+    List<dynamic> units,
+    Map<String, FinancialStatement> index,
+    String typeOfForm,
+  ) {
+    final List<Map<String, dynamic>> periods = [];
 
     for (final period in units) {
       if (period['form'] == typeOfForm) {
@@ -42,11 +52,11 @@ class BaseProcessor {
           continue;
         }
 
-        if (!_validPeriod(period as Map)) {
+        if (!_validPeriod(period as Map<String, dynamic>)) {
           continue;
         }
 
-        periods.add(period);
+        periods.add(period as Map<String, dynamic>);
       }
     }
 
@@ -54,11 +64,11 @@ class BaseProcessor {
   }
 
   /// Prepare the periods to be processed, avoid duplicated periods
-  static List<dynamic> _finallizePeriods(List<dynamic> periods) {
+  static List<Map<String, dynamic>> _finallizePeriods(List<Map<String, dynamic>> periods) {
     // Reverse so the last periods are processed first
     final periodsReversed = periods.reversed.toList();
 
-    final List<dynamic> filteredPeriods = [];
+    final List<Map<String, dynamic>> filteredPeriods = [];
     // Avoid duplicated fields
     final Set<String> processed = {};
     for (final period in periodsReversed) {
@@ -78,7 +88,7 @@ class BaseProcessor {
 
   /// Check if the period is valid
   /// There are a lot of periods of 10-Q like 6 months or 9 months that we don't really want to process
-  static bool _validPeriod(Map period) {
+  static bool _validPeriod(Map<String, dynamic> period) {
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
     if (period['form'] == '10-Q' && period.containsKey('start')) {
       final DateTime startDate = dateFormat.parse(period['start'] as String);
