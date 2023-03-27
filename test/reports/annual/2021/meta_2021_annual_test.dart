@@ -44,11 +44,10 @@ void main() {
     assert(netIncomeBillions == 39.37);
     assert(costOfRevenueBillions == 22.649);
 
-    // TODO map
-    //assert(grossProfitBillions == 146.698);
+    assert(grossProfitBillions == 95.280);
     assert(sellingGeneralAdministrativeBillions == 23.872);
     assert(researchDevelopmentBillions == 24.655);
-    //assert(operatingExpenseBillions == 67.984);
+    assert(operatingExpenseBillions == 48.527);
 
     assert(interestExpensesBillions == 0);
 

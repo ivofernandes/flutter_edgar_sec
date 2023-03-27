@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/utils/number_utils.dart';
 
+/// A single step of the funnel chart
 class FunnelStep extends StatelessWidget {
+  /// The label of the step
   final String label;
+
+  /// The value of the step
   final double value;
+
+  /// The maximum value of the funnel (revenues)
   final double maxValue;
+
+  /// The color of the step to distinguish between positive and negative values
   final Color color;
-  final double top;
+
+  final double height;
 
   const FunnelStep({
     required this.label,
     required this.value,
     required this.maxValue,
     required this.color,
-    required this.top,
+    this.height = 30,
     super.key,
   });
 
@@ -21,25 +30,14 @@ class FunnelStep extends StatelessWidget {
   Widget build(BuildContext context) {
     final double widthPercentage = value / maxValue;
 
-    return Positioned(
-      left: 0,
-      right: 0,
-      top: top,
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 20,
-            child: Text(
-              '$label: ${value.reportFormat}',
-              style: TextStyle(
-                color: color,
-              ),
-            ),
-          ),
           Container(
             width: double.infinity,
-            height: 20,
+            height: height,
             child: Stack(
               children: [
                 Container(
@@ -49,6 +47,21 @@ class FunnelStep extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * widthPercentage,
                   color: color,
+                  child: SizedBox(
+                    height: height,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 6,
+                    horizontal: 6,
+                  ),
+                  child: Text(
+                    '$label: ${value.reportFormat}',
+                    style: TextStyle(
+                      color: _inverseColor(color),
+                    ),
+                  ),
                 ),
               ],
             ),

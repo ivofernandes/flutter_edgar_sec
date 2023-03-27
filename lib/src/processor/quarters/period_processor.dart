@@ -14,9 +14,15 @@ class PeriodProcessor {
   static Map<int, YearlyResults> process(Map<String, dynamic> facts) {
     const String referenceField = 'NetIncomeLoss';
     final referenceUnits = facts[referenceField]['units']['USD'] as List;
+
+    // Create the quarter and annual data indexes
     final Map<String, FinancialStatement> quarters = {};
     final Map<String, FinancialStatement> annuals = {};
     for (final row in referenceUnits) {
+      if (row is! Map) {
+        continue;
+      }
+
       final endDateString = row['end'] as String;
       // Parse date from string with format yyyy-MM-dd
       final endDate = DateTime.parse(endDateString);
@@ -61,16 +67,15 @@ class PeriodProcessor {
 
     // Get all the years available
     final Map<int, YearlyResults> yearlyResults = {};
-    PeriodProcessor.distributeByQuarter(quarters, yearlyResults);
+    PeriodProcessor._distributeByQuarter(quarters, yearlyResults);
     PeriodProcessor.distributeByYear(annuals, yearlyResults);
 
     return yearlyResults;
   }
 
   /// Distributes the quarters into the yearly results
-  static void distributeByQuarter(
-      Map<String, FinancialStatement> quarterStatements,
-      Map<int, YearlyResults> yearlyResults) {
+  static void _distributeByQuarter(
+      Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
     for (final quarterStatement in quarterStatements.values) {
       final int year = quarterStatement.year;
 
@@ -96,8 +101,7 @@ class PeriodProcessor {
     }
   }
 
-  static void distributeByYear(Map<String, FinancialStatement> annuals,
-      Map<int, YearlyResults> yearlyResults) {
+  static void distributeByYear(Map<String, FinancialStatement> annuals, Map<int, YearlyResults> yearlyResults) {
     for (final annualStatement in annuals.values) {
       final int year = annualStatement.year;
 

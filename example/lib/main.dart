@@ -97,7 +97,11 @@ class ChartPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CompanyChartUI(symbol: 'AAPL'),
+              CompanyChartUI(
+                symbol: 'AAPL',
+                positiveColor: Color(0xff000055),
+                negativeColor: Colors.grey.shade700,
+              ),
             ],
           ),
         ),

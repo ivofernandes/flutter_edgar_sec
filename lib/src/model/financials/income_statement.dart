@@ -9,12 +9,13 @@ class IncomeStatement {
     'Research and Development Expenses',
     'Selling General and Admin Expenses',
     'Operating Expenses',
-    'Net Income',
+    'Operating Income',
     'Interest Expenses',
     'Other Non Operating Income Expenses',
     'Income tax Expense',
-    'Net Margin',
+    'Net Income',
     'Operating Margin',
+    'Net Margin',
     'EBIT',
     'Interest Coverage Ratio',
   ];
@@ -46,13 +47,13 @@ class IncomeStatement {
       case 'Income tax Expense':
         return incomeTaxExpense.reportFormat;
       case 'Net Margin':
-        return netMargin.reportFormat;
+        return netMargin.percentFormat;
       case 'Operating Margin':
-        return operatingMargin.reportFormat;
+        return operatingMargin.percentFormat;
       case 'EBIT':
         return EBIT.reportFormat;
       case 'Interest Coverage Ratio':
-        return interestCoverageRatio.reportFormat;
+        return interestCoverageRatio.percentFormat;
       default:
         return '';
     }
@@ -76,7 +77,7 @@ class IncomeStatement {
   double operatingIncome = 0;
 
   /// Gross profit is the difference between the revenue and the cost of goods sold.
-  double grossProfit = 0;
+  double get grossProfit => revenues - costOfRevenues;
 
   /// R&D
   double researchAndDevelopmentExpenses = 0;
@@ -85,7 +86,7 @@ class IncomeStatement {
   double generalAndAdministrativeExpenses = 0;
 
   /// R&D + SG&A
-  double operatingExpenses = 0;
+  double get operatingExpenses => researchAndDevelopmentExpenses + generalAndAdministrativeExpenses;
 
   /// Interest on debt
   double interestExpenses = 0;

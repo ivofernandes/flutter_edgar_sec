@@ -43,17 +43,16 @@ void main() {
     assert(netIncomeBillions == 76.033);
     assert(costOfRevenueBillions == 110.939);
 
-    // TODO map
-    //assert(grossProfitBillions == 146.698);
+    assert(grossProfitBillions == 146.698);
     assert(sellingGeneralAdministrativeBillions == 36.422);
     assert(researchDevelopmentBillions == 31.562);
-    //assert(operatingExpenseBillions == 67.984);
+    assert(operatingExpenseBillions == 67.984);
 
     assert(interestExpensesBillions == 0.346);
 
     //TODO why is wrong?
     // assert(otherNonOperatingIncomeExpenseBillions == -1.497);
-    //assert(incomeTaxExpenseBillions == 14.701);
+    assert(incomeTaxExpenseBillions == 14.701);
 
     // Check derivated values
     final netMargin = income2021.netMargin;
