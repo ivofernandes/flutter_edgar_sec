@@ -79,8 +79,14 @@ void main() {
     final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
 
     final dividends = cashFlowStatement2021.dividends.billions;
-    //TODO not sure why not matches seeking alpha
-    //assert(repurchaseofCommonStockBillions == 59.296);
+
+    final sharedBasedCompensationBillions = cashFlowStatement2021.shareBasedCompensation.billions;
+    final accumulatedDepreciationBillions = cashFlowStatement2021.accumulatedDepreciation.billions;
+    final capitalExpendituresBillions = cashFlowStatement2021.capitalExpenditures.billions;
+
+    assert(repurchaseofCommonStockBillions == 50.274);
     assert(dividends == 0);
+    assert(sharedBasedCompensationBillions == 15.376);
+    assert(capitalExpendituresBillions == 24.64);
   });
 }

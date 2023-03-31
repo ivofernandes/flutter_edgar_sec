@@ -22,6 +22,9 @@ class CashFlowProcessor {
     ...dividendsFields,
     ...buyBackFields,
     'SecuritiesSoldUnderAgreementsToRepurchaseFairValueOfCollateral',
+    'ShareBasedCompensation',
+    'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment',
+    'PaymentsToAcquirePropertyPlantAndEquipment'
   };
 
   static void process(
@@ -90,6 +93,15 @@ class CashFlowProcessor {
 
     switch (field) {
       case 'SecuritiesSoldUnderAgreementsToRepurchaseFairValueOfCollateral':
+        break;
+      case 'ShareBasedCompensation':
+        cashFlowStatement.shareBasedCompensation = value;
+        break;
+      case 'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment':
+        cashFlowStatement.accumulatedDepreciation = value;
+        break;
+      case 'PaymentsToAcquirePropertyPlantAndEquipment':
+        cashFlowStatement.capitalExpenditures = value;
         break;
     }
   }
