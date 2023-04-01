@@ -16,16 +16,14 @@ class SymbolToCik {
   /// Converts a symbol to a CIK
   Future<String> convert(
     String symbolParam, {
-    bool leadingZeros: false,
+    bool leadingZeros = false,
   }) async {
     await ensureConversionIsCreated();
 
     final String symbol = symbolParam.toLowerCase();
 
     if (symbolToCik.containsKey(symbol)) {
-      return leadingZeros
-          ? addLeadingZeros(symbolToCik[symbol]!)
-          : symbolToCik[symbol]!;
+      return leadingZeros ? addLeadingZeros(symbolToCik[symbol]!) : symbolToCik[symbol]!;
     }
 
     return '';
@@ -43,11 +41,10 @@ class SymbolToCik {
   /// https://www.sec.gov/include/ticker.txt
   Future<void> ensureConversionIsCreated() async {
     if (symbolToCik.isEmpty) {
-      final String content =
-          await http.read(Uri.https('www.sec.gov', '/include/ticker.txt'));
+      final String content = await http.read(Uri.https('www.sec.gov', '/include/ticker.txt'));
       final List<String> lines = content.split('\n');
 
-      for (String line in lines) {
+      for (final String line in lines) {
         final List<String> parts = line.split('\t');
         symbolToCik[parts[0]] = parts[1];
       }

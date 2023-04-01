@@ -28,14 +28,18 @@ class FunnelStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double widthPercentage = value / maxValue;
+    double widthPercentage = 0;
+
+    if (!maxValue.isNaN && !value.isNaN && maxValue != 0) {
+      widthPercentage = value / maxValue;
+    }
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             height: height,
             child: Stack(

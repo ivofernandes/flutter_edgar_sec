@@ -18,7 +18,7 @@ void main() {
 
     assert(results2021.fullYear != null);
 
-    final IncomeStatement income2021 = results2021.fullYear!.incomeStatement!;
+    final IncomeStatement income2021 = results2021.fullYear!.incomeStatement;
 
     final revenueBillions = income2021.revenues.billions;
     final operatingIncomeBillions = income2021.operatingIncome.billions;
@@ -74,7 +74,7 @@ void main() {
 
     assert(results2021.fullYear != null);
 
-    final CashFlowStatement cashFlowStatement2021 = results2021.fullYear!.cashFlowStatement!;
+    final CashFlowStatement cashFlowStatement2021 = results2021.fullYear!.cashFlowStatement;
 
     final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
 

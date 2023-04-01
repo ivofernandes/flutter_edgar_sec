@@ -23,7 +23,7 @@ class SettingsButton extends StatelessWidget {
       );
 
   void _showSettingsBottomSheet(BuildContext context) {
-    showModalBottomSheet(
+    showModalBottomSheet<Widget>(
       context: context,
       builder: (context) => Column(
         mainAxisSize: MainAxisSize.min,

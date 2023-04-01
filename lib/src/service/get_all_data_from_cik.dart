@@ -7,7 +7,7 @@ class GetAllDataFromCik {
   static Future<CompanyResults> getAllDataFromCik(String cik) async {
     // Get the data from the SEC. Example url:
     // https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json
-    Uri uri = Uri.https('data.sec.gov', '/api/xbrl/companyfacts/CIK$cik.json');
+    final Uri uri = Uri.https('data.sec.gov', '/api/xbrl/companyfacts/CIK$cik.json');
 
     final response = await http.get(uri);
 

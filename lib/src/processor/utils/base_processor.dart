@@ -56,7 +56,7 @@ class BaseProcessor {
           continue;
         }
 
-        periods.add(period as Map<String, dynamic>);
+        periods.add(period);
       }
     }
 
