@@ -24,7 +24,8 @@ class CashFlowProcessor {
     'SecuritiesSoldUnderAgreementsToRepurchaseFairValueOfCollateral',
     'ShareBasedCompensation',
     'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment',
-    'PaymentsToAcquirePropertyPlantAndEquipment'
+    'PaymentsToAcquirePropertyPlantAndEquipment',
+    'DepreciationDepletionAndAmortization',
   };
 
   static void process(
@@ -102,6 +103,9 @@ class CashFlowProcessor {
         break;
       case 'PaymentsToAcquirePropertyPlantAndEquipment':
         cashFlowStatement.capitalExpenditures = value;
+        break;
+      case 'DepreciationDepletionAndAmortization':
+        cashFlowStatement.depreciationAndAmortization = value;
         break;
     }
   }

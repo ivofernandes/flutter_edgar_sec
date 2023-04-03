@@ -65,7 +65,7 @@ void main() {
 
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/META/cash-flow-statement
-  ///https://s21.q4cdn.com/399680738/files/doc_financials/2021/q4/FB-12.31.2021-Exhibit-99.1-Final.pdf
+  /// https://www.sec.gov/Archives/edgar/data/1326801/000132680122000018/fb-20211231.htm#i0e2f35c4e2f2407493e331b6cc85a047_97
   test('Test 2021 Meta values for cash flow', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('META');
 
@@ -78,9 +78,16 @@ void main() {
     final CashFlowStatement cashFlowStatement2021 = results2021.fullYear!.cashFlowStatement;
 
     final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
+    final capitalExpendituresBillions = cashFlowStatement2021.capitalExpenditures.billions;
+    final shareBasedCompensationBillions = cashFlowStatement2021.shareBasedCompensation.billions;
+    final depreciationAndAmortizationBillions = cashFlowStatement2021.depreciationAndAmortization.billions;
 
     final dividends = cashFlowStatement2021.dividends.billions;
     assert(repurchaseofCommonStockBillions == 44.537);
+    assert(capitalExpendituresBillions == 18.567);
+    assert(shareBasedCompensationBillions == 9.164);
+    assert(depreciationAndAmortizationBillions == 7.967);
+
     assert(dividends == 0);
   });
 }
