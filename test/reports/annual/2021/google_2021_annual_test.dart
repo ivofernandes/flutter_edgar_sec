@@ -54,7 +54,7 @@ void main() {
     // assert(otherNonOperatingIncomeExpenseBillions == -1.497);
     assert(incomeTaxExpenseBillions == 14.701);
 
-    // Check derivated values
+    // Check derived values
     final netMargin = income2021.netMargin;
     final operatingMargin = income2021.operatingMargin;
 
@@ -81,12 +81,13 @@ void main() {
     final dividends = cashFlowStatement2021.dividends.billions;
 
     final sharedBasedCompensationBillions = cashFlowStatement2021.shareBasedCompensation.billions;
-    final accumulatedDepreciationBillions = cashFlowStatement2021.accumulatedDepreciation.billions;
     final capitalExpendituresBillions = cashFlowStatement2021.capitalExpenditures.billions;
+    final cashFromOperationsBillions = cashFlowStatement2021.cashFromOperations.billions;
 
     assert(repurchaseofCommonStockBillions == 50.274);
     assert(dividends == 0);
     assert(sharedBasedCompensationBillions == 15.376);
     assert(capitalExpendituresBillions == 24.64);
+    assert(cashFromOperationsBillions == 91.652);
   });
 }

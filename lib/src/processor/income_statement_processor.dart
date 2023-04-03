@@ -45,7 +45,7 @@ class IncomeStatementProcessor {
     'GrossProfit',
     'OperatingExpenses',
     'InterestExpense',
-    'OtherNonoperatingIncomeExpense',
+    'NonoperatingIncomeExpense',
     'IncomeTaxesPaidNet',
     'IncomeTaxExpenseBenefit',
   };
@@ -173,7 +173,7 @@ class IncomeStatementProcessor {
         case 'InterestExpense':
           incomeStatement.interestExpenses = value;
           break;
-        case 'OtherNonoperatingIncomeExpense':
+        case 'NonoperatingIncomeExpense':
           incomeStatement.otherNonOperatingIncomeExpense = value;
           break;
         case 'IncomeTaxExpenseBenefit':

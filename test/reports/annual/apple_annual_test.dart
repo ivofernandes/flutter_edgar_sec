@@ -129,7 +129,7 @@ void main() {
     assert(otherNonOperatingIncomeExpenseBillions == -0.228);
     assert(incomeTaxExpenseBillions == 19.3);
 
-    // Check derivated values
+    // Check derived values
     final netMargin = income2022.netMargin;
     final operatingMargin = income2022.operatingMargin;
 

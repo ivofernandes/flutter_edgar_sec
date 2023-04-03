@@ -37,7 +37,7 @@ void main() {
     assert(researchDevelopmentBillions == 7.709);
     assert(operatingExpenseBillions == 14.316);
 
-    // Check derivated values
+    // Check derived values
     final netMargin = income2022Q4.netMargin;
     final operatingMargin = income2022Q4.operatingMargin;
 

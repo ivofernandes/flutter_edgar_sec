@@ -8,6 +8,7 @@ class CashFlowStatement {
     'Accumulated Depreciation',
     'Capital Expenditures',
     'Depreciation & Amortization',
+    'Cash from Operations',
   ];
 
   String getValueForIndex(int index) {
@@ -25,6 +26,8 @@ class CashFlowStatement {
         return capitalExpenditures.reportFormat;
       case 'Depreciation & Amortization':
         return depreciationAndAmortization.reportFormat;
+      case 'Cash from Operations':
+        return cashFromOperations.reportFormat;
       default:
         return '';
     }
@@ -36,6 +39,7 @@ class CashFlowStatement {
   double accumulatedDepreciation = 0;
   double capitalExpenditures = 0;
   double depreciationAndAmortization = 0;
+  double cashFromOperations = 0;
 
   CashFlowStatement();
 
@@ -46,5 +50,7 @@ class CashFlowStatement {
   shareBasedCompensation: $shareBasedCompensation
   accumulatedDepreciation: $accumulatedDepreciation
   capitalExpenditures: $capitalExpenditures
+  depreciationAndAmortization: $depreciationAndAmortization
+  cashFromOperations: $cashFromOperations
   ''';
 }
