@@ -99,8 +99,6 @@ class ChartPage extends StatelessWidget {
               children: [
                 CompanyChartUI(
                   symbol: symbol,
-                  positiveColor: const Color(0xff000055),
-                  negativeColor: Colors.grey.shade700,
                 ),
               ],
             ),

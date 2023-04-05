@@ -64,7 +64,7 @@ void main() {
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/GOOG/cash-flow-statement
   /// https://www.sec.gov/Archives/edgar/data/1652044/000165204423000016/goog-20221231.htm#ia96e4fb0476549c99dc3a2b2368f643f_208
-  test('Test 2021 Google values for cash flow', () async {
+  test('Test 2022 Google values for cash flow', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);

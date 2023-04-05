@@ -19,6 +19,8 @@ class CompanyChartUI extends StatefulWidget {
   /// operating expenses, income tax expense). Defaults to [Colors.red] if not provided.
   final Color negativeColor;
 
+  final Color deliveredToHolders;
+
   /// Creates a [CompanyChartUI] widget.
   ///
   /// The [symbol] parameter is required and must not be null.
@@ -26,11 +28,18 @@ class CompanyChartUI extends StatefulWidget {
   /// default values of [Colors.green] and [Colors.red], respectively.
   const CompanyChartUI({
     required this.symbol,
-    this.positiveColor = Colors.green,
-    this.negativeColor = Colors.red,
+    this.positiveColor = const Color(0xff005522),
+    this.negativeColor = const Color(0xff550022),
+    this.deliveredToHolders = const Color(0xff000066),
     super.key,
   });
 
+/*
+
+    this.positiveColor = const Color(0xff005500),
+    this.negativeColor = Colors.red,
+    this.deliveredToHolders = const Color(0xff000088),
+ */
   @override
   State<CompanyChartUI> createState() => _CompanyChartUIState();
 }
