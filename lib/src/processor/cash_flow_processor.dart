@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
+import 'package:flutter_edgar_sec/src/utils/app_logger.dart';
 import 'package:flutter_edgar_sec/src/utils/number_utils.dart';
 
 /// Cash flow processor
@@ -50,7 +50,7 @@ class CashFlowProcessor {
           final bool matchDate = endDate.year == 2021;
           final bool match = matchField && matchDate;
           if (match) {
-            debugPrint('Found $field @ $endDateString = $valueBillions');
+            AppLogger().debug('Found $field @ $endDateString = $valueBillions');
 
             final financialStatement = index[endDateString]!;
             final cashFlowStatement = financialStatement.cashFlowStatement;

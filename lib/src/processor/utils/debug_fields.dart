@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
+import 'package:flutter_edgar_sec/src/utils/app_logger.dart';
 
 class DebugFields {
   static void debugFields(Map<String, dynamic> facts, Map<String, FinancialStatement> index, String typeOfForm,
@@ -10,6 +10,6 @@ class DebugFields {
 
     final fieldsFacts = json.encode(fields);
 
-    debugPrint('fieldsFacts');
+    AppLogger().debug('fieldsFacts');
   }
 }

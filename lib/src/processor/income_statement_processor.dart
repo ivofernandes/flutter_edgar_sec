@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/debug_fields.dart';
+import 'package:flutter_edgar_sec/src/utils/app_logger.dart';
 
 /// Processes the income statement from the json response
 /// https://seekingalpha.com/symbol/AAPL/income-statement
@@ -78,7 +78,7 @@ class IncomeStatementProcessor {
 
         if (typeOfForm == '10-K') {
           if (valueBillions == 75.111) {
-            debugPrint('Found $field @ $endDateString = $valueBillions');
+            AppLogger().debug('Found $field @ $endDateString = $valueBillions');
           }
 
           final DateTime endDate = DateTime.parse(endDateString);
@@ -86,7 +86,7 @@ class IncomeStatementProcessor {
           final bool matchDate = endDate.year == 2021;
           final bool match = matchField && matchDate;
           if (match) {
-            debugPrint('Found $field @ $endDateString = $valueBillions');
+            AppLogger().debug('Found $field @ $endDateString = $valueBillions');
 
             final financialStatement = index[endDateString]!;
             final incomeStatement = financialStatement.incomeStatement;
@@ -125,12 +125,12 @@ class IncomeStatementProcessor {
     final String key = '${field}_${period['fy']}_${period['fp']}';
 
     if (key.contains('2021_FY') && field == 'DeferredTaxAssetsInProcessResearchAndDevelopment') {
-      print('Field $key = $value');
+      AppLogger().debug('Field $key = $value');
     }
 
     bool alreadyProcessed = false;
     if (processed.contains(key)) {
-      //print('Field $key already processed, will ignore $value');
+      //AppLogger().debug'Field $key already processed, will ignore $value');
       alreadyProcessed = true;
     }
 
@@ -140,7 +140,7 @@ class IncomeStatementProcessor {
     if (revenueFields.contains(field)) {
       final endDateString = period['end'] as String;
       if (endDateString == '2021-12-31') {
-        debugPrint('Found REV $field @ $endDateString = ${value.billions}');
+        AppLogger().debug('Found REV $field @ $endDateString = ${value.billions}');
       }
       incomeStatement.revenues = value;
     } else if (costOfRevenueFields.contains(field)) {
@@ -148,7 +148,7 @@ class IncomeStatementProcessor {
     } else if (generalAndAdministrativeFields.contains(field) && !alreadyProcessed) {
       final endDateString = period['end'] as String;
       if (endDateString == '2021-12-31') {
-        debugPrint('Found GAS $field @ $endDateString = ${value.billions}');
+        AppLogger().debug('Found GAS $field @ $endDateString = ${value.billions}');
       }
       incomeStatement.generalAndAdministrativeExpenses += value;
     } else {
