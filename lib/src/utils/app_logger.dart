@@ -21,7 +21,7 @@ class AppLogger {
   }
 
   void debug(dynamic event) {
-    //_logger.d('$event');
+    _logger.d('$event');
   }
 
   void trace(dynamic event) {
