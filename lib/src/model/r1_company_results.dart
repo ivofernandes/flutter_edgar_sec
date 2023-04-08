@@ -1,6 +1,7 @@
 import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/quarters/period_processor.dart';
+import 'package:flutter_edgar_sec/src/processor/validator/yearly_results_validator.dart';
 
 /// A class that represents all the financial statements for a given company
 class CompanyResults {
@@ -31,6 +32,8 @@ class CompanyResults {
     final Map<String, dynamic> facts = factsNode['us-gaap'] as Map<String, dynamic>;
 
     final Map<int, YearlyResults> yearlyResults = PeriodProcessor.process(facts);
+
+    YearlyResultsValidator.validate(yearlyResults);
 
     return CompanyResults(
       yearlyResults: yearlyResults,

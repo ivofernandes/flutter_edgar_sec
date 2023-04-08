@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
 class AppLogger {
@@ -10,22 +11,40 @@ class AppLogger {
 
   AppLogger._internal();
 
+  final bool _enableLogging = true;
+
   final Logger _logger = Logger(printer: SimplePrinter(), output: _SplitConsoleOutput());
 
   void error(dynamic event, [dynamic error, StackTrace? stackTrace]) {
-    _logger.e('$event', error, stackTrace);
+    if (_enableLogging) {
+      if (kDebugMode) {
+        print('ERROR: $event $error $stackTrace');
+      }
+    }
   }
 
   void warning(dynamic event) {
-    _logger.w('$event');
+    if (_enableLogging) {
+      if (kDebugMode) {
+        print('WARNING: $event');
+      }
+    }
   }
 
   void debug(dynamic event) {
-    _logger.d('$event');
+    if (_enableLogging) {
+      if (kDebugMode) {
+        print('DEBUG: $event');
+      }
+    }
   }
 
   void trace(dynamic event) {
-    _logger.i('$event');
+    if (_enableLogging) {
+      if (kDebugMode) {
+        print('TRACE: $event');
+      }
+    }
   }
 }
 

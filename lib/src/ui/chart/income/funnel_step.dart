@@ -49,10 +49,7 @@ class FunnelStep extends StatelessWidget {
                   color: color.withOpacity(0.2),
                 ),
                 Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * widthPercentage,
+                  width: MediaQuery.of(context).size.width * widthPercentage,
                   color: color,
                   child: SizedBox(
                     height: height,
@@ -70,21 +67,22 @@ class FunnelStep extends StatelessWidget {
                     ),
                   ),
                 ),
-                widthPercentage != 1 ? Align(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 6,
-                        horizontal: 6,
-                      ),
-                      child: Text(
-                        '${(widthPercentage * 100).toStringAsFixed(2)}%',
-                        style: TextStyle(
-                          color: _inverseColor(color),
-                        ),
-                      ),
-                    )
-                ) : SizedBox.shrink(),
+                widthPercentage != 1
+                    ? Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 6,
+                            horizontal: 6,
+                          ),
+                          child: Text(
+                            '${(widthPercentage * 100).toStringAsFixed(2)}%',
+                            style: TextStyle(
+                              color: _inverseColor(color),
+                            ),
+                          ),
+                        ))
+                    : const SizedBox.shrink(),
               ],
             ),
           ),

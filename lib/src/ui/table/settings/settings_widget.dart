@@ -3,7 +3,6 @@ import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart
 import 'package:flutter_edgar_sec/src/model/enums/financial_type.dart';
 
 class SettingsWidget extends StatefulWidget {
-
   final FinancialStatementPeriod financialStatementPeriod;
   final FinancialType financialType;
 
@@ -23,7 +22,6 @@ class SettingsWidget extends StatefulWidget {
 }
 
 class _SettingsWidgetState extends State<SettingsWidget> {
-
   late FinancialStatementPeriod currentFinancialStatementPeriod;
   late FinancialType currentFinancialType;
 
@@ -35,8 +33,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Column(
+  Widget build(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
@@ -50,15 +47,11 @@ class _SettingsWidgetState extends State<SettingsWidget> {
               },
               items: FinancialStatementPeriod.values
                   .map(
-                    (period) =>
-                    DropdownMenuItem(
+                    (period) => DropdownMenuItem(
                       value: period,
-                      child: Text(period
-                          .toString()
-                          .split('.')
-                          .last),
+                      child: Text(period.toString().split('.').last),
                     ),
-              )
+                  )
                   .toList(),
             ),
           ),
@@ -72,14 +65,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                 setState(() {});
               },
               items: FinancialType.values
-                  .map((type) =>
-                  DropdownMenuItem(
-                    value: type,
-                    child: Text(type
-                        .toString()
-                        .split('.')
-                        .last),
-                  ))
+                  .map((type) => DropdownMenuItem(
+                        value: type,
+                        child: Text(type.toString().split('.').last),
+                      ))
                   .toList(),
             ),
           ),

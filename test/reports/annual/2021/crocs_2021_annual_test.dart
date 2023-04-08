@@ -29,7 +29,7 @@ void main() {
 
     // Income Statement's asserts
     final interestExpensesBillions = income2021.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2021.otherNonOperatingIncomeExpense.billions;
+    final totalNonOperatingIncomeExpenseBillions = income2021.totalNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2021.incomeTaxExpense.billions;
 
     final ebitBillions = income2021.EBIT.billions;
@@ -46,7 +46,7 @@ void main() {
     assert(operatingExpenseBillions == 0.750856);
 
     assert(interestExpensesBillions == 0.021647);
-    //assert(otherNonOperatingIncomeExpenseBillions == 0.001797);
+    assert(totalNonOperatingIncomeExpenseBillions == 0.001797);
     assert(incomeTaxExpenseBillions == -0.061845);
 
     // Check derived values

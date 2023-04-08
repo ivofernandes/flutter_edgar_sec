@@ -7,7 +7,7 @@ void main() {
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/ORCL/income-statement
   /// Seeking alpha have a wrong operating income
-  /// https://alpharesearch.io/platform/share?filingId=0001564590-22-023675
+  /// https://www.sec.gov/ix?doc=/Archives/edgar/data/1341439/000156459022023675/orcl-10k_20220531.htm
   test('Test 2022 Oracle values for income statement', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('ORCL');
 
@@ -40,7 +40,7 @@ void main() {
     assert(revenueBillions == 42.44);
     assert(operatingIncomeBillions == 10.926);
     assert(netIncomeBillions == 6.717);
-    //assert(costOfRevenueBillions == 0);
+    assert(costOfRevenueBillions == 14.931);
 
     //assert(grossProfitBillions == 1.860282);
     assert(sellingGeneralAdministrativeBillions == 9.364);

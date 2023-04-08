@@ -25,6 +25,8 @@ class IncomeStatementProcessor {
   static const Set<String> costOfRevenueFields = {
     'CostOfGoodsAndServicesSold',
     'CostOfRevenue',
+    //'CostOfServices',
+    //'CostOfServicesMaintenanceCosts',
   };
 
   static const Set<String> generalAndAdministrativeFields = {
@@ -46,8 +48,10 @@ class IncomeStatementProcessor {
     'OperatingExpenses',
     'InterestExpense',
     'NonoperatingIncomeExpense',
+    'OtherNonoperatingIncomeExpense',
     'IncomeTaxesPaidNet',
     'IncomeTaxExpenseBenefit',
+    'CostsAndExpenses',
   };
 
   /// The fields that have been processed
@@ -82,8 +86,8 @@ class IncomeStatementProcessor {
           }
 
           final DateTime endDate = DateTime.parse(endDateString);
-          final bool matchField = field.toLowerCase().contains('fulfill') || field.toLowerCase().contains('marketing');
-          final bool matchDate = endDate.year == 2021;
+          final bool matchField = field.toLowerCase().contains('costof');
+          final bool matchDate = endDate.year == 2022;
           final bool match = matchField && matchDate;
           if (match) {
             AppLogger().debug('Found $field @ $endDateString = $valueBillions');
@@ -115,7 +119,7 @@ class IncomeStatementProcessor {
   }
 
   /// Map the value to the correct field
-  static void _mapValue(String field, double value, IncomeStatement incomeStatement, period) {
+  static void _mapValue(String field, double value, IncomeStatement incomeStatement, Map<String, dynamic> period) {
     // If there is no value, return. It's not be processed anyway
     if (value == 0) {
       return;
@@ -164,7 +168,7 @@ class IncomeStatementProcessor {
           break;
         case 'GrossProfit':
           // Not needed because is just revenues without the cost of revenues
-          //incomeStatement.grossProfit = value;
+          incomeStatement.grossProfit = value;
           break;
         case 'OperatingExpenses':
           // Not needed because is just a sum of research and development and general and administrative expenses
@@ -172,6 +176,9 @@ class IncomeStatementProcessor {
           break;
         case 'InterestExpense':
           incomeStatement.interestExpenses = value;
+          break;
+        case 'OtherNonoperatingIncomeExpense':
+          incomeStatement.totalNonOperatingIncomeExpense = value;
           break;
         case 'NonoperatingIncomeExpense':
           incomeStatement.otherNonOperatingIncomeExpense = value;

@@ -77,7 +77,7 @@ class IncomeStatement {
   double operatingIncome = 0;
 
   /// Gross profit is the difference between the revenue and the cost of goods sold.
-  double get grossProfit => revenues - costOfRevenues;
+  double grossProfit = 0;
 
   /// R&D
   double researchAndDevelopmentExpenses = 0;
@@ -93,6 +93,11 @@ class IncomeStatement {
 
   /// Other income and expenses
   double otherNonOperatingIncomeExpense = 0;
+
+  /// Total of all non operating income and expenses
+  /// Some reports may have this field reported as other non operating income expense
+  /// But should confirm if this is also including the interest expenses
+  double totalNonOperatingIncomeExpense = 0;
 
   /// Income tax expense
   double incomeTaxExpense = 0;

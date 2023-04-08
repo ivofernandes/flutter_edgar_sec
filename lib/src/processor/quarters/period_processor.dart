@@ -13,7 +13,9 @@ class PeriodProcessor {
   /// Returns a map of quarters and a map of annual financial statements for a given symbol
   static Map<int, YearlyResults> process(Map<String, dynamic> facts) {
     const String referenceField = 'NetIncomeLoss';
-    final referenceUnits = facts[referenceField]['units']['USD'] as List;
+    final Map<String, dynamic> referenceFieldMap = facts[referenceField] as Map<String, dynamic>;
+    final Map<String, dynamic> coinsMap = referenceFieldMap['units'] as Map<String, dynamic>;
+    final referenceUnits = coinsMap['USD'] as List;
 
     // Create the quarter and annual data indexes
     final Map<String, FinancialStatement> quarters = {};

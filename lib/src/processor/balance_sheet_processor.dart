@@ -2,11 +2,11 @@ import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart
 import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
+import 'package:flutter_edgar_sec/src/utils/app_logger.dart';
 
 /// Processes the balance sheet from the json response
 /// https://seekingalpha.com/symbol/AAPL/balance-sheet
 class BalanceSheetProcessor {
-
   // stockholdersequityincludingportionattributabletononcontrollinginterestabstract’: [‘Equity:’,
   // “Stockholders’ Equity, Including Portion Attributable to Noncontrolling Interest [Abstract]”],
   // ‘commonstockvalue’: [‘Common stock’,
@@ -146,54 +146,54 @@ class BalanceSheetProcessor {
   // Cash % Short term Investments
   static const Set<String> shortTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
-    'AvailableForSaleSecuritiesCurrent',     // Short Term Investments - from 2008 to 2018
-    'MarketableSecuritiesCurrent',           // Short Term Investments - from 2018 to ...
+    'AvailableForSaleSecuritiesCurrent', // Short Term Investments - from 2008 to 2018
+    'MarketableSecuritiesCurrent', // Short Term Investments - from 2018 to ...
   };
 
   static const Set<String> longTermInvestments = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
-    'AvailableForSaleSecuritiesNoncurrent',  // Long Term Investments - from 2008 to 2018
-    'MarketableSecuritiesNoncurrent',        // Long Term Investments - from 2018 to ...
+    'AvailableForSaleSecuritiesNoncurrent', // Long Term Investments - from 2008 to 2018
+    'MarketableSecuritiesNoncurrent', // Long Term Investments - from 2018 to ...
   };
 
   static const Set<String> unearnedRevenueCurrent = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
-    'ContractWithCustomerLiabilityCurrent',  // unearnedRevenueCurrent - part 1
-    'DeferredRevenueCurrent',                // unearnedRevenueCurrent - part 2
+    'ContractWithCustomerLiabilityCurrent', // unearnedRevenueCurrent - part 1
+    'DeferredRevenueCurrent', // unearnedRevenueCurrent - part 2
   };
 
   static const Set<String> supportedFields = {
     // SEC EDGAR's field names               // Seeking Alpha's Names
-                         //Total Cash & ST Investments
+    //Total Cash & ST Investments
     'CashAndCashEquivalentsAtCarryingValue', // Cash And Equivalents
-    ...shortTermInvestments,                 // Short Term Investments
-                         //Receivables
-    'AccountsReceivableNetCurrent',          // Accounts Receivable
-    'NontradeReceivablesCurrent',            // Other Receivables
-                         //Current Assets
-    'InventoryNet',                          // Inventory
-    'DeferredTaxAssetsNetCurrent',           // Deferred Tax Assets Current
+    ...shortTermInvestments, // Short Term Investments
+    //Receivables
+    'AccountsReceivableNetCurrent', // Accounts Receivable
+    'NontradeReceivablesCurrent', // Other Receivables
+    //Current Assets
+    'InventoryNet', // Inventory
+    'DeferredTaxAssetsNetCurrent', // Deferred Tax Assets Current
     'RestrictedCashAndCashEquivalentsAtCarryingValue', // Restricted Cash
-    'OtherAssetsCurrent',                    // Other Current Assets
-    'AssetsCurrent',                         // Total Current Assets
-                         //Long Term Assets
-    'PropertyPlantAndEquipmentGross',        // Gross Property, Plant & Equipment
-    'OperatingLeaseRightOfUseAsset',         // Gross Property, Plant & Equipment
+    'OtherAssetsCurrent', // Other Current Assets
+    'AssetsCurrent', // Total Current Assets
+    //Long Term Assets
+    'PropertyPlantAndEquipmentGross', // Gross Property, Plant & Equipment
+    'OperatingLeaseRightOfUseAsset', // Gross Property, Plant & Equipment
     'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment', // Acc Depreciation
-    'PropertyPlantAndEquipmentNet',          // Net Property, Plant & Equipment
-    ...longTermInvestments,                  // Long Term Investments
-    'Goodwill',                              // Goodwill
-    'IntangibleAssetsNetExcludingGoodwill',  // Other Intangibles excluding Goodwill
-    'OtherAssetsNoncurrent',                 // Other Long Term Assets
+    'PropertyPlantAndEquipmentNet', // Net Property, Plant & Equipment
+    ...longTermInvestments, // Long Term Investments
+    'Goodwill', // Goodwill
+    'IntangibleAssetsNetExcludingGoodwill', // Other Intangibles excluding Goodwill
+    'OtherAssetsNoncurrent', // Other Long Term Assets
 
-    'LiabilitiesAndStockholdersEquity',      // Total Assets
+    'LiabilitiesAndStockholdersEquity', // Total Assets
 
-                         //Current Liabilities
-    'AccountsPayableCurrent',               // Accounts Payable
-    'AccruedLiabilitiesCurrent',            // Accrued Expenses
-    'CommercialPaper',                      // Short term Borrowings
-    'LongTermDebtCurrent',                  // Current Portion of LT Debt
-    ...unearnedRevenueCurrent,              // Unearned Revenue Current
+    //Current Liabilities
+    'AccountsPayableCurrent', // Accounts Payable
+    'AccruedLiabilitiesCurrent', // Accrued Expenses
+    'CommercialPaper', // Short term Borrowings
+    'LongTermDebtCurrent', // Current Portion of LT Debt
+    ...unearnedRevenueCurrent, // Unearned Revenue Current
   };
 
   static void process(
@@ -216,10 +216,8 @@ class BalanceSheetProcessor {
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        if(financialStatement.period == FinancialStatementPeriod.annual
-            && field == 'AccruedLiabilitiesCurrent') {
-          print('period -> ' + financialStatement.period.toString() + ' ' +
-              financialStatement.year.toString()+ '   ->>> '+value.toString());
+        if (financialStatement.period == FinancialStatementPeriod.annual && field == 'AccruedLiabilitiesCurrent') {
+          AppLogger().debug('period -> ${financialStatement.period} ${financialStatement.year}   ->>> $value');
         }
 
         _mapValue(field, value.toDouble(), balanceSheet);
@@ -228,9 +226,8 @@ class BalanceSheetProcessor {
   }
 
   static void _mapValue(String field, double value, BalanceSheet balanceSheet) {
-
     if (shortTermInvestments.contains(field)) {
-      // print('setting the field '+ field + ' with value '+value.toString());
+      // AppLogger().debug('setting the field '+ field + ' with value '+value.toString());
       balanceSheet.shortTermInvestments = value;
       return;
     }
@@ -240,12 +237,12 @@ class BalanceSheetProcessor {
       return;
     }
 
-    if(unearnedRevenueCurrent.contains(field)) {
+    if (unearnedRevenueCurrent.contains(field)) {
       balanceSheet.unearnedRevenueCurrent = value;
       return;
     }
 
-    // print('Field --->>> '+ field + ' with value '+value.toString());
+    // AppLogger().debug('Field --->>> '+ field + ' with value '+value.toString());
 
     switch (field) {
       case 'OtherAssetsCurrent':
@@ -273,12 +270,10 @@ class BalanceSheetProcessor {
         balanceSheet.currentAssets = value;
         break;
       case 'PropertyPlantAndEquipmentGross':
-        balanceSheet.grossPropertyPlantEquipment =
-            balanceSheet.grossPropertyPlantEquipment + value;
+        balanceSheet.grossPropertyPlantEquipment = balanceSheet.grossPropertyPlantEquipment + value;
         break;
       case 'OperatingLeaseRightOfUseAsset':
-        balanceSheet.grossPropertyPlantEquipment =
-            balanceSheet.grossPropertyPlantEquipment + value;
+        balanceSheet.grossPropertyPlantEquipment = balanceSheet.grossPropertyPlantEquipment + value;
         break;
       case 'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment':
         balanceSheet.accumulatedDepreciation = value;
