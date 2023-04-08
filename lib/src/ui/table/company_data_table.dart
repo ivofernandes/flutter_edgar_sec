@@ -46,39 +46,42 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
   @override
   Widget build(BuildContext context) {
     /// Get the correct list of reports, can be quarterly or annual
-    final List<FinancialStatement> reports = period.isQuarter
-        ? widget.companyResults.quarters
-        : widget.companyResults.yearReports;
+    final List<FinancialStatement> reports =
+    period.isQuarter ? widget.companyResults.quarters : widget.companyResults.yearReports;
 
     if (reports.isEmpty) {
-      return const Center(child: Text('No data available'));
+      return const Center(
+        child: Text('No data available'),
+      );
     }
 
     final firstRow = _getTitleWidget(reports);
-    final List<String> labels =
-        reports.first.getLabelsForFinancialStatement(financialType);
+    final List<String> labels = reports.first.getLabelsForFinancialStatement(financialType);
 
     return HorizontalDataTable(
       leftHandSideColumnWidth: 100,
       rightHandSideColumnWidth: widget.columnWidth * reports.length,
       isFixedHeader: true,
       headerWidgets: firstRow,
-      leftSideItemBuilder: (context, index) =>
-          _generateFirstColumnRow(reports, index),
-      rightSideItemBuilder: (context, index) =>
-          _generateRightHandSideColumnRow(reports, index),
+      leftSideItemBuilder: (context, index) => _generateFirstColumnRow(reports, index),
+      rightSideItemBuilder: (context, index) => _generateRightHandSideColumnRow(reports, index),
       itemCount: labels.length,
       rowSeparatorWidget: const Divider(
         color: Colors.black38,
         height: 1,
         thickness: 0,
       ),
-      leftHandSideColBackgroundColor: Theme.of(context).canvasColor,
-      rightHandSideColBackgroundColor: Theme.of(context).canvasColor,
+      leftHandSideColBackgroundColor: Theme
+          .of(context)
+          .canvasColor,
+      rightHandSideColBackgroundColor: Theme
+          .of(context)
+          .canvasColor,
     );
   }
 
-  List<Widget> _getTitleWidget(List<FinancialStatement> reports) => [
+  List<Widget> _getTitleWidget(List<FinancialStatement> reports) =>
+      [
         SizedBox(
           width: 100,
           height: 56,
@@ -96,13 +99,13 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
           ),
         ),
         ...reports.map(
-          (FinancialStatement report) => _getTitleItemWidget(
-              period.isQuarter ? report.quarterPeriod : report.annualPeriod,
-              100),
+              (FinancialStatement report) =>
+              _getTitleItemWidget(period.isQuarter ? report.quarterPeriod : report.annualPeriod, 100),
         )
       ];
 
-  Widget _getTitleItemWidget(String label, double width) => Container(
+  Widget _getTitleItemWidget(String label, double width) =>
+      Container(
         width: width,
         height: 56,
         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -111,8 +114,7 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
       );
 
   Widget _generateFirstColumnRow(List<FinancialStatement> reports, int index) {
-    final List<String> labels =
-        reports.first.getLabelsForFinancialStatement(financialType);
+    final List<String> labels = reports.first.getLabelsForFinancialStatement(financialType);
     final String label = labels[index];
     return Container(
       width: 100,
@@ -126,19 +128,19 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
     );
   }
 
-  Widget _generateRightHandSideColumnRow(
-          List<FinancialStatement> reports, int index) =>
+  Widget _generateRightHandSideColumnRow(List<FinancialStatement> reports, int index) =>
       Row(
         children: reports
             .map(
-              (report) => Container(
+              (report) =>
+              Container(
                 width: 100,
                 height: 52,
                 padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                 alignment: Alignment.centerLeft,
                 child: Text(getDataForReport(report, index)),
               ),
-            )
+        )
             .toList(),
       );
 

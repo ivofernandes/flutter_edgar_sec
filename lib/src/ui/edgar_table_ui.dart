@@ -29,15 +29,21 @@ class _EdgarTableUIState extends State<EdgarTableUI> {
   Future<void> load() async {
     _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(widget.symbol);
     loading = false;
+
+    if (!mounted) {
+      return;
+    }
+
     setState(() {});
   }
 
   @override
-  Widget build(BuildContext context) => loading
-      ? const Center(
-          child: CircularProgressIndicator(),
-        )
-      : CompanyTableUI(
-          companyResults: _companyResults,
-        );
+  Widget build(BuildContext context) =>
+      loading
+          ? const Center(
+        child: CircularProgressIndicator(),
+      )
+          : CompanyTableUI(
+        companyResults: _companyResults,
+      );
 }
