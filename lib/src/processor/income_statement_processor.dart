@@ -167,12 +167,10 @@ class IncomeStatementProcessor {
           incomeStatement.researchAndDevelopmentExpenses = value;
           break;
         case 'GrossProfit':
-          // Not needed because is just revenues without the cost of revenues
           incomeStatement.grossProfit = value;
           break;
         case 'OperatingExpenses':
-          // Not needed because is just a sum of research and development and general and administrative expenses
-          //incomeStatement.operatingExpenses = value;
+          incomeStatement.totalOperatingExpenses = value;
           break;
         case 'InterestExpense':
           incomeStatement.interestExpenses = value;
@@ -185,6 +183,9 @@ class IncomeStatementProcessor {
           break;
         case 'IncomeTaxExpenseBenefit':
           incomeStatement.incomeTaxExpense = value;
+          break;
+        case 'CostsAndExpenses':
+          incomeStatement.costsAndExpenses = value;
           break;
       }
     }

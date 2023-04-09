@@ -86,7 +86,9 @@ class IncomeStatement {
   double generalAndAdministrativeExpenses = 0;
 
   /// R&D + SG&A
-  double get operatingExpenses => researchAndDevelopmentExpenses + generalAndAdministrativeExpenses;
+  double get operatingExpenses => totalOperatingExpenses;
+
+  double totalOperatingExpenses = 0;
 
   /// Interest on debt
   double interestExpenses = 0;
@@ -113,6 +115,9 @@ class IncomeStatement {
   ///Interest Cover Ratio
   ///Interest Coverage Ratio = EBIT / Interest Expense
   double get interestCoverageRatio => EBIT / interestExpenses;
+
+  /// Sum of operating and cost of revenues
+  double costsAndExpenses = 0;
 
   @override
   String toString() => '''

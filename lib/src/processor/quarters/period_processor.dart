@@ -7,6 +7,7 @@ import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/balance_sheet_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/cash_flow_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/income_statement_processor.dart';
+import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 
 /// Logic related to process 10-Q and 10-K financial statements
 class PeriodProcessor {
@@ -20,14 +21,21 @@ class PeriodProcessor {
     // Create the quarter and annual data indexes
     final Map<String, FinancialStatement> quarters = {};
     final Map<String, FinancialStatement> annuals = {};
+
+    final quartersRawData = <Map<String, dynamic>>[];
     for (final row in referenceUnits) {
-      if (row is! Map) {
+      if (row is! Map<String, dynamic>) {
+        continue;
+      }
+
+      // Ignore 10-Q that have more than 3 months
+      if (!BaseProcessor.validPeriod(row)) {
         continue;
       }
 
       final endDateString = row['end'] as String;
       // Parse date from string with format yyyy-MM-dd
-      final endDate = DateTime.parse(endDateString);
+      final DateTime endDate = DateTime.parse(endDateString);
 
       if (row['form'] == '10-Q') {
         final financialStatement = FinancialStatement(
@@ -39,6 +47,7 @@ class PeriodProcessor {
         );
 
         quarters[endDateString] = financialStatement;
+        quartersRawData.add(row as Map<String, dynamic>);
       } else if (row['form'] == '10-K') {
         final financialStatement = FinancialStatement(
           date: endDate,
@@ -76,8 +85,8 @@ class PeriodProcessor {
   }
 
   /// Distributes the quarters into the yearly results
-  static void _distributeByQuarter(
-      Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
+  static void _distributeByQuarter(Map<String, FinancialStatement> quarterStatements,
+      Map<int, YearlyResults> yearlyResults) {
     for (final quarterStatement in quarterStatements.values) {
       final int year = quarterStatement.year;
 

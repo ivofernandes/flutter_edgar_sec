@@ -8,6 +8,7 @@ void main() {
   /// Come to this url to get the correct values for the test
   /// Official source for the financial data -> https://www.apple.com/newsroom/pdfs/FY23_Q1_Consolidated_Financial_Statements.pdf
   /// https://seekingalpha.com/symbol/AAPL/income-statement
+  /// https://www.sec.gov/ix?doc=/Archives/edgar/data/320193/000032019322000108/aapl-20220924.htm
   test('Test 2022 apple values for income statement', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
 

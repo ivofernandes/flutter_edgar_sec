@@ -6,6 +6,7 @@ class IncomeStatementValidator {
     _validateGrossProfit(incomeStatement);
 
     _validateCostOfRevenue(incomeStatement);
+    _validateTotalOperatingExpenses(incomeStatement);
   }
 
   static void _validateGrossProfit(IncomeStatement incomeStatement) {
@@ -14,10 +15,8 @@ class IncomeStatementValidator {
         incomeStatement.grossProfit = incomeStatement.revenues - incomeStatement.costOfRevenues;
       } else if (incomeStatement.revenues != 0 && incomeStatement.operatingIncome != 0) {
         // Gross Profit = Operating Income + R&D + General & Admin Expenses
-        incomeStatement.grossProfit = incomeStatement.operatingIncome + incomeStatement.researchAndDevelopmentExpenses +
-            incomeStatement.generalAndAdministrativeExpenses;
-      }
-      else {
+        incomeStatement.grossProfit = incomeStatement.operatingIncome + incomeStatement.totalOperatingExpenses;
+      } else {
         AppLogger().error('Unable to calculate grossProfit. Because costOfRevenues or revenues are 0');
       }
     }
@@ -30,9 +29,20 @@ class IncomeStatementValidator {
 
     if (incomeStatement.grossProfit != 0 && incomeStatement.revenues != 0) {
       incomeStatement.costOfRevenues = incomeStatement.revenues - incomeStatement.grossProfit;
-    }
-    else {
+    } else {
       AppLogger().error('Unable to calculate costOfRevenues. Because grossProfit or revenues are 0');
+    }
+  }
+
+  static void _validateTotalOperatingExpenses(IncomeStatement incomeStatement) {
+    if (incomeStatement.totalOperatingExpenses != 0) {
+      // Nothing to validate
+    }
+
+    if (incomeStatement.grossProfit != 0 && incomeStatement.operatingIncome != 0) {
+      incomeStatement.totalOperatingExpenses = incomeStatement.grossProfit - incomeStatement.operatingIncome;
+    } else {
+      AppLogger().error('Unable to calculate totalOperatingExpenses. Because grossProfit or operatingIncome are 0');
     }
   }
 }

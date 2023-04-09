@@ -44,6 +44,10 @@ class BaseProcessor {
     final List<Map<String, dynamic>> periods = [];
 
     for (final period in units) {
+      if (period is! Map) {
+        continue;
+      }
+
       if (period['form'] == typeOfForm) {
         final String endDateString = period['end'] as String;
 
@@ -52,7 +56,7 @@ class BaseProcessor {
           continue;
         }
 
-        if (!_validPeriod(period as Map<String, dynamic>)) {
+        if (!validPeriod(period as Map<String, dynamic>)) {
           continue;
         }
 
@@ -88,7 +92,7 @@ class BaseProcessor {
 
   /// Check if the period is valid
   /// There are a lot of periods of 10-Q like 6 months or 9 months that we don't really want to process
-  static bool _validPeriod(Map<String, dynamic> period) {
+  static bool validPeriod(Map<String, dynamic> period) {
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
     if (period['form'] == '10-Q' && period.containsKey('start')) {
       final DateTime startDate = dateFormat.parse(period['start'] as String);

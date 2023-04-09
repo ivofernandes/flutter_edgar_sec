@@ -27,6 +27,7 @@ class CompanyResults {
     required this.yearlyResults,
   });
 
+  /// Creates a CompanyResults object from the json object that comes from the SEC
   factory CompanyResults.fromJsonList(Map<String, dynamic> companyFactsJson) {
     final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
     final Map<String, dynamic> facts = factsNode['us-gaap'] as Map<String, dynamic>;
