@@ -8,6 +8,7 @@ class IncomeStatement {
     'Gross Profit',
     'Research and Development Expenses',
     'Selling General and Admin Expenses',
+    'Other Operating Expenses',
     'Operating Expenses',
     'Operating Income',
     'Interest Expenses',
@@ -36,6 +37,8 @@ class IncomeStatement {
         return researchAndDevelopmentExpenses.reportFormat;
       case 'Selling General and Admin Expenses':
         return generalAndAdministrativeExpenses.reportFormat;
+      case 'Other Operating Expenses':
+        return otherOperatingExpenses.reportFormat;
       case 'Operating Expenses':
         return operatingExpenses.reportFormat;
       case 'Net Income':
@@ -119,6 +122,19 @@ class IncomeStatement {
   /// Sum of operating and cost of revenues
   double costsAndExpenses = 0;
 
+  /// Charges on restructuring
+  double restructuring = 0;
+
+  /// Amount of money spent because of acquisitions and efforts to combine the businesses
+  double acquisitionCosts = 0;
+
+  /// Amortization of intangibles assets like goodwill and other intangible assets
+  double amortizationOfIntangibles = 0;
+
+  /// Other operating expenses that are not R&D neither SG&A
+  double get otherOperatingExpenses =>
+      totalOperatingExpenses - researchAndDevelopmentExpenses - generalAndAdministrativeExpenses;
+
   @override
   String toString() => '''
   revenues: $revenues
@@ -135,5 +151,8 @@ class IncomeStatement {
   netMargin: $netMargin
   operatingMargin: $operatingMargin
   interestCoverageRatio: $interestCoverageRatio
+  acquisitionCosts: $acquisitionCosts
+  restructuring: $restructuring
+  amortizationOfIntangibles: $amortizationOfIntangibles
   ''';
 }

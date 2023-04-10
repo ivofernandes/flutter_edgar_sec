@@ -89,7 +89,7 @@ class ChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Chart'),
+          title: Text(symbol),
         ),
         body: Center(
           child: Container(

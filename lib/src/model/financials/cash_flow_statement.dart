@@ -11,6 +11,8 @@ class CashFlowStatement {
     'Cash from Operations',
   ];
 
+  double get totalShareholderReturn => buyback + dividends;
+
   String getValueForIndex(int index) {
     final String name = labels[index];
     switch (name) {

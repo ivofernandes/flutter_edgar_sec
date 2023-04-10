@@ -52,12 +52,15 @@ class IncomeFunnelUI extends StatelessWidget {
       'Revenues': Tuple(incomeStatement.revenues, positiveColor),
       'Cost of Revenue': Tuple(incomeStatement.costOfRevenues, negativeColor),
       'Gross Profit': Tuple(incomeStatement.grossProfit, positiveColor),
-      'Operating Expenses': Tuple(incomeStatement.operatingExpenses, negativeColor),
+      'R&D': Tuple(incomeStatement.researchAndDevelopmentExpenses, negativeColor),
+      'General & Admin': Tuple(incomeStatement.generalAndAdministrativeExpenses, negativeColor),
+      'Operating Expenses': Tuple(incomeStatement.totalOperatingExpenses, negativeColor),
       'Operating Income': Tuple(incomeStatement.operatingIncome, positiveColor),
       'Interest Expense': Tuple(incomeStatement.interestExpenses, negativeColor),
       'Income Tax Expense': Tuple(incomeStatement.incomeTaxExpense, negativeColor),
       'Other Expenses': Tuple(incomeStatement.otherNonOperatingIncomeExpense.abs(), negativeColor),
       'Net Income': Tuple(incomeStatement.netIncome, positiveColor),
+      'Total shareholder return': Tuple(cashFlowStatement.totalShareholderReturn, deliveredToHolders),
       'Buybacks': Tuple(cashFlowStatement.buyback, deliveredToHolders),
       'Dividend': Tuple(cashFlowStatement.dividends, deliveredToHolders),
     });
@@ -66,13 +69,12 @@ class IncomeFunnelUI extends StatelessWidget {
 
     return Column(
       children: data.entries
-          .map((entry) =>
-          FunnelStep(
-            label: entry.key,
-            value: entry.value.item1,
-            maxValue: maxValue,
-            color: entry.value.item2,
-          ))
+          .map((entry) => FunnelStep(
+                label: entry.key,
+                value: entry.value.item1,
+                maxValue: maxValue,
+                color: entry.value.item2,
+              ))
           .toList(),
     );
   }

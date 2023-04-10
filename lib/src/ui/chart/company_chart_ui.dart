@@ -19,7 +19,8 @@ class CompanyChartUI extends StatefulWidget {
   /// operating expenses, income tax expense). Defaults to [Colors.red] if not provided.
   final Color negativeColor;
 
-  final Color deliveredToHolders;
+  /// The color used for the delivered to holders value in the chart.
+  final Color deliveredToHoldersColor;
 
   /// Creates a [CompanyChartUI] widget.
   ///
@@ -30,16 +31,10 @@ class CompanyChartUI extends StatefulWidget {
     required this.symbol,
     this.positiveColor = const Color(0xff005522),
     this.negativeColor = const Color(0xff550022),
-    this.deliveredToHolders = const Color(0xff000066),
+    this.deliveredToHoldersColor = const Color(0xff000066),
     super.key,
   });
 
-/*
-
-    this.positiveColor = const Color(0xff005500),
-    this.negativeColor = Colors.red,
-    this.deliveredToHolders = const Color(0xff000088),
- */
   @override
   State<CompanyChartUI> createState() => _CompanyChartUIState();
 }
@@ -68,13 +63,14 @@ class _CompanyChartUIState extends State<CompanyChartUI> {
   /// If the financial data is still being fetched, a [CircularProgressIndicator] is shown.
   /// Once the data is available, an [IncomeFunnelUI] widget is created with the fetched data.
   @override
-  Widget build(BuildContext context) => loading
-      ? const Center(
-          child: CircularProgressIndicator(),
-        )
-      : IncomeFunnelUI(
-          companyResults: _companyResults,
-          negativeColor: widget.negativeColor,
-          positiveColor: widget.positiveColor,
-        );
+  Widget build(BuildContext context) =>
+      loading
+          ? const Center(
+        child: CircularProgressIndicator(),
+      )
+          : IncomeFunnelUI(
+        companyResults: _companyResults,
+        negativeColor: widget.negativeColor,
+        positiveColor: widget.positiveColor,
+      );
 }

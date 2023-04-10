@@ -52,6 +52,9 @@ class IncomeStatementProcessor {
     'IncomeTaxesPaidNet',
     'IncomeTaxExpenseBenefit',
     'CostsAndExpenses',
+    'RestructuringCharges',
+    'BusinessCombinationAcquisitionRelatedCosts',
+    'AmortizationOfIntangibleAssets',
   };
 
   /// The fields that have been processed
@@ -186,6 +189,15 @@ class IncomeStatementProcessor {
           break;
         case 'CostsAndExpenses':
           incomeStatement.costsAndExpenses = value;
+          break;
+        case 'RestructuringCharges':
+          incomeStatement.restructuring = value;
+          break;
+        case 'BusinessCombinationAcquisitionRelatedCosts':
+          incomeStatement.acquisitionCosts = value;
+          break;
+        case 'AmortizationOfIntangibleAssets':
+          incomeStatement.amortizationOfIntangibles = value;
           break;
       }
     }

@@ -28,6 +28,7 @@ void main() {
     final sellingGeneralAdministrativeBillions = income2022.generalAndAdministrativeExpenses.billions;
     final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
+    final otherOperatingExpensesBillions = income2022.otherOperatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
@@ -40,13 +41,13 @@ void main() {
     assert(revenueBillions == 42.44);
     assert(operatingIncomeBillions == 10.926);
     assert(netIncomeBillions == 6.717);
-    //assert(costOfRevenueBillions == 14.931);
+    assert(costOfRevenueBillions == 8.877);
 
-    //assert(grossProfitBillions == 1.860282);
+    assert(grossProfitBillions == 33.563);
     assert(sellingGeneralAdministrativeBillions == 9.364);
     assert(researchDevelopmentBillions == 7.219);
-    //TODO Other Operating Expense/(Income)
-    //assert(operatingExpenseBillions == 1.009526);
+    assert(otherOperatingExpensesBillions == 6.054);
+    assert(operatingExpenseBillions == 22.637);
 
     assert(interestExpensesBillions == 2.755);
     //assert(otherNonOperatingIncomeExpenseBillions == -0.000338);
