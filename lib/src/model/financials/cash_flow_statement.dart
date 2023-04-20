@@ -10,6 +10,8 @@ class CashFlowStatement {
     'Depreciation & Amortization',
     'Cash from Operations',
     'Cash from Investing',
+    'Cash from Financing',
+    'Deferred Income Tax',
   ];
 
   double get totalShareholderReturn => buyback + dividends;
@@ -38,18 +40,29 @@ class CashFlowStatement {
         return cashFromOperations;
       case 'Cash from Investing':
         return cashFromInvesting;
+      case 'Cash from Financing':
+        return cashFromFinancing;
+      case 'Deferred Income Tax':
+        return deferredIncomeTax;
       default:
         return 0;
     }
   }
 
+  /// Operations
+  double accumulatedDepreciation = 0;
+  double shareBasedCompensation = 0;
+  double depreciationAndAmortization = 0;
+  double deferredIncomeTax = 0;
+  double cashFromOperations = 0;
+
+  /// Financing
   double buyback = 0;
   double dividends = 0;
-  double shareBasedCompensation = 0;
-  double accumulatedDepreciation = 0;
+  double cashFromFinancing = 0;
+
+  /// Investing
   double capitalExpenditures = 0;
-  double depreciationAndAmortization = 0;
-  double cashFromOperations = 0;
   double cashFromInvesting = 0;
 
   CashFlowStatement();
@@ -63,5 +76,8 @@ class CashFlowStatement {
   capitalExpenditures: $capitalExpenditures
   depreciationAndAmortization: $depreciationAndAmortization
   cashFromOperations: $cashFromOperations
+  cashFromInvesting: $cashFromInvesting
+  cashFromFinancing: $cashFromFinancing
+  deferredIncomeTax: $deferredIncomeTax
   ''';
 }

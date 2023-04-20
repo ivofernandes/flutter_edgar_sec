@@ -27,7 +27,9 @@ class CashFlowProcessor {
     'PaymentsToAcquirePropertyPlantAndEquipment',
     'DepreciationDepletionAndAmortization',
     'NetCashProvidedByUsedInOperatingActivities',
-    'NetCashProvidedByUsedInInvestingActivities'
+    'NetCashProvidedByUsedInInvestingActivities',
+    'NetCashProvidedByUsedInFinancingActivities',
+    'DeferredIncomeTaxExpenseBenefit',
   };
 
   static void process(
@@ -114,6 +116,12 @@ class CashFlowProcessor {
         break;
       case 'NetCashProvidedByUsedInInvestingActivities':
         cashFlowStatement.cashFromInvesting = value;
+        break;
+      case 'NetCashProvidedByUsedInFinancingActivities':
+        cashFlowStatement.cashFromFinancing = value;
+        break;
+      case 'DeferredIncomeTaxExpenseBenefit':
+        cashFlowStatement.deferredIncomeTax = value;
         break;
     }
   }

@@ -83,11 +83,14 @@ void main() {
     final capitalExpendituresBillions = cashFlowStatement2022.capitalExpenditures.billions;
     final cashFromOperationsBillions = cashFlowStatement2022.cashFromOperations.billions;
     final cashFromInvestingBillions = cashFlowStatement2022.cashFromInvesting.billions;
+    final cashFromFinancingBillions = cashFlowStatement2022.cashFromFinancing.billions;
 
     assert(repurchaseofCommonStockBillions == 59.296);
     assert(dividends == 0);
     assert(sharedBasedCompensationBillions == 19.362);
     assert(capitalExpendituresBillions == 31.485);
     assert(cashFromOperationsBillions == 91.495);
+    assert(cashFromInvestingBillions == -20.298);
+    assert(cashFromFinancingBillions == -69.757);
   });
 }

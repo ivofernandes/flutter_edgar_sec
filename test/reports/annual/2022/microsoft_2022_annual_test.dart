@@ -57,7 +57,7 @@ void main() {
 
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/MSFT/cash-flow-statement
-  test('Test 2022 Google values for cash flow', () async {
+  test('Test 2022 Microsoft values for cash flow', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('MSFT');
 
     assert(results.yearlyResults.isNotEmpty);
@@ -77,6 +77,7 @@ void main() {
     final cashFromOperationsBillions = cashFlowStatement2022.cashFromOperations.billions;
     final cashFromInvestingBillions = cashFlowStatement2022.cashFromInvesting.billions;
     final depreciationBillions = cashFlowStatement2022.depreciationAndAmortization.billions;
+    final cashFromFinancingBillions = cashFlowStatement2022.cashFromFinancing.billions;
 
     assert(repurchaseofCommonStockBillions == 32.696);
     assert(dividends == 18.135);
@@ -84,5 +85,6 @@ void main() {
     assert(capitalExpendituresBillions == 23.886);
     assert(cashFromOperationsBillions == 89.035);
     assert(cashFromInvestingBillions == -30.311);
+    assert(cashFromFinancingBillions == -58.876);
   });
 }
