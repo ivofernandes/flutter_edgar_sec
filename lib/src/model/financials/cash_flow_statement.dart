@@ -9,29 +9,37 @@ class CashFlowStatement {
     'Capital Expenditures',
     'Depreciation & Amortization',
     'Cash from Operations',
+    'Cash from Investing',
   ];
 
   double get totalShareholderReturn => buyback + dividends;
 
   String getValueForIndex(int index) {
+    final double value = getDoubleValueForIndex(index);
+    return value.reportFormat;
+  }
+
+  double getDoubleValueForIndex(int index) {
     final String name = labels[index];
     switch (name) {
       case 'Buybacks':
-        return buyback.reportFormat;
+        return buyback;
       case 'Dividends':
-        return dividends.reportFormat;
+        return dividends;
       case 'Share Based Compensation':
-        return shareBasedCompensation.reportFormat;
+        return shareBasedCompensation;
       case 'Accumulated Depreciation':
-        return accumulatedDepreciation.reportFormat;
+        return accumulatedDepreciation;
       case 'Capital Expenditures':
-        return capitalExpenditures.reportFormat;
+        return capitalExpenditures;
       case 'Depreciation & Amortization':
-        return depreciationAndAmortization.reportFormat;
+        return depreciationAndAmortization;
       case 'Cash from Operations':
-        return cashFromOperations.reportFormat;
+        return cashFromOperations;
+      case 'Cash from Investing':
+        return cashFromInvesting;
       default:
-        return '';
+        return 0;
     }
   }
 
@@ -42,6 +50,7 @@ class CashFlowStatement {
   double capitalExpenditures = 0;
   double depreciationAndAmortization = 0;
   double cashFromOperations = 0;
+  double cashFromInvesting = 0;
 
   CashFlowStatement();
 

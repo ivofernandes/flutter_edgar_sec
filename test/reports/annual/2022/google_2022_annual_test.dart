@@ -82,6 +82,7 @@ void main() {
     final sharedBasedCompensationBillions = cashFlowStatement2022.shareBasedCompensation.billions;
     final capitalExpendituresBillions = cashFlowStatement2022.capitalExpenditures.billions;
     final cashFromOperationsBillions = cashFlowStatement2022.cashFromOperations.billions;
+    final cashFromInvestingBillions = cashFlowStatement2022.cashFromInvesting.billions;
 
     assert(repurchaseofCommonStockBillions == 59.296);
     assert(dividends == 0);
