@@ -12,6 +12,8 @@ class CashFlowStatement {
     'Cash from Investing',
     'Cash from Financing',
     'Deferred Income Tax',
+    'Buy Securities',
+    'Sell Securities',
   ];
 
   double get totalShareholderReturn => buyback + dividends;
@@ -44,6 +46,10 @@ class CashFlowStatement {
         return cashFromFinancing;
       case 'Deferred Income Tax':
         return deferredIncomeTax;
+      case 'Buy Securities':
+        return buyMarketableSecurities;
+      case 'Sell Securities':
+        return sellMarketableSecurities;
       default:
         return 0;
     }
@@ -63,6 +69,8 @@ class CashFlowStatement {
 
   /// Investing
   double capitalExpenditures = 0;
+  double buyMarketableSecurities = 0;
+  double sellMarketableSecurities = 0;
   double cashFromInvesting = 0;
 
   CashFlowStatement();

@@ -75,22 +75,39 @@ void main() {
 
     final CashFlowStatement cashFlowStatement2022 = results2022.fullYear!.cashFlowStatement;
 
-    final repurchaseofCommonStockBillions = cashFlowStatement2022.buyback.billions;
-
-    final dividends = cashFlowStatement2022.dividends.billions;
-
+    // Operations
+    final accumulatedDepreciationBillions = cashFlowStatement2022.accumulatedDepreciation.billions;
+    final depreciationAndAmortizationBillions = cashFlowStatement2022.depreciationAndAmortization.billions;
     final sharedBasedCompensationBillions = cashFlowStatement2022.shareBasedCompensation.billions;
-    final capitalExpendituresBillions = cashFlowStatement2022.capitalExpenditures.billions;
+    final deferredIncomeTaxBillions = cashFlowStatement2022.deferredIncomeTax.billions;
     final cashFromOperationsBillions = cashFlowStatement2022.cashFromOperations.billions;
-    final cashFromInvestingBillions = cashFlowStatement2022.cashFromInvesting.billions;
-    final cashFromFinancingBillions = cashFlowStatement2022.cashFromFinancing.billions;
 
-    assert(repurchaseofCommonStockBillions == 59.296);
-    assert(dividends == 0);
+    // Financing
+    final dividends = cashFlowStatement2022.dividends.billions;
+    final cashFromFinancingBillions = cashFlowStatement2022.cashFromFinancing.billions;
+    final buyPropertyPlantEquipmentBillions = cashFlowStatement2022.sellMarketableSecurities.billions;
+    final buyBackBillions = cashFlowStatement2022.buyback.billions;
+
+    // Investing
+    final capitalExpendituresBillions = cashFlowStatement2022.capitalExpenditures.billions;
+    final buySecuritiesBillions = cashFlowStatement2022.buyMarketableSecurities.billions;
+    final sellSecuritiesBillions = cashFlowStatement2022.sellMarketableSecurities.billions;
+    final cashFromInvestingBillions = cashFlowStatement2022.cashFromInvesting.billions;
+
+    // Operations validations
     assert(sharedBasedCompensationBillions == 19.362);
     assert(capitalExpendituresBillions == 31.485);
+    assert(deferredIncomeTaxBillions == -8.081);
     assert(cashFromOperationsBillions == 91.495);
-    assert(cashFromInvestingBillions == -20.298);
+
+    // Financing validations
+    assert(dividends == 0);
+    assert(buyBackBillions == 59.296);
     assert(cashFromFinancingBillions == -69.757);
+
+    // Investing validations
+    assert(buySecuritiesBillions == 78.874);
+    assert(sellSecuritiesBillions == 97.822);
+    assert(cashFromInvestingBillions == -20.298);
   });
 }
