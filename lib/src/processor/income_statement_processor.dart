@@ -55,6 +55,7 @@ class IncomeStatementProcessor {
     'RestructuringCharges',
     'BusinessCombinationAcquisitionRelatedCosts',
     'AmortizationOfIntangibleAssets',
+    'ForeignCurrencyTransactionGainLossBeforeTax'
   };
 
   /// The fields that have been processed
@@ -174,6 +175,9 @@ class IncomeStatementProcessor {
           break;
         case 'OperatingExpenses':
           incomeStatement.totalOperatingExpenses = value;
+          break;
+        case 'ForeignCurrencyTransactionGainLossBeforeTax':
+          incomeStatement.foreignCurrencyExchange = value;
           break;
         case 'InterestExpense':
           incomeStatement.interestExpenses = value;

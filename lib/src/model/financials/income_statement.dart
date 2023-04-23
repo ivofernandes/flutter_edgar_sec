@@ -92,6 +92,8 @@ class IncomeStatement {
   double get operatingExpenses => totalOperatingExpenses;
 
   double totalOperatingExpenses = 0;
+  
+  double foreignCurrencyExchange = 0;
 
   /// Interest on debt
   double interestExpenses = 0;
