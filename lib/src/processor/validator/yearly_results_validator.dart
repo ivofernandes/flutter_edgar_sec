@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/validator/financials/income_statment_validator.dart';
@@ -8,7 +9,7 @@ class YearlyResultsValidator {
   static void validate(Map<int, YearlyResults> yearlyResults) {
     for (final year in yearlyResults.keys) {
       if (year == 2022) {
-        print('year: $year');
+        debugPrint('year: $year');
       }
       final YearlyResults yearlyResult = yearlyResults[year]!;
       final List<FinancialStatement> quarters = yearlyResult.quarters;

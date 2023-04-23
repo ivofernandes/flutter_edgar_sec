@@ -6,35 +6,25 @@ import 'package:flutter_test/flutter_test.dart';
 /// Come to this url and select the quarterly period to
 /// https://seekingalpha.com/symbol/GOOG/income-statement
 void main() {
-  test('Test 2022-Q4 Google values for income statement', () async {
+  test('Test 2022-Q3 Google values for income statement', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);
 
     final YearlyResults results2022 = results.yearlyResults[2022]!;
 
-    //TODO take the return to test if the data is available
-    return;
-    assert(results2022.q4 != null);
-    final IncomeStatement income2022Q4 = results2022.q4!.incomeStatement;
+    assert(results2022.q3 != null);
+    final IncomeStatement income2022Q3 = results2022.q3!.incomeStatement;
 
-    final revenueBillions = income2022Q4.revenues.billions;
-    final operatingIncomeBillions = income2022Q4.operatingIncome.billions;
-    final netIncomeBillions = income2022Q4.netIncome.billions;
-    final costOfRevenueBillions = income2022Q4.costOfRevenues.billions;
+    final revenueBillions = income2022Q3.revenues.billions;
+    final operatingIncomeBillions = income2022Q3.operatingIncome.billions;
+    final netIncomeBillions = income2022Q3.netIncome.billions;
+    final costOfRevenueBillions = income2022Q3.costOfRevenues.billions;
 
-    assert(revenueBillions == 76.048);
-    assert(operatingIncomeBillions == 18.16);
-    assert(netIncomeBillions == 13.624);
-    assert(costOfRevenueBillions == 35.342);
-
-    // Check derived values
-    final netMargin = income2022Q4.netMargin;
-    final operatingMargin = income2022Q4.operatingMargin;
-
-    //TODO how to get correct data for this margins?
-    // Seeking alpha just gest TTM data
-    // https://seekingalpha.com/symbol/AAPL/profitability
+    assert(revenueBillions == 69.092);
+    assert(operatingIncomeBillions == 17.135);
+    assert(netIncomeBillions == 13.91);
+    assert(costOfRevenueBillions == 31.158);
   });
 
   /// https://www.sec.gov/Archives/edgar/data/1652044/000165204422000090/goog-20220930.htm
