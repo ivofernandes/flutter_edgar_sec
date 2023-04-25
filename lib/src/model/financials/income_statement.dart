@@ -11,6 +11,7 @@ class IncomeStatement {
     'Other Operating Expenses',
     'Operating Expenses',
     'Operating Income',
+    'Currency Exchange',
     'Interest Expenses',
     'Other Non Operating Income Expenses',
     'Income tax Expense',
@@ -23,42 +24,59 @@ class IncomeStatement {
 
   /// This is just an abstraction for the frontend, and needs to match the labels array
   String getValueForIndex(int index) {
+    final double value = getDoubleValueForIndex(index);
+    final Set<String> percentLabels = {
+      'Operating Margin',
+      'Net Margin',
+      'Interest Coverage Ratio',
+    };
+
+    if (percentLabels.contains(labels[index])) {
+      return value.percentFormat;
+    } else {
+      return value.reportFormat;
+    }
+  }
+
+  double getDoubleValueForIndex(int index) {
     final String name = labels[index];
     switch (name) {
       case 'Revenues':
-        return revenues.reportFormat;
+        return revenues;
       case 'Cost of Revenues':
-        return costOfRevenues.reportFormat;
+        return costOfRevenues;
       case 'Operating Income':
-        return operatingIncome.reportFormat;
+        return operatingIncome;
       case 'Gross Profit':
-        return grossProfit.reportFormat;
+        return grossProfit;
       case 'Research and Development Expenses':
-        return researchAndDevelopmentExpenses.reportFormat;
+        return researchAndDevelopmentExpenses;
       case 'Selling General and Admin Expenses':
-        return generalAndAdministrativeExpenses.reportFormat;
+        return generalAndAdministrativeExpenses;
       case 'Other Operating Expenses':
-        return otherOperatingExpenses.reportFormat;
+        return otherOperatingExpenses;
       case 'Operating Expenses':
-        return operatingExpenses.reportFormat;
+        return operatingExpenses;
       case 'Net Income':
-        return netIncome.reportFormat;
+        return netIncome;
       case 'Interest Expenses':
-        return interestExpenses.reportFormat;
+        return interestExpenses;
       case 'Other Non Operating Income Expenses':
-        return otherNonOperatingIncomeExpense.reportFormat;
+        return otherNonOperatingIncomeExpense;
       case 'Income tax Expense':
-        return incomeTaxExpense.reportFormat;
+        return incomeTaxExpense;
       case 'Net Margin':
-        return netMargin.percentFormat;
+        return netMargin;
       case 'Operating Margin':
-        return operatingMargin.percentFormat;
+        return operatingMargin;
       case 'EBIT':
-        return EBIT.reportFormat;
+        return EBIT;
       case 'Interest Coverage Ratio':
-        return interestCoverageRatio.percentFormat;
+        return interestCoverageRatio;
+      case 'Currency Exchange':
+        return foreignCurrencyExchange;
       default:
-        return '';
+        return 0;
     }
   }
 
@@ -92,7 +110,7 @@ class IncomeStatement {
   double get operatingExpenses => totalOperatingExpenses;
 
   double totalOperatingExpenses = 0;
-  
+
   double foreignCurrencyExchange = 0;
 
   /// Interest on debt

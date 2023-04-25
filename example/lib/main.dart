@@ -91,16 +91,18 @@ class ChartPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(symbol),
         ),
-        body: Center(
-          child: Container(
-            margin: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CompanyChartUI(
-                  symbol: symbol,
-                ),
-              ],
+        body: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              margin: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CompanyChartUI(
+                    symbol: symbol,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
