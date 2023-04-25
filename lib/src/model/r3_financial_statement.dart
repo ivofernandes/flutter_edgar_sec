@@ -44,6 +44,24 @@ class FinancialStatement implements Comparable<FinancialStatement> {
     required this.cashFlowStatement,
   });
 
+  /// If we have a full year report,and just one missing quarter, we can extrapolate the missing quarter report
+  factory FinancialStatement.extrapolate(
+    FinancialStatement fullYear,
+    FinancialStatement q1,
+    FinancialStatement q2,
+    FinancialStatement q3,
+  ) =>
+      FinancialStatement(
+        date: fullYear.date,
+        period: FinancialStatementPeriod.quarterly,
+        incomeStatement: IncomeStatement.extrapolate(
+            fullYear.incomeStatement, q1.incomeStatement, q2.incomeStatement, q3.incomeStatement),
+        balanceSheet:
+            BalanceSheet.extrapolate(fullYear.balanceSheet, q1.balanceSheet, q2.balanceSheet, q3.balanceSheet),
+        cashFlowStatement: CashFlowStatement.extrapolate(
+            fullYear.cashFlowStatement, q1.cashFlowStatement, q2.cashFlowStatement, q3.cashFlowStatement),
+      );
+
   String get incomeStatementString => incomeStatement.toString();
 
   @override

@@ -32,6 +32,17 @@ class BalanceSheet {
     }
   }
 
+  factory BalanceSheet.extrapolate(
+    BalanceSheet fullYear,
+    BalanceSheet q1,
+    BalanceSheet q2,
+    BalanceSheet q3,
+  ) {
+    final BalanceSheet balanceSheet = BalanceSheet();
+    //TODO
+    return balanceSheet;
+  }
+
   // Cash & Short Term Investments division
   double cashAndCashEquivalents = 0;
   double shortTermInvestments = 0;
@@ -70,8 +81,7 @@ class BalanceSheet {
   double unearnedRevenueCurrent = 0;
 
   // Calculated total cash n cash equivalents
-  double get totalCashAndShortTermInvestments =>
-      cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
+  double get totalCashAndShortTermInvestments => cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
 
   BalanceSheet();
 

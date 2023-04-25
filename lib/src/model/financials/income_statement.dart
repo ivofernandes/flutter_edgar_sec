@@ -82,6 +82,17 @@ class IncomeStatement {
 
   IncomeStatement();
 
+  factory IncomeStatement.extrapolate(
+    IncomeStatement fullYear,
+    IncomeStatement q1,
+    IncomeStatement q2,
+    IncomeStatement q3,
+  ) {
+    final IncomeStatement incomeStatement = IncomeStatement();
+    //TODO
+    return incomeStatement;
+  }
+
   /// The aggregate amount of revenues earned by the company during the reporting period.
   double revenues = 0;
 

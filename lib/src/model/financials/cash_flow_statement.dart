@@ -16,6 +16,17 @@ class CashFlowStatement {
     'Sell Securities',
   ];
 
+  factory CashFlowStatement.extrapolate(
+    CashFlowStatement fullYear,
+    CashFlowStatement q1,
+    CashFlowStatement q2,
+    CashFlowStatement q3,
+  ) {
+    final CashFlowStatement cashFlowStatement = CashFlowStatement();
+    //TODO
+    return cashFlowStatement;
+  }
+
   double get totalShareholderReturn => buyback + dividends;
 
   String getValueForIndex(int index) {
