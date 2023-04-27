@@ -1,10 +1,8 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
+import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
 import 'package:flutter_edgar_sec/src/model/r1_company_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
-import 'package:flutter_edgar_sec/src/ui/chart/income/funnel_step.dart';
+import 'package:flutter_edgar_sec/src/ui/chart/income/funnel/single_report_funnel.dart';
 
 /// A custom widget that represents an income funnel chart.
 ///
@@ -18,7 +16,7 @@ import 'package:flutter_edgar_sec/src/ui/chart/income/funnel_step.dart';
 ///
 /// The [negativeColor] parameter is used for negative values (e.g., cost of revenues,
 /// operating expenses, income tax expense) and defaults to [Colors.red] if not provided.
-class IncomeFunnelUI extends StatelessWidget {
+class IncomeFunnelUI extends StatefulWidget {
   final CompanyResults companyResults;
 
   /// The color used for positive values (e.g., revenues, gross profit, operating income)
@@ -30,12 +28,16 @@ class IncomeFunnelUI extends StatelessWidget {
   /// The color used to represent the dividends and buybacks, the direct to holders payments
   final Color deliveredToHolders;
 
+  /// The period for which the financial statements data will be displayed
+  final FinancialStatementPeriod period;
+
   /// Creates an [IncomeFunnelUI] widget.
   ///
   /// The [companyResults] parameter is required and must not be null.
   /// The [positiveColor] and [negativeColor] parameters are optional
   const IncomeFunnelUI({
     required this.companyResults,
+    this.period = FinancialStatementPeriod.quarterly,
     this.positiveColor = const Color(0xff005500),
     this.negativeColor = Colors.red,
     this.deliveredToHolders = const Color(0xff000088),
@@ -43,46 +45,73 @@ class IncomeFunnelUI extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final FinancialStatement financialStatement = companyResults.yearReports.last;
-    final IncomeStatement incomeStatement = financialStatement.incomeStatement;
-    final cashFlowStatement = financialStatement.cashFlowStatement;
-
-    final LinkedHashMap<String, Tuple<double, Color>> data = LinkedHashMap.from({
-      'Revenues': Tuple(incomeStatement.revenues, positiveColor),
-      'Cost of Revenue': Tuple(incomeStatement.costOfRevenues, negativeColor),
-      'Gross Profit': Tuple(incomeStatement.grossProfit, positiveColor),
-      'R&D': Tuple(incomeStatement.researchAndDevelopmentExpenses, negativeColor),
-      'General & Admin': Tuple(incomeStatement.generalAndAdministrativeExpenses, negativeColor),
-      'Operating Expenses': Tuple(incomeStatement.totalOperatingExpenses, negativeColor),
-      'Operating Income': Tuple(incomeStatement.operatingIncome, positiveColor),
-      'Interest Expense': Tuple(incomeStatement.interestExpenses, negativeColor),
-      'Income Tax Expense': Tuple(incomeStatement.incomeTaxExpense, negativeColor),
-      'Other Expenses': Tuple(incomeStatement.otherNonOperatingIncomeExpense.abs(), negativeColor),
-      'Net Income': Tuple(incomeStatement.netIncome, positiveColor),
-      'Total shareholder return': Tuple(cashFlowStatement.totalShareholderReturn, deliveredToHolders),
-      'Buybacks': Tuple(cashFlowStatement.buyback, deliveredToHolders),
-      'Dividend': Tuple(cashFlowStatement.dividends, deliveredToHolders),
-    });
-
-    final maxValue = incomeStatement.revenues;
-
-    return Column(
-      children: data.entries
-          .map((entry) => FunnelStep(
-                label: entry.key,
-                value: entry.value.item1,
-                maxValue: maxValue,
-                color: entry.value.item2,
-              ))
-          .toList(),
-    );
-  }
+  State<IncomeFunnelUI> createState() => _IncomeFunnelUIState();
 }
 
-class Tuple<T1, T2> {
-  final T1 item1;
-  final T2 item2;
+class _IncomeFunnelUIState extends State<IncomeFunnelUI> {
+  int selectedStatementIndex = 0;
 
-  Tuple(this.item1, this.item2);
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.period.isQuarter) {
+      selectedStatementIndex = widget.companyResults.quarters.length - 1;
+    } else {
+      selectedStatementIndex = widget.companyResults.yearlyResults.length - 1;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final FinancialStatement financialStatement = getCurrentStatement();
+
+    return Column(
+      children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: getStatements()
+                .map(
+                  (String statementName) => Container(
+                    margin: const EdgeInsets.all(10),
+                    child: MaterialButton(
+                      child: Text(statementName),
+                      onPressed: () {
+                        setState(() {
+                          selectedStatementIndex = getStatements().indexOf(statementName);
+                        });
+                      },
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+        ),
+        SingleReportFunnel(
+          financialStatement: financialStatement,
+          positiveColor: widget.positiveColor,
+          negativeColor: widget.negativeColor,
+          deliveredToHolders: widget.deliveredToHolders,
+        ),
+      ],
+    );
+  }
+
+  List<String> getStatements() {
+    if (widget.period.isQuarter) {
+      return widget.companyResults.quarters.map((e) => e.quarterPeriod).toList();
+    } else {
+      return widget.companyResults.yearReports.map((e) => e.year.toString()).toList();
+    }
+  }
+
+  /// Returns the current financial statement based on the [period] parameter
+  FinancialStatement getCurrentStatement() {
+    if (widget.period.isQuarter) {
+      return widget.companyResults.quarters[selectedStatementIndex];
+    } else {
+      return widget.companyResults.yearReports[selectedStatementIndex];
+    }
+  }
 }
