@@ -1,6 +1,9 @@
 import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 
+/// Most companies just report the full year data on a specific trimester,
+/// and in the full year report, they just report the full year data.
+/// And not the quarterly data. That's why we need this logic to extrapolate the data
 class MissingQuarterValidator {
   // Singleton
   static final MissingQuarterValidator _singleton = MissingQuarterValidator._internal();
@@ -20,12 +23,45 @@ class MissingQuarterValidator {
       final bool hasQ1 = yearlyResult.q1 != null;
       final bool hasQ2 = yearlyResult.q2 != null;
       final bool hasQ3 = yearlyResult.q3 != null;
-      final bool hasNoQ4 = yearlyResult.q4 == null;
+      final bool hasQ4 = yearlyResult.q4 != null;
 
-      if (hasFullYear && hasQ1 && hasQ2 && hasQ3 && hasNoQ4) {
+      if (hasFullYear && hasQ1 && hasQ2 && hasQ3 && !hasQ4) {
         extrapolateQ4(yearlyResult);
+      } else if (hasFullYear && !hasQ1 && hasQ2 && hasQ3 && hasQ4) {
+        extrapolateQ1(yearlyResult);
+      } else if (hasFullYear && hasQ1 && !hasQ2 && hasQ3 && hasQ4) {
+        extrapolateQ2(yearlyResult);
+      } else if (hasFullYear && hasQ1 && hasQ2 && !hasQ3 && hasQ4) {
+        extrapolateQ3(yearlyResult);
       }
     }
+  }
+
+  void extrapolateQ1(YearlyResults yearlyResult) {
+    yearlyResult.q1 = FinancialStatement.extrapolate(
+      yearlyResult.fullYear!,
+      yearlyResult.q2!,
+      yearlyResult.q3!,
+      yearlyResult.q4!,
+    );
+  }
+
+  void extrapolateQ2(YearlyResults yearlyResult) {
+    yearlyResult.q2 = FinancialStatement.extrapolate(
+      yearlyResult.fullYear!,
+      yearlyResult.q1!,
+      yearlyResult.q3!,
+      yearlyResult.q4!,
+    );
+  }
+
+  void extrapolateQ3(YearlyResults yearlyResult) {
+    yearlyResult.q3 = FinancialStatement.extrapolate(
+      yearlyResult.fullYear!,
+      yearlyResult.q1!,
+      yearlyResult.q2!,
+      yearlyResult.q4!,
+    );
   }
 
   void extrapolateQ4(YearlyResults yearlyResult) {
