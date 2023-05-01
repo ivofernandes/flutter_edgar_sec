@@ -36,6 +36,11 @@ class CashFlowStatement {
 
   double getDoubleValueForIndex(int index) {
     final String name = labels[index];
+
+    return getValueForLabel(name);
+  }
+
+  double getValueForLabel(String name) {
     switch (name) {
       case 'Buybacks':
         return buyback;

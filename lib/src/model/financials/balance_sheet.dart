@@ -16,6 +16,10 @@ class BalanceSheet {
 
     final String name = labels[index];
 
+    return getValueForLabel(name);
+  }
+
+  String getValueForLabel(String name) {
     switch (name) {
       case 'Cash & Cash Equivalents':
         return cashAndCashEquivalents.reportFormat;
