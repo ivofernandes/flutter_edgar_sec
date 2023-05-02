@@ -34,7 +34,7 @@ class CompanyResults {
 
     final Map<int, YearlyResults> yearlyResults = PeriodProcessor.process(facts);
 
-    YearlyResultsValidator.validate(yearlyResults);
+    YearlyResultsValidator().validate(yearlyResults);
 
     return CompanyResults(
       yearlyResults: yearlyResults,

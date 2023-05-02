@@ -33,13 +33,20 @@ class PeriodProcessor {
         continue;
       }
 
+      final startDateString = row['start'] as String;
       final endDateString = row['end'] as String;
+      final filedDateString = row['filed'] as String;
+
       // Parse date from string with format yyyy-MM-dd
       final DateTime endDate = DateTime.parse(endDateString);
+      final DateTime startDate = DateTime.parse(startDateString);
+      final filedDate = DateTime.parse(filedDateString);
 
       if (row['form'] == '10-Q') {
         final financialStatement = FinancialStatement(
-          date: endDate,
+          startDate: startDate,
+          endDate: endDate,
+          filedDate: filedDate,
           period: FinancialStatementPeriod.quarterly,
           incomeStatement: IncomeStatement(),
           balanceSheet: BalanceSheet(),
@@ -47,10 +54,12 @@ class PeriodProcessor {
         );
 
         quarters[endDateString] = financialStatement;
-        quartersRawData.add(row as Map<String, dynamic>);
+        quartersRawData.add(row);
       } else if (row['form'] == '10-K') {
         final financialStatement = FinancialStatement(
-          date: endDate,
+          startDate: startDate,
+          endDate: endDate,
+          filedDate: filedDate,
           period: FinancialStatementPeriod.annual,
           incomeStatement: IncomeStatement(),
           balanceSheet: BalanceSheet(),
@@ -85,8 +94,8 @@ class PeriodProcessor {
   }
 
   /// Distributes the quarters into the yearly results
-  static void _distributeByQuarter(Map<String, FinancialStatement> quarterStatements,
-      Map<int, YearlyResults> yearlyResults) {
+  static void _distributeByQuarter(
+      Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
     for (final quarterStatement in quarterStatements.values) {
       final int year = quarterStatement.year;
 

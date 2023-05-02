@@ -94,16 +94,30 @@ class BaseProcessor {
   /// There are a lot of periods of 10-Q like 6 months or 9 months that we don't really want to process
   static bool validPeriod(Map<String, dynamic> period) {
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-    if (period['form'] == '10-Q' && period.containsKey('start')) {
-      final DateTime startDate = dateFormat.parse(period['start'] as String);
-      final DateTime endDate = dateFormat.parse(period['end'] as String);
 
-      final Duration duration = endDate.difference(startDate);
+    if (!period.containsKey('start')) {
+      return true;
+    }
 
-      final days = duration.inDays;
-      if (days > 100) {
-        return false;
-      }
+    final DateTime startDate = dateFormat.parse(period['start'] as String);
+    final DateTime endDate = dateFormat.parse(period['end'] as String);
+
+    final Duration duration = endDate.difference(startDate);
+    final days = duration.inDays;
+
+    final bool isQuarter = days > 20 && days < 100;
+    final bool isYear = days > 300 && days < 400;
+    final bool is10Q = period['form'] == '10-Q';
+    final bool is10K = period['form'] == '10-K';
+
+    // Invalidate 10-Q that are not 3 months
+    if (is10Q && !isQuarter) {
+      return false;
+    }
+
+    if (is10K && !isYear) {
+      // Invalidate 10-K that are not 12 months
+      return false;
     }
 
     return true;

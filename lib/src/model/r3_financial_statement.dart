@@ -5,8 +5,14 @@ import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart'
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 
 class FinancialStatement implements Comparable<FinancialStatement> {
-  /// The date of the financial statement
-  final DateTime date;
+  /// The start date of the period reported
+  final DateTime startDate;
+
+  /// The end date of the period reported
+  final DateTime endDate;
+
+  /// Date of the reporting of the financial statement
+  final DateTime filedDate;
 
   /// The period of the financial statement: quarterly or annual
   final FinancialStatementPeriod period;
@@ -22,13 +28,13 @@ class FinancialStatement implements Comparable<FinancialStatement> {
 
   /// Calculated fields
   /// Calculates the year of the financial statement
-  int get year => date.year;
+  int get year => endDate.year;
 
   /// Calculates the month of the financial statement
-  int get month => date.month;
+  int get month => endDate.month;
 
   /// Calculates the quarter of the financial statement
-  int get quarter => date.month ~/ 3;
+  int get quarter => endDate.month ~/ 3;
 
   /// Calculates the title of the quarter financial statement
   String get quarterPeriod => '$year-Q$quarter';
@@ -37,7 +43,9 @@ class FinancialStatement implements Comparable<FinancialStatement> {
   String get annualPeriod => year.toString();
 
   FinancialStatement({
-    required this.date,
+    required this.startDate,
+    required this.endDate,
+    required this.filedDate,
     required this.period,
     required this.incomeStatement,
     required this.balanceSheet,
@@ -46,20 +54,36 @@ class FinancialStatement implements Comparable<FinancialStatement> {
 
   /// If we have a full year report,and just one missing quarter, we can extrapolate the missing quarter report
   factory FinancialStatement.extrapolate(
+    DateTime startDate,
+    DateTime endDate,
     FinancialStatement fullYear,
     FinancialStatement q1,
     FinancialStatement q2,
     FinancialStatement q3,
   ) =>
       FinancialStatement(
-        date: fullYear.date,
+        startDate: startDate,
+        endDate: endDate,
+        filedDate: fullYear.filedDate,
         period: FinancialStatementPeriod.quarterly,
         incomeStatement: IncomeStatement.extrapolate(
-            fullYear.incomeStatement, q1.incomeStatement, q2.incomeStatement, q3.incomeStatement),
-        balanceSheet:
-            BalanceSheet.extrapolate(fullYear.balanceSheet, q1.balanceSheet, q2.balanceSheet, q3.balanceSheet),
+          fullYear.incomeStatement,
+          q1.incomeStatement,
+          q2.incomeStatement,
+          q3.incomeStatement,
+        ),
+        balanceSheet: BalanceSheet.extrapolate(
+          fullYear.balanceSheet,
+          q1.balanceSheet,
+          q2.balanceSheet,
+          q3.balanceSheet,
+        ),
         cashFlowStatement: CashFlowStatement.extrapolate(
-            fullYear.cashFlowStatement, q1.cashFlowStatement, q2.cashFlowStatement, q3.cashFlowStatement),
+          fullYear.cashFlowStatement,
+          q1.cashFlowStatement,
+          q2.cashFlowStatement,
+          q3.cashFlowStatement,
+        ),
       );
 
   String get incomeStatementString => incomeStatement.toString();
@@ -88,5 +112,5 @@ class FinancialStatement implements Comparable<FinancialStatement> {
   }
 
   @override
-  int compareTo(FinancialStatement other) => date.compareTo(other.date);
+  int compareTo(FinancialStatement other) => endDate.compareTo(other.endDate);
 }

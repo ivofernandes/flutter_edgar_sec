@@ -1,6 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Come to this url and select the quarterly period to
@@ -13,7 +11,6 @@ void main() {
 
     final YearlyResults results2022 = results.yearlyResults[2022]!;
 
-    return;
     assert(results2022.q4 != null);
     final IncomeStatement income2022Q4 = results2022.q4!.incomeStatement;
 
