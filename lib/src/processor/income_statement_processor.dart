@@ -1,6 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/debug_fields.dart';
 import 'package:flutter_edgar_sec/src/utils/app_logger.dart';
@@ -55,7 +53,11 @@ class IncomeStatementProcessor {
     'RestructuringCharges',
     'BusinessCombinationAcquisitionRelatedCosts',
     'AmortizationOfIntangibleAssets',
-    'ForeignCurrencyTransactionGainLossBeforeTax'
+    'ForeignCurrencyTransactionGainLossBeforeTax',
+    'EarningsPerShareBasic',
+    'EarningsPerShareDiluted',
+    'WeightedAverageNumberOfSharesOutstandingBasic',
+    'WeightedAverageNumberOfDilutedSharesOutstanding',
   };
 
   /// The fields that have been processed
@@ -85,7 +87,7 @@ class IncomeStatementProcessor {
         final valueBillions = value.billions;
 
         if (typeOfForm == '10-K') {
-          if (valueBillions == 75.111) {
+          if (field == 75.111) {
             AppLogger().debug('Found $field @ $endDateString = $valueBillions');
           }
 
@@ -110,6 +112,9 @@ class IncomeStatementProcessor {
       // Filter the quarters or the annuals, i.e. rows that are 10-Q or 10-K
       final periods = BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
 
+      if (field == 'WeightedAverageNumberOfSharesOutstandingBasic') {
+        AppLogger().debug('Found $field');
+      }
       // Map the values for each report
       for (final period in periods) {
         final endDateString = period['end'];
@@ -202,6 +207,18 @@ class IncomeStatementProcessor {
           break;
         case 'AmortizationOfIntangibleAssets':
           incomeStatement.amortizationOfIntangibles = value;
+          break;
+        case 'EarningsPerShareBasic':
+          incomeStatement.eps = value;
+          break;
+        case 'EarningsPerShareDiluted':
+          incomeStatement.epsDiluted = value;
+          break;
+        case 'WeightedAverageNumberOfSharesOutstandingBasic':
+          incomeStatement.shares = value;
+          break;
+        case 'WeightedAverageNumberOfDilutedSharesOutstanding':
+          incomeStatement.sharesDiluted = value;
           break;
       }
     }

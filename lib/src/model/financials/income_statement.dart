@@ -22,6 +22,10 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
     'Net Margin',
     'EBIT',
     'Interest Coverage Ratio',
+    'EPS',
+    'EPS Diluted',
+    'Shares',
+    'Shares Diluted',
   ];
 
   /// This is just an abstraction for the frontend, and needs to match the labels array
@@ -82,6 +86,14 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
         return interestCoverageRatio;
       case 'Currency Exchange':
         return foreignCurrencyExchange;
+      case 'EPS':
+        return eps;
+      case 'EPS Diluted':
+        return epsDiluted;
+      case 'Shares':
+        return shares;
+      case 'Shares Diluted':
+        return sharesDiluted;
       default:
         return 0;
     }

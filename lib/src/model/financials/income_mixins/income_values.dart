@@ -1,5 +1,3 @@
-
-
 mixin IncomeValues {
   /// The aggregate amount of revenues earned by the company during the reporting period.
   double revenues = 0;
@@ -70,6 +68,14 @@ mixin IncomeValues {
   /// Amortization of intangibles assets like goodwill and other intangible assets
   double amortizationOfIntangibles = 0;
 
+  /// Earnings per share
+  double eps = 0;
+  double epsDiluted = 0;
+
+  /// Shares outstanding
+  double shares = 0;
+  double sharesDiluted = 0;
+
   /// Other operating expenses that are not R&D neither SG&A
   double get otherOperatingExpenses =>
       totalOperatingExpenses - researchAndDevelopmentExpenses - generalAndAdministrativeExpenses;
@@ -93,5 +99,9 @@ mixin IncomeValues {
   acquisitionCosts: $acquisitionCosts
   restructuring: $restructuring
   amortizationOfIntangibles: $amortizationOfIntangibles
+  eps: $eps
+  epsDiluted: $epsDiluted
+  shares: $shares
+  sharesDiluted: $sharesDiluted
   ''';
 }

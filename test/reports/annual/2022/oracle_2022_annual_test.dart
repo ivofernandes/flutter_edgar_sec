@@ -1,6 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -59,5 +57,17 @@ void main() {
 
     assert(netMargin.toStringAsFixed(4) == '0.1583');
     assert(operatingMargin.toStringAsFixed(4) == '0.2574');
+
+    // Check eps and shares
+    final eps = income2022.eps;
+    final epsDiluted = income2022.epsDiluted;
+    final shares = income2022.shares;
+    final sharesDiluted = income2022.sharesDiluted;
+
+    assert(eps == 2.49);
+    assert(epsDiluted == 2.41);
+
+    assert(shares == 2700000000.0);
+    assert(sharesDiluted == 2786000000.0);
   });
 }

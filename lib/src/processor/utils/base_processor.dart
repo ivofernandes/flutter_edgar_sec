@@ -26,13 +26,19 @@ class BaseProcessor {
       return [];
     }
 
-    if (!getFactsUnits.containsKey('USD')) {
-      return [];
+    final List<String> factsUnitsKeys = [
+      'USD',
+      'USD/shares',
+      'shares',
+    ];
+    for (final key in factsUnitsKeys) {
+      if (getFactsUnits.containsKey(key)) {
+        final List<dynamic> units = getFactsUnits[key] as List<dynamic>;
+        return _getValidPeriods(units, index, typeOfForm);
+      }
     }
 
-    final List<dynamic> units = getFactsUnits['USD'] as List<dynamic>;
-
-    return _getValidPeriods(units, index, typeOfForm);
+    return [];
   }
 
   /// Validate and finalize periods
