@@ -1,13 +1,11 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/CROX/income-statement
   /// https://d18rn0p25nwr6d.cloudfront.net/CIK-0001334036/f61c8670-c9e2-4aab-bf47-374a5ab5092b.html#
+  /// https://www.sec.gov/ix?doc=/Archives/edgar/data/0001334036/000133403623000015/crox-20221231.htm
   test('Test 2022 Crocs values for income statement', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('CROX');
 
@@ -57,6 +55,12 @@ void main() {
 
     assert(netMargin.toStringAsFixed(4) == '0.1519');
     assert(operatingMargin.toStringAsFixed(4) == '0.2393');
+
+    final eps = income2022.eps;
+    final epsDiluted = income2022.epsDiluted;
+
+    assert(eps == 8.82);
+    assert(epsDiluted == 8.71);
   });
 
   /// Come to this url to get the correct values for the test

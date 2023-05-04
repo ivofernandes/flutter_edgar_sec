@@ -1,6 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Come to this url and select the quarterly period to
@@ -26,5 +24,11 @@ void main() {
     assert(operatingIncomeBillions == 0.118677);
     assert(netIncomeBillions == 0.07276);
     assert(costOfRevenueBillions == 0.335224);
+
+    final eps = income2022Q1.eps;
+    final epsDiluted = income2022Q1.epsDiluted;
+
+    assert(eps == 1.22);
+    assert(epsDiluted == 1.19);
   });
 }

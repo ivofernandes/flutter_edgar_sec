@@ -29,9 +29,9 @@ class FunnelStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double widthPercentage = 0;
-
+    final double adjustedValue = value.abs();
     if (!maxValue.isNaN && !value.isNaN && maxValue != 0) {
-      widthPercentage = value / maxValue;
+      widthPercentage = adjustedValue / maxValue;
     }
 
     return Container(

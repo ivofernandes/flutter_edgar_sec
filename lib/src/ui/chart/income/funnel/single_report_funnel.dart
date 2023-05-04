@@ -6,7 +6,6 @@ import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/ui/chart/income/funnel/funnel_step.dart';
 
 class SingleReportFunnel extends StatelessWidget {
-
   final FinancialStatement financialStatement;
 
   final Color positiveColor;
@@ -46,18 +45,25 @@ class SingleReportFunnel extends StatelessWidget {
     final maxValue = incomeStatement.revenues;
 
     return Column(
-      children: data.entries
-          .map((entry) =>
-          FunnelStep(
-            label: entry.key,
-            value: entry.value.item1,
-            maxValue: maxValue,
-            color: entry.value.item2,
-          ))
-          .toList(),
+      children: [
+        Text(financialStatement.quarterPeriod),
+        Column(
+          children: [
+            Column(
+              children: data.entries
+                  .map((entry) => FunnelStep(
+                        label: entry.key,
+                        value: entry.value.item1,
+                        maxValue: maxValue,
+                        color: entry.value.item2,
+                      ))
+                  .toList(),
+            ),
+          ],
+        ),
+      ],
     );
   }
-
 }
 
 class Tuple<T1, T2> {

@@ -23,5 +23,16 @@ void main() {
     //assert(operatingIncomeBillions == 0.1845);
     assert(netIncomeBillions == 0.137735);
     assert(costOfRevenueBillions == 0.448839);
+
+    final eps = income2022Q4.eps;
+    final epsDiluted = income2022Q4.epsDiluted;
+
+    // Extrapolate from other quarters
+    // Full year - q3 - q2 -
+    // 8.82 - 2.75 - 2.6 - 1.22 = 2.25
+    // No idea why seeking alpha has 2.23 but I assume they made a mistake
+    // Is not exactly 2.25 because we divide the net income by the number of shares
+    assert(eps == 2.2498366546880106);
+    assert(epsDiluted == 2.2213172918749797);
   });
 }

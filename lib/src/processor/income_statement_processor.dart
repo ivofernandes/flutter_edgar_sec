@@ -16,7 +16,8 @@ class IncomeStatementProcessor {
     'SalesRevenueGoodsNet',
     'SalesRevenueNet',
     'TotalRevenuesAndOtherIncome',
-    'RevenueFromContractWithCustomerIncludingAssessedTax'
+    'RevenueFromContractWithCustomerIncludingAssessedTax',
+    'Revenues',
   };
 
   // Cost of revenue fields
@@ -57,7 +58,9 @@ class IncomeStatementProcessor {
     'EarningsPerShareBasic',
     'EarningsPerShareDiluted',
     'WeightedAverageNumberOfSharesOutstandingBasic',
+    'WeightedAverageNumberOfSharesIssuedBasic',
     'WeightedAverageNumberOfDilutedSharesOutstanding',
+    ''
   };
 
   /// The fields that have been processed
@@ -215,6 +218,7 @@ class IncomeStatementProcessor {
           incomeStatement.epsDiluted = value;
           break;
         case 'WeightedAverageNumberOfSharesOutstandingBasic':
+        case 'WeightedAverageNumberOfSharesIssuedBasic':
           incomeStatement.shares = value;
           break;
         case 'WeightedAverageNumberOfDilutedSharesOutstanding':

@@ -36,5 +36,13 @@ mixin IncomeExtrapolate {
     incomeStatement.netIncome = fullYear.netIncome - qc.netIncome - qb.netIncome - qa.netIncome;
     incomeStatement.incomeTaxExpense =
         fullYear.incomeTaxExpense - qc.incomeTaxExpense - qb.incomeTaxExpense - qa.incomeTaxExpense;
+
+    // For shares the quarter has no 10-Q because was the quarter of the 10-K
+    // So we can just pick the full year value
+    incomeStatement.shares = fullYear.shares;
+    incomeStatement.sharesDiluted = fullYear.sharesDiluted;
+
+    incomeStatement.eps = incomeStatement.netIncome / incomeStatement.shares;
+    incomeStatement.epsDiluted = incomeStatement.netIncome / incomeStatement.sharesDiluted;
   }
 }
