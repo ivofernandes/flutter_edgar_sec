@@ -30,7 +30,7 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
 
   /// This is just an abstraction for the frontend, and needs to match the labels array
   String getValueForIndex(int index) {
-    final double value = getDoubleValueForIndex(index);
+    final double? value = getDoubleValueForIndex(index);
     final Set<String> percentLabels = {
       'Operating Margin',
       'Net Margin',
@@ -38,19 +38,19 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
     };
 
     if (percentLabels.contains(labels[index])) {
-      return value.percentFormat;
+      return value?.percentFormat ?? '';
     } else {
-      return value.reportFormat;
+      return value?.reportFormat ?? '';
     }
   }
 
-  double getDoubleValueForIndex(int index) {
+  double? getDoubleValueForIndex(int index) {
     final String name = labels[index];
 
     return getValueForLabel(name);
   }
 
-  double getValueForLabel(String name) {
+  double? getValueForLabel(String name) {
     switch (name) {
       case 'Revenues':
         return revenues;
@@ -95,7 +95,7 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
       case 'Shares Diluted':
         return sharesDiluted;
       default:
-        return 0;
+        return null;
     }
   }
 

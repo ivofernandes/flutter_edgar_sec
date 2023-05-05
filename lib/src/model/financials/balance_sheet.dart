@@ -1,3 +1,4 @@
+import 'package:flutter_edgar_sec/src/model/financials/balance_mixins/balance_extrapolate.dart';
 import 'package:flutter_edgar_sec/src/utils/number_utils.dart';
 
 class BalanceSheet {
@@ -7,6 +8,21 @@ class BalanceSheet {
     'Accounts Receivables',
     'Other Receivables',
     'Inventory',
+    'Deferred Tax Assets',
+    'Restricted Cash',
+    'Other Current Assets',
+    'Current Assets',
+    'Gross Property Plant Equipment',
+    'Accumulated Depreciation',
+    'Net Property Plant Equipment',
+    'Goodwill',
+    'Other Intangibles',
+    'Other Long Term Assets',
+    'Total Assets',
+    'Accounts Payable',
+    'Accrued Expenses',
+    'Short Term Borrowings',
+    'Equity',
   ];
 
   String getValueForIndex(int index) {
@@ -16,23 +32,55 @@ class BalanceSheet {
 
     final String name = labels[index];
 
-    return getValueForLabel(name);
+    return getValueForLabel(name)?.reportFormat ?? '';
   }
 
-  String getValueForLabel(String name) {
+  double? getValueForLabel(String name) {
     switch (name) {
       case 'Cash & Cash Equivalents':
-        return cashAndCashEquivalents.reportFormat;
+        return cashAndCashEquivalents;
       case 'Short Term Investments':
-        return shortTermInvestments.reportFormat;
+        return shortTermInvestments;
       case 'Accounts Receivables':
-        return accountsReceivable.reportFormat;
+        return accountsReceivable;
       case 'Other Receivables':
-        return otherReceivables.reportFormat;
+        return otherReceivables;
       case 'Inventory':
-        return inventory.reportFormat;
+        return inventory;
+      case 'Deferred Tax Assets':
+        return deferredTaxAssets;
+      case 'Restricted Cash':
+        return restrictedCash;
+      case 'Other Current Assets':
+        return otherCurrentAssets;
+      case 'Current Assets':
+        return currentAssets;
+      case 'Gross Property Plant Equipment':
+        return grossPropertyPlantEquipment;
+      case 'Accumulated Depreciation':
+        return accumulatedDepreciation;
+      case 'Net Property Plant Equipment':
+        return netPropertyPlantEquipment;
+      case 'Long Term Investments':
+        return longTermInvestments;
+      case 'Goodwill':
+        return goodwill;
+      case 'Other Intangibles':
+        return otherIntangibles;
+      case 'Other Long Term Assets':
+        return otherLongTermAssets;
+      case 'Total Assets':
+        return totalAssets;
+      case 'Accounts Payable':
+        return accountsPayable;
+      case 'Accrued Expenses':
+        return accruedExpenses;
+      case 'Short Term Borrowings':
+        return shortTermBorrowings;
+      case 'Equity':
+        return equity;
       default:
-        return '';
+        return null;
     }
   }
 
@@ -43,7 +91,7 @@ class BalanceSheet {
     BalanceSheet q3,
   ) {
     final BalanceSheet balanceSheet = BalanceSheet();
-    //TODO
+    BalanceExtrapolate.fillMissingQuarter(balanceSheet, fullYear, q1, q2, q3);
     return balanceSheet;
   }
 
@@ -83,6 +131,8 @@ class BalanceSheet {
   double shortTermBorrowings = 0;
   double currentPortionLtDebt = 0;
   double unearnedRevenueCurrent = 0;
+
+  double equity = 0;
 
   // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments => cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;

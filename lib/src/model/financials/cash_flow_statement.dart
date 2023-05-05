@@ -1,3 +1,4 @@
+import 'package:flutter_edgar_sec/src/model/financials/cash_flow_mixins/cash_flow_extrapolate.dart';
 import 'package:flutter_edgar_sec/src/utils/number_utils.dart';
 
 class CashFlowStatement {
@@ -16,14 +17,14 @@ class CashFlowStatement {
     'Sell Securities',
   ];
 
-  factory CashFlowStatement.extrapolate(
-    CashFlowStatement fullYear,
-    CashFlowStatement q1,
-    CashFlowStatement q2,
-    CashFlowStatement q3,
-  ) {
+  factory CashFlowStatement.extrapolate(CashFlowStatement fullYear,
+      CashFlowStatement q1,
+      CashFlowStatement q2,
+      CashFlowStatement q3,) {
     final CashFlowStatement cashFlowStatement = CashFlowStatement();
-    //TODO
+
+    CashFlowExtrapolate.fillMissingQuarter(cashFlowStatement, fullYear, q1, q2, q3);
+
     return cashFlowStatement;
   }
 
