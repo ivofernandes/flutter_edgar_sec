@@ -22,6 +22,8 @@ class BalanceSheet {
     'Accounts Payable',
     'Accrued Expenses',
     'Short Term Borrowings',
+    'Total Liabilities',
+    'Current Liabilities',
     'Equity',
   ];
 
@@ -79,10 +81,16 @@ class BalanceSheet {
         return shortTermBorrowings;
       case 'Equity':
         return equity;
+      case 'Total Liabilities':
+        return totalLiabilities;
+      case 'Current Liabilities':
+        return currentLiabilities;
       default:
         return null;
     }
   }
+
+  BalanceSheet();
 
   factory BalanceSheet.extrapolate(
     BalanceSheet fullYear,
@@ -131,15 +139,16 @@ class BalanceSheet {
   double shortTermBorrowings = 0;
   double currentPortionLtDebt = 0;
   double unearnedRevenueCurrent = 0;
+  double currentLiabilities = 0;
+
+  double totalLiabilities = 0;
 
   double equity = 0;
 
   // Calculated total cash n cash equivalents
   double get totalCashAndShortTermInvestments => cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
 
-  BalanceSheet();
-
-  set(double otherAssetsCurrent) {}
+  double get capitalEmployed => totalAssets - currentLiabilities;
 
   @override
   String toString() => '''

@@ -194,6 +194,8 @@ class BalanceSheetProcessor {
     'CommercialPaper', // Short term Borrowings
     'LongTermDebtCurrent', // Current Portion of LT Debt
     'StockholdersEquity',
+    'Liabilities',
+    'LiabilitiesCurrent',
     ...unearnedRevenueCurrent, // Unearned Revenue Current
   };
 
@@ -308,6 +310,12 @@ class BalanceSheetProcessor {
         break;
       case 'StockholdersEquity':
         balanceSheet.equity = value;
+        break;
+      case 'Liabilities':
+        balanceSheet.totalLiabilities = value;
+        break;
+      case 'LiabilitiesCurrent':
+        balanceSheet.currentLiabilities = value;
         break;
     }
   }

@@ -5,6 +5,7 @@ import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart'
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 
 class FinancialStatement implements Comparable<FinancialStatement> {
+
   /// The start date of the period reported
   final DateTime startDate;
 
@@ -42,6 +43,15 @@ class FinancialStatement implements Comparable<FinancialStatement> {
   /// Calculates the title of the annual financial statement
   String get annualPeriod => year.toString();
 
+  /// https://gocardless.com/guides/posts/return-on-capital-employed-formula
+  double get ROCE => incomeStatement.EBIT / balanceSheet.capitalEmployed;
+
+  /// https://www.investopedia.com/terms/p/payoutratio.asp
+  double get payoutRatio => cashFlowStatement.dividends / incomeStatement.netIncome;
+
+  /// Buybacks plus dividends divided by net income
+  double get totalShareholderReturn => cashFlowStatement.shareBasedCompensation / incomeStatement.netIncome;
+
   FinancialStatement({
     required this.startDate,
     required this.endDate,
@@ -53,14 +63,12 @@ class FinancialStatement implements Comparable<FinancialStatement> {
   });
 
   /// If we have a full year report,and just one missing quarter, we can extrapolate the missing quarter report
-  factory FinancialStatement.extrapolate(
-    DateTime startDate,
-    DateTime endDate,
-    FinancialStatement fullYear,
-    FinancialStatement q1,
-    FinancialStatement q2,
-    FinancialStatement q3,
-  ) =>
+  factory FinancialStatement.extrapolate(DateTime startDate,
+      DateTime endDate,
+      FinancialStatement fullYear,
+      FinancialStatement q1,
+      FinancialStatement q2,
+      FinancialStatement q3,) =>
       FinancialStatement(
         startDate: startDate,
         endDate: endDate,

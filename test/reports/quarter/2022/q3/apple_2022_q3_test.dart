@@ -24,9 +24,11 @@ void main() {
     final researchDevelopmentBillions = income2022Q3.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022Q3.operatingExpenses.billions;
 
-    //assert(revenueBillions == 117.154);
-    //assert(operatingIncomeBillions == 36.016);
-    //assert(netIncomeBillions == 29.998);
-    //assert(costOfRevenueBillions == 66.822);
+    // Annual 2022 - Q1 - Q2 - Q4
+    // 394.328 - 97.278 - 82.959 - 117.154
+    assert(revenueBillions == 96.937);
+    assert(operatingIncomeBillions == 30.366);
+    assert(netIncomeBillions == 25.353);
+    assert(costOfRevenueBillions == 54.931);
   });
 }

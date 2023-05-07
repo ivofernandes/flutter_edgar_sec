@@ -2,35 +2,41 @@ import 'package:flutter_edgar_sec/src/model/financials/balance_sheet.dart';
 
 mixin BalanceExtrapolate {
   static void fillMissingQuarter(
-    BalanceSheet incomeStatement,
+    BalanceSheet balanceSheet,
     BalanceSheet fullYear,
     BalanceSheet qa,
     BalanceSheet qb,
     BalanceSheet qc,
   ) {
-    incomeStatement.cashAndCashEquivalents = fullYear.cashAndCashEquivalents -
+    balanceSheet.cashAndCashEquivalents = fullYear.cashAndCashEquivalents -
         qc.cashAndCashEquivalents -
         qb.cashAndCashEquivalents -
         qa.cashAndCashEquivalents;
-    incomeStatement.shortTermInvestments =
+    balanceSheet.shortTermInvestments =
         fullYear.shortTermInvestments - qc.shortTermInvestments - qb.shortTermInvestments - qa.shortTermInvestments;
 
-    incomeStatement.accountsReceivable =
+    balanceSheet.accountsReceivable =
         fullYear.accountsReceivable - qc.accountsReceivable - qb.accountsReceivable - qa.accountsReceivable;
 
-    incomeStatement.otherReceivables =
+    balanceSheet.otherReceivables =
         fullYear.otherReceivables - qc.otherReceivables - qb.otherReceivables - qa.otherReceivables;
 
-    incomeStatement.inventory = fullYear.inventory - qc.inventory - qb.inventory - qa.inventory;
+    balanceSheet.inventory = fullYear.inventory - qc.inventory - qb.inventory - qa.inventory;
 
-    incomeStatement.deferredTaxAssets =
+    balanceSheet.deferredTaxAssets =
         fullYear.deferredTaxAssets - qc.deferredTaxAssets - qb.deferredTaxAssets - qa.deferredTaxAssets;
 
-    incomeStatement.otherCurrentAssets =
+    balanceSheet.otherCurrentAssets =
         fullYear.otherCurrentAssets - qc.otherCurrentAssets - qb.otherCurrentAssets - qa.otherCurrentAssets;
 
-    incomeStatement.goodwill = fullYear.goodwill - qc.goodwill - qb.goodwill - qa.goodwill;
+    balanceSheet.goodwill = fullYear.goodwill - qc.goodwill - qb.goodwill - qa.goodwill;
 
-    incomeStatement.equity = fullYear.equity - qc.equity - qb.equity - qa.equity;
+    balanceSheet.totalLiabilities =
+        fullYear.totalLiabilities - qc.totalLiabilities - qb.totalLiabilities - qa.totalLiabilities;
+
+    balanceSheet.currentLiabilities =
+        fullYear.currentLiabilities - qc.currentLiabilities - qb.currentLiabilities - qa.currentLiabilities;
+
+    balanceSheet.equity = fullYear.equity - qc.equity - qb.equity - qa.equity;
   }
 }
