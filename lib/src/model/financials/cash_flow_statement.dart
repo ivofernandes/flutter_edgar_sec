@@ -17,6 +17,8 @@ class CashFlowStatement {
     'Sell Securities',
   ];
 
+  CashFlowStatement();
+
   factory CashFlowStatement.extrapolate(CashFlowStatement fullYear,
       CashFlowStatement q1,
       CashFlowStatement q2,
@@ -90,7 +92,7 @@ class CashFlowStatement {
   double sellMarketableSecurities = 0;
   double cashFromInvesting = 0;
 
-  CashFlowStatement();
+  double get freeCashFlow => cashFromOperations - capitalExpenditures;
 
   @override
   String toString() => '''

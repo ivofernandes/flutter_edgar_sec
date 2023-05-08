@@ -46,8 +46,9 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
   @override
   Widget build(BuildContext context) {
     /// Get the correct list of reports, can be quarterly or annual
-    final List<FinancialStatement> reports =
-    period.isQuarter ? widget.companyResults.quarters : widget.companyResults.yearReports;
+    final List<FinancialStatement> reports = period.isQuarter
+        ? widget.companyResults.quarters.reversed.toList()
+        : widget.companyResults.yearReports.reversed.toList();
 
     if (reports.isEmpty) {
       return const Center(
@@ -71,17 +72,12 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
         height: 1,
         thickness: 0,
       ),
-      leftHandSideColBackgroundColor: Theme
-          .of(context)
-          .canvasColor,
-      rightHandSideColBackgroundColor: Theme
-          .of(context)
-          .canvasColor,
+      leftHandSideColBackgroundColor: Theme.of(context).canvasColor,
+      rightHandSideColBackgroundColor: Theme.of(context).canvasColor,
     );
   }
 
-  List<Widget> _getTitleWidget(List<FinancialStatement> reports) =>
-      [
+  List<Widget> _getTitleWidget(List<FinancialStatement> reports) => [
         SizedBox(
           width: 100,
           height: 56,
@@ -99,13 +95,12 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
           ),
         ),
         ...reports.map(
-              (FinancialStatement report) =>
+          (FinancialStatement report) =>
               _getTitleItemWidget(period.isQuarter ? report.quarterPeriod : report.annualPeriod, 100),
         )
       ];
 
-  Widget _getTitleItemWidget(String label, double width) =>
-      Container(
+  Widget _getTitleItemWidget(String label, double width) => Container(
         width: width,
         height: 56,
         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -128,19 +123,17 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
     );
   }
 
-  Widget _generateRightHandSideColumnRow(List<FinancialStatement> reports, int index) =>
-      Row(
+  Widget _generateRightHandSideColumnRow(List<FinancialStatement> reports, int index) => Row(
         children: reports
             .map(
-              (report) =>
-              Container(
+              (report) => Container(
                 width: 100,
                 height: 52,
                 padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                 alignment: Alignment.centerLeft,
                 child: Text(getDataForReport(report, index)),
               ),
-        )
+            )
             .toList(),
       );
 

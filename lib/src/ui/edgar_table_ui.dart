@@ -5,10 +5,20 @@ import 'package:flutter_edgar_sec/src/ui/company_table_ui.dart';
 
 /// Widget to load a table directly from the symbol
 class EdgarTableUI extends StatefulWidget {
+
+  /// Symbol to load the table
   final String symbol;
+
+  /// Width of the table
+  final double width;
+
+  /// Height of the table
+  final double height;
 
   const EdgarTableUI({
     required this.symbol,
+    this.height = 400,
+    this.width = 500,
     super.key,
   });
 
@@ -45,5 +55,7 @@ class _EdgarTableUIState extends State<EdgarTableUI> {
       )
           : CompanyTableUI(
         companyResults: _companyResults,
+        height: widget.height,
+        width: widget.width,
       );
 }

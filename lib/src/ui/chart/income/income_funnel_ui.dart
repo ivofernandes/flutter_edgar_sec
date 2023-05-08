@@ -54,12 +54,6 @@ class _IncomeFunnelUIState extends State<IncomeFunnelUI> {
   @override
   void initState() {
     super.initState();
-
-    if (widget.period.isQuarter) {
-      selectedStatementIndex = widget.companyResults.quarters.length - 1;
-    } else {
-      selectedStatementIndex = widget.companyResults.yearlyResults.length - 1;
-    }
   }
 
   @override
@@ -100,18 +94,18 @@ class _IncomeFunnelUIState extends State<IncomeFunnelUI> {
 
   List<String> getStatements() {
     if (widget.period.isQuarter) {
-      return widget.companyResults.quarters.map((e) => e.quarterPeriod).toList();
+      return widget.companyResults.quarters.map((e) => e.quarterPeriod).toList().reversed.toList();
     } else {
-      return widget.companyResults.yearReports.map((e) => e.year.toString()).toList();
+      return widget.companyResults.yearReports.map((e) => e.year.toString()).toList().reversed.toList();
     }
   }
 
   /// Returns the current financial statement based on the [period] parameter
   FinancialStatement getCurrentStatement() {
     if (widget.period.isQuarter) {
-      return widget.companyResults.quarters[selectedStatementIndex];
+      return widget.companyResults.quarters.reversed.toList()[selectedStatementIndex];
     } else {
-      return widget.companyResults.yearReports[selectedStatementIndex];
+      return widget.companyResults.yearReports.reversed.toList()[selectedStatementIndex];
     }
   }
 }

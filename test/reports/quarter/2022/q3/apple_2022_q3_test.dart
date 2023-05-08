@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   /// Come to this url and select the quarterly period to
   /// https://seekingalpha.com/symbol/AAPL/income-statement
-  test('Test 2022-Q2 apple values for income statement', () async {
+  test('Test 2022-Q3 apple values for income statement', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
 
     assert(results.yearlyResults.isNotEmpty);
