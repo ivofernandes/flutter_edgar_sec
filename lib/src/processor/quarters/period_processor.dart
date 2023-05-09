@@ -23,26 +23,26 @@ class PeriodProcessor {
     final Map<String, FinancialStatement> annuals = {};
 
     final quartersRawData = <Map<String, dynamic>>[];
-    for (final row in referenceUnits) {
-      if (row is! Map<String, dynamic>) {
+    for (final period in referenceUnits) {
+      if (period is! Map<String, dynamic>) {
         continue;
       }
 
-      // Ignore 10-Q that have more than 3 months
-      if (!BaseProcessor.validPeriod(row)) {
+      // Validate if the reports have the right amount of time between start and end dates
+      if (!BaseProcessor.validPeriod(period)) {
         continue;
       }
 
-      final startDateString = row['start'] as String;
-      final endDateString = row['end'] as String;
-      final filedDateString = row['filed'] as String;
+      final startDateString = period['start'] as String;
+      final endDateString = period['end'] as String;
+      final filedDateString = period['filed'] as String;
 
       // Parse date from string with format yyyy-MM-dd
       final DateTime endDate = DateTime.parse(endDateString);
       final DateTime startDate = DateTime.parse(startDateString);
       final filedDate = DateTime.parse(filedDateString);
 
-      if (row['form'] == '10-Q') {
+      if (BaseProcessor.calculateIsQuarterReport(period)) {
         final financialStatement = FinancialStatement(
           startDate: startDate,
           endDate: endDate,
@@ -54,8 +54,8 @@ class PeriodProcessor {
         );
 
         quarters[endDateString] = financialStatement;
-        quartersRawData.add(row);
-      } else if (row['form'] == '10-K') {
+        quartersRawData.add(period);
+      } else if (BaseProcessor.calculateIsAnnualReport(period)) {
         final financialStatement = FinancialStatement(
           startDate: startDate,
           endDate: endDate,
@@ -73,14 +73,14 @@ class PeriodProcessor {
 
     // these should be changed to quarters and annual
     // so we can iterate only 1 time
-    IncomeStatementProcessor.process(facts, quarters, '10-Q');
-    BalanceSheetProcessor.process(facts, quarters, '10-Q');
-    CashFlowProcessor.process(facts, quarters, '10-Q');
+    IncomeStatementProcessor.process(facts, quarters, FinancialStatementPeriod.quarterly);
+    BalanceSheetProcessor.process(facts, quarters, FinancialStatementPeriod.quarterly);
+    CashFlowProcessor.process(facts, quarters, FinancialStatementPeriod.quarterly);
 
     // Process the annuals
-    IncomeStatementProcessor.process(facts, annuals, '10-K');
-    BalanceSheetProcessor.process(facts, annuals, '10-K');
-    CashFlowProcessor.process(facts, annuals, '10-K');
+    IncomeStatementProcessor.process(facts, annuals, FinancialStatementPeriod.annual);
+    BalanceSheetProcessor.process(facts, annuals, FinancialStatementPeriod.annual);
+    CashFlowProcessor.process(facts, annuals, FinancialStatementPeriod.annual);
 
     // might not be needed
     //final Map<String, FinancialStatement> annual = YearProcessor.process(facts);

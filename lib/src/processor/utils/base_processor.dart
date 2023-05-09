@@ -1,3 +1,4 @@
+import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:intl/intl.dart';
 
@@ -8,7 +9,7 @@ class BaseProcessor {
     Map<String, dynamic> facts,
     String field,
     Map<String, FinancialStatement> index, {
-    String typeOfForm = '10-Q',
+    FinancialStatementPeriod typeOfForm = FinancialStatementPeriod.quarterly,
   }) {
     // Ignore not mapped fields
     if (!facts.containsKey(field)) {
@@ -45,16 +46,23 @@ class BaseProcessor {
   static List<Map<String, dynamic>> _getValidPeriods(
     List<dynamic> units,
     Map<String, FinancialStatement> index,
-    String typeOfForm,
+    FinancialStatementPeriod typeOfForm,
   ) {
     final List<Map<String, dynamic>> periods = [];
 
     for (final period in units) {
-      if (period is! Map) {
+      if (period is! Map<String, dynamic>) {
         continue;
       }
 
-      if (period['form'] == typeOfForm) {
+      bool isValidPeriod = false;
+      if (typeOfForm == FinancialStatementPeriod.quarterly) {
+        isValidPeriod = calculateIsQuarterReport(period);
+      } else if (typeOfForm == FinancialStatementPeriod.annual) {
+        isValidPeriod = calculateIsAnnualReport(period);
+      }
+
+      if (isValidPeriod) {
         final String endDateString = period['end'] as String;
 
         // Ignore not mapped fields
@@ -62,7 +70,7 @@ class BaseProcessor {
           continue;
         }
 
-        if (!validPeriod(period as Map<String, dynamic>)) {
+        if (!validPeriod(period)) {
           continue;
         }
 
@@ -113,19 +121,37 @@ class BaseProcessor {
 
     final bool isQuarter = days > 20 && days < 100;
     final bool isYear = days > 300 && days < 400;
-    final bool is10Q = period['form'] == '10-Q';
-    final bool is10K = period['form'] == '10-K';
+
+    // Report type
+    final bool isQuarterReport = calculateIsQuarterReport(period);
+    final bool isAnnualReport = calculateIsAnnualReport(period);
 
     // Invalidate 10-Q that are not 3 months
-    if (is10Q && !isQuarter) {
+    if (isQuarterReport && !isQuarter) {
       return false;
     }
 
-    if (is10K && !isYear) {
+    if (isAnnualReport && !isYear) {
       // Invalidate 10-K that are not 12 months
       return false;
     }
 
     return true;
+  }
+
+  /// Calculate if the report is a quarter report
+  static bool calculateIsQuarterReport(Map<String, dynamic> period) {
+    final bool is10Q = period['form'] == '10-Q';
+    final bool is6K = period['form'] == '6-K';
+    return is10Q || is6K;
+  }
+
+  /// Calculate if the report is an annual report
+  static bool calculateIsAnnualReport(Map<String, dynamic> period) {
+    final bool is10K = period['form'] == '10-K';
+    final bool is40F = period['form'] == '40-F';
+    final bool is20F = period['form'] == '20-F';
+
+    return is10K || is20F || is40F;
   }
 }

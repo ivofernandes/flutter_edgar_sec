@@ -1,3 +1,4 @@
+import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
@@ -37,7 +38,7 @@ class CashFlowProcessor {
   static void process(
     Map<String, dynamic> facts,
     Map<String, FinancialStatement> index,
-    String typeOfForm,
+    FinancialStatementPeriod typeOfForm,
   ) {
     // Auxiliar code to find the fields that are not mapped
     final List<String> factsKeys = facts.keys.toList();
@@ -49,7 +50,7 @@ class CashFlowProcessor {
         final double value = (period['val'] as num).toDouble();
         final valueBillions = value.billions;
 
-        if (typeOfForm == '10-K') {
+        if (BaseProcessor.calculateIsAnnualReport(period)) {
           final DateTime endDate = DateTime.parse(endDateString);
           final bool matchField = field.toLowerCase().contains('repurchase') || field.toLowerCase().contains('stock');
           final bool matchDate = endDate.year == 2021;

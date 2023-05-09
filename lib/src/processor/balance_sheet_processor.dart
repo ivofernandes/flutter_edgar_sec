@@ -202,7 +202,7 @@ class BalanceSheetProcessor {
   static void process(
     Map<String, dynamic> facts,
     Map<String, FinancialStatement> index,
-    String typeOfForm,
+    FinancialStatementPeriod typeOfForm,
   ) {
     for (final field in supportedFields) {
       // Filter the quarters, i.e. rows that are 10-Q

@@ -1,4 +1,5 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
+import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/debug_fields.dart';
 import 'package:flutter_edgar_sec/src/utils/app_logger.dart';
@@ -73,7 +74,7 @@ class IncomeStatementProcessor {
   static void process(
     Map<String, dynamic> facts,
     Map<String, FinancialStatement> index,
-    String typeOfForm,
+    FinancialStatementPeriod typeOfForm,
   ) {
     // Reset the processed fields
     processed = {};
@@ -89,11 +90,7 @@ class IncomeStatementProcessor {
         final double value = (period['val'] as num).toDouble();
         final valueBillions = value.billions;
 
-        if (typeOfForm == '10-K') {
-          if (field == 75.111) {
-            AppLogger().debug('Found $field @ $endDateString = $valueBillions');
-          }
-
+        if (BaseProcessor.calculateIsAnnualReport(period)) {
           final DateTime endDate = DateTime.parse(endDateString);
           final bool matchField = field.toLowerCase().contains('costof');
           final bool matchDate = endDate.year == 2022;

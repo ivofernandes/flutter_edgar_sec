@@ -1,7 +1,8 @@
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_mixins/cash_flow_extrapolate.dart';
+import 'package:flutter_edgar_sec/src/model/financials/cash_flow_mixins/cash_flow_values.dart';
 import 'package:flutter_edgar_sec/src/utils/number_utils.dart';
 
-class CashFlowStatement {
+class CashFlowStatement with CashFlowValues {
   static List<String> labels = [
     'Buybacks',
     'Dividends',
@@ -19,10 +20,12 @@ class CashFlowStatement {
 
   CashFlowStatement();
 
-  factory CashFlowStatement.extrapolate(CashFlowStatement fullYear,
-      CashFlowStatement q1,
-      CashFlowStatement q2,
-      CashFlowStatement q3,) {
+  factory CashFlowStatement.extrapolate(
+    CashFlowStatement fullYear,
+    CashFlowStatement q1,
+    CashFlowStatement q2,
+    CashFlowStatement q3,
+  ) {
     final CashFlowStatement cashFlowStatement = CashFlowStatement();
 
     CashFlowExtrapolate.fillMissingQuarter(cashFlowStatement, fullYear, q1, q2, q3);
@@ -33,17 +36,17 @@ class CashFlowStatement {
   double get totalShareholderReturn => buyback + dividends;
 
   String getValueForIndex(int index) {
-    final double value = getDoubleValueForIndex(index);
-    return value.reportFormat;
+    final double? value = getDoubleValueForIndex(index);
+    return value?.reportFormat ?? '';
   }
 
-  double getDoubleValueForIndex(int index) {
+  double? getDoubleValueForIndex(int index) {
     final String name = labels[index];
 
     return getValueForLabel(name);
   }
 
-  double getValueForLabel(String name) {
+  double? getValueForLabel(String name) {
     switch (name) {
       case 'Buybacks':
         return buyback;
@@ -70,41 +73,7 @@ class CashFlowStatement {
       case 'Sell Securities':
         return sellMarketableSecurities;
       default:
-        return 0;
+        return null;
     }
   }
-
-  /// Operations
-  double accumulatedDepreciation = 0;
-  double shareBasedCompensation = 0;
-  double depreciationAndAmortization = 0;
-  double deferredIncomeTax = 0;
-  double cashFromOperations = 0;
-
-  /// Financing
-  double buyback = 0;
-  double dividends = 0;
-  double cashFromFinancing = 0;
-
-  /// Investing
-  double capitalExpenditures = 0;
-  double buyMarketableSecurities = 0;
-  double sellMarketableSecurities = 0;
-  double cashFromInvesting = 0;
-
-  double get freeCashFlow => cashFromOperations - capitalExpenditures;
-
-  @override
-  String toString() => '''
-  buyBacks: $buyback
-  dividends: $dividends
-  shareBasedCompensation: $shareBasedCompensation
-  accumulatedDepreciation: $accumulatedDepreciation
-  capitalExpenditures: $capitalExpenditures
-  depreciationAndAmortization: $depreciationAndAmortization
-  cashFromOperations: $cashFromOperations
-  cashFromInvesting: $cashFromInvesting
-  cashFromFinancing: $cashFromFinancing
-  deferredIncomeTax: $deferredIncomeTax
-  ''';
 }
