@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/quarters/period_processor.dart';
@@ -32,10 +33,15 @@ class CompanyResults {
     final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
     final Map<String, dynamic> facts = factsNode['us-gaap'] as Map<String, dynamic>;
 
-    final Map<int, YearlyResults> yearlyResults = PeriodProcessor.process(facts);
+    Map<int, YearlyResults> yearlyResults = {};
 
-    YearlyResultsValidator().validate(yearlyResults);
+    try {
+      yearlyResults = PeriodProcessor.process(facts);
 
+      YearlyResultsValidator().validate(yearlyResults);
+    } catch (e) {
+      debugPrint('Error while processing company results: $e');
+    }
     return CompanyResults(
       yearlyResults: yearlyResults,
     );
