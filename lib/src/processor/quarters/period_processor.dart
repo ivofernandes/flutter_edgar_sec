@@ -82,8 +82,11 @@ class PeriodProcessor {
     BalanceSheetProcessor.process(facts, annuals, FinancialStatementPeriod.annual);
     CashFlowProcessor.process(facts, annuals, FinancialStatementPeriod.annual);
 
-    // might not be needed
-    //final Map<String, FinancialStatement> annual = YearProcessor.process(facts);
+    //TODO for balance sheet, we don't need to stay inside the bondaries of the quarter
+    //TODO we can use 6 months or 9 months reports
+
+    //TODO for cash flow sometimes they report 3 months, then 6 months, then 9 months
+    //TODO so we need further computation to get the right values
 
     // Get all the years available
     final Map<int, YearlyResults> yearlyResults = {};
@@ -94,8 +97,8 @@ class PeriodProcessor {
   }
 
   /// Distributes the quarters into the yearly results
-  static void _distributeByQuarter(
-      Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
+  static void _distributeByQuarter(Map<String, FinancialStatement> quarterStatements,
+      Map<int, YearlyResults> yearlyResults) {
     for (final quarterStatement in quarterStatements.values) {
       final int year = quarterStatement.year;
 

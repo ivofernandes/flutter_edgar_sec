@@ -43,5 +43,26 @@ void main() {
 
     final totalAssetsBillions = balanceSheet.totalAssets.billions;
     final totalLiabilitiesBillions = balanceSheet.totalLiabilities.billions;
+    final totalEquityBillions = balanceSheet.equity.billions;
+    final inventoryBillions = balanceSheet.inventory.billions;
+    final currentAssetsBillions = balanceSheet.currentAssets.billions;
+    final currentLiabilitiesBillions = balanceSheet.currentLiabilities.billions;
+
+    assert(totalAssetsBillions == 74.426);
+    assert(totalLiabilitiesBillions == 33.302);
+    assert(inventoryBillions == 10.327);
+    assert(currentAssetsBillions == 35.99);
+    assert(currentLiabilitiesBillions == 24.611);
+  });
+
+  test('Test 2022-Q3 Tesla values for cash flow', () async {
+    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
+
+    assert(results.yearlyResults.isNotEmpty);
+
+    final YearlyResults results2022 = results.yearlyResults[2022]!;
+
+    assert(results2022.q3 != null);
+    final CashFlowStatement cashFlow = results2022.q3!.cashFlowStatement;
   });
 }
