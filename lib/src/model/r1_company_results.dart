@@ -18,11 +18,13 @@ class CompanyResults {
 
   /// Returns a list of all the quarters that are already reported for this company
   List<FinancialStatement> get quarters =>
-      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList()..sort();
+      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList()
+        ..sort();
 
   /// Returns a list of all yearly reports that are already reported for this company
   List<FinancialStatement> get yearReports =>
-      yearlyResults.values.map((e) => e.yearReport).expand((element) => element).toList()..sort();
+      yearlyResults.values.map((e) => e.yearReport).expand((element) => element).toList()
+        ..sort();
 
   const CompanyResults({
     required this.yearlyResults,
@@ -31,7 +33,7 @@ class CompanyResults {
   /// Creates a CompanyResults object from the json object that comes from the SEC
   factory CompanyResults.fromJsonList(Map<String, dynamic> companyFactsJson) {
     final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
-    final Map<String, dynamic> facts = factsNode['us-gaap'] as Map<String, dynamic>;
+    final Map<String, dynamic> facts = _getFacts(factsNode);
 
     Map<int, YearlyResults> yearlyResults = {};
 
@@ -47,7 +49,27 @@ class CompanyResults {
     );
   }
 
-  factory CompanyResults.empty() => const CompanyResults(
+  /// Returns the facts node that has the most data
+  static Map<String, dynamic> _getFacts(Map<String, dynamic> factsNode) {
+    int usGaapCount = 0;
+    int ifrsFullCount = 0;
+
+    if (factsNode.containsKey('us-gaap')) {
+      usGaapCount = (factsNode['us-gaap'] as Map<String, dynamic>).length;
+    }
+    if (factsNode.containsKey('ifrs-full')) {
+      ifrsFullCount = (factsNode['ifrs-full'] as Map<String, dynamic>).length;
+    }
+
+    if (usGaapCount > ifrsFullCount) {
+      return factsNode['us-gaap'] as Map<String, dynamic>;
+    } else {
+      return factsNode['ifrs-full'] as Map<String, dynamic>;
+    }
+  }
+
+  factory CompanyResults.empty() =>
+      const CompanyResults(
         yearlyResults: {},
       );
 
