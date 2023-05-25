@@ -60,4 +60,21 @@ class YearlyResults {
     q4: $q4\n
     fullYear: $fullYear\n
     ''';
+
+  factory YearlyResults.fromJson(Map<String, dynamic> json) => YearlyResults(
+        q1: json['q1'] != null ? FinancialStatement.fromJson(json['q1'] as Map<String, dynamic>) : null,
+        q2: json['q2'] != null ? FinancialStatement.fromJson(json['q2'] as Map<String, dynamic>) : null,
+        q3: json['q3'] != null ? FinancialStatement.fromJson(json['q3'] as Map<String, dynamic>) : null,
+        q4: json['q4'] != null ? FinancialStatement.fromJson(json['q4'] as Map<String, dynamic>) : null,
+        fullYear:
+            json['fullYear'] != null ? FinancialStatement.fromJson(json['fullYear'] as Map<String, dynamic>) : null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'q1': q1?.toJson(),
+        'q2': q2?.toJson(),
+        'q3': q3?.toJson(),
+        'q4': q4?.toJson(),
+        'fullYear': fullYear?.toJson(),
+      };
 }

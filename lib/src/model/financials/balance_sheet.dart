@@ -176,4 +176,14 @@ class BalanceSheet {
   currentPortionLtDebt: $currentPortionLtDebt,
   unearnedRevenueCurrent: $unearnedRevenueCurrent,
   ''';
+
+  factory BalanceSheet.fromJson(json) {
+    //TODO map values
+    return BalanceSheet();
+  }
+
+  Map<String, dynamic> toJson() {
+    //TODO map values
+    return {};
+  }
 }

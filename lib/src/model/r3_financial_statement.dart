@@ -5,7 +5,6 @@ import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart'
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 
 class FinancialStatement implements Comparable<FinancialStatement> {
-
   /// The start date of the period reported
   final DateTime startDate;
 
@@ -63,12 +62,14 @@ class FinancialStatement implements Comparable<FinancialStatement> {
   });
 
   /// If we have a full year report,and just one missing quarter, we can extrapolate the missing quarter report
-  factory FinancialStatement.extrapolate(DateTime startDate,
-      DateTime endDate,
-      FinancialStatement fullYear,
-      FinancialStatement q1,
-      FinancialStatement q2,
-      FinancialStatement q3,) =>
+  factory FinancialStatement.extrapolate(
+    DateTime startDate,
+    DateTime endDate,
+    FinancialStatement fullYear,
+    FinancialStatement q1,
+    FinancialStatement q2,
+    FinancialStatement q3,
+  ) =>
       FinancialStatement(
         startDate: startDate,
         endDate: endDate,
@@ -121,4 +122,25 @@ class FinancialStatement implements Comparable<FinancialStatement> {
 
   @override
   int compareTo(FinancialStatement other) => endDate.compareTo(other.endDate);
+
+  factory FinancialStatement.fromJson(Map<String, dynamic> json) => FinancialStatement(
+        startDate: DateTime.parse(json['startDate'] as String),
+        endDate: DateTime.parse(json['endDate'] as String),
+        filedDate: DateTime.parse(json['filedDate'] as String),
+        period: FinancialStatementPeriod.values
+            .firstWhere((e) => e.toString() == 'FinancialStatementPeriod.${json['period'] as String}'),
+        incomeStatement: IncomeStatement.fromJson(json['incomeStatement']),
+        balanceSheet: BalanceSheet.fromJson(json['balanceSheet']),
+        cashFlowStatement: CashFlowStatement.fromJson(json['cashFlowStatement']),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'startDate': startDate.toIso8601String(),
+        'endDate': endDate.toIso8601String(),
+        'filedDate': filedDate.toIso8601String(),
+        'period': period.toString().split('.')[1],
+        'incomeStatement': incomeStatement.toJson(),
+        'balanceSheet': balanceSheet.toJson(),
+        'cashFlowStatement': cashFlowStatement.toJson(),
+      };
 }

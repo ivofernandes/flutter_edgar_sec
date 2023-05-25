@@ -76,4 +76,14 @@ class CashFlowStatement with CashFlowValues {
         return null;
     }
   }
+
+  factory CashFlowStatement.fromJson(json) {
+    //TODO map values
+    return CashFlowStatement();
+  }
+
+  Map<String, dynamic> toJson() {
+    //TODO map values
+    return {};
+  }
 }

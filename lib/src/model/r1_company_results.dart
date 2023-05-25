@@ -73,15 +73,24 @@ class CompanyResults {
   /// Creates a CompanyResults object from the json object that comes from the storage
   /// This method is used to create a CompanyResults object from the storage
   factory CompanyResults.fromJsonStorage(Map<String, dynamic> jsonData) {
-    //TODO: implement this storage retrieval
-    return CompanyResults.empty();
+    final Map<int, YearlyResults> yearlyResults = (jsonData['yearlyResults'] as Map<String, dynamic>).map(
+      (key, value) => MapEntry(
+        int.parse(key),
+        YearlyResults.fromJson(value as Map<String, dynamic>),
+      ),
+    );
+
+    return CompanyResults(yearlyResults: yearlyResults);
   }
 
   /// Returns a json object that can be stored in the storage
   /// This method is used to create a json object that can be stored in the storage
   Map<String, dynamic> toJson() {
-    //TODO implement this storage creation
-    return {};
+    final Map<String, dynamic> jsonData = {};
+
+    jsonData['yearlyResults'] = yearlyResults.map((key, value) => MapEntry(key.toString(), value.toJson()));
+
+    return jsonData;
   }
 
   @override

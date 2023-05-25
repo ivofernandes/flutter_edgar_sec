@@ -113,4 +113,14 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
 
     return incomeStatement;
   }
+
+  factory IncomeStatement.fromJson(json) {
+    //TODO map values
+    return IncomeStatement();
+  }
+
+  Map<String, dynamic> toJson() {
+    //TODO map values
+    return {};
+  }
 }
