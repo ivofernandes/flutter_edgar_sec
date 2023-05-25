@@ -18,13 +18,11 @@ class CompanyResults {
 
   /// Returns a list of all the quarters that are already reported for this company
   List<FinancialStatement> get quarters =>
-      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList()
-        ..sort();
+      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList()..sort();
 
   /// Returns a list of all yearly reports that are already reported for this company
   List<FinancialStatement> get yearReports =>
-      yearlyResults.values.map((e) => e.yearReport).expand((element) => element).toList()
-        ..sort();
+      yearlyResults.values.map((e) => e.yearReport).expand((element) => element).toList()..sort();
 
   const CompanyResults({
     required this.yearlyResults,
@@ -68,10 +66,23 @@ class CompanyResults {
     }
   }
 
-  factory CompanyResults.empty() =>
-      const CompanyResults(
+  factory CompanyResults.empty() => const CompanyResults(
         yearlyResults: {},
       );
+
+  /// Creates a CompanyResults object from the json object that comes from the storage
+  /// This method is used to create a CompanyResults object from the storage
+  factory CompanyResults.fromJsonStorage(Map<String, dynamic> jsonData) {
+    //TODO: implement this storage retrieval
+    return CompanyResults.empty();
+  }
+
+  /// Returns a json object that can be stored in the storage
+  /// This method is used to create a json object that can be stored in the storage
+  Map<String, dynamic> toJson() {
+    //TODO implement this storage creation
+    return {};
+  }
 
   @override
   String toString() {
