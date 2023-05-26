@@ -177,7 +177,7 @@ class BalanceSheet {
   unearnedRevenueCurrent: $unearnedRevenueCurrent,
   ''';
 
-  factory BalanceSheet.fromJson(json) {
+  factory BalanceSheet.fromJson(Map<String, dynamic> json) {
     //TODO map values
     return BalanceSheet();
   }

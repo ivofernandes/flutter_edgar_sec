@@ -77,7 +77,7 @@ class CashFlowStatement with CashFlowValues {
     }
   }
 
-  factory CashFlowStatement.fromJson(json) {
+  factory CashFlowStatement.fromJson(Map<String, dynamic> json) {
     //TODO map values
     return CashFlowStatement();
   }

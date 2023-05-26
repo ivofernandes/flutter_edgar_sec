@@ -114,13 +114,38 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
     return incomeStatement;
   }
 
-  factory IncomeStatement.fromJson(json) {
-    //TODO map values
-    return IncomeStatement();
-  }
+  factory IncomeStatement.fromJson(Map<String, dynamic> json) => IncomeStatement()
+    ..revenues = json['revenues'] as double
+    ..costOfRevenues = json['costOfRevenues'] as double
+    ..grossProfit = json['grossProfit'] as double
+    ..researchAndDevelopmentExpenses = json['researchAndDevelopmentExpenses'] as double
+    ..generalAndAdministrativeExpenses = json['generalAndAdministrativeExpenses'] as double
+    ..operatingIncome = json['operatingIncome'] as double
+    ..foreignCurrencyExchange = json['foreignCurrencyExchange'] as double
+    ..interestExpenses = json['interestExpenses'] as double
+    ..otherNonOperatingIncomeExpense = json['otherNonOperatingIncomeExpense'] as double
+    ..incomeTaxExpense = json['incomeTaxExpense'] as double
+    ..netIncome = json['netIncome'] as double
+    ..eps = json['eps'] as double
+    ..epsDiluted = json['epsDiluted'] as double
+    ..shares = json['shares'] as double
+    ..sharesDiluted = json['sharesDiluted'] as double;
 
-  Map<String, dynamic> toJson() {
-    //TODO map values
-    return {};
-  }
+  Map<String, dynamic> toJson() => {
+        'revenues': revenues,
+        'costOfRevenues': costOfRevenues,
+        'grossProfit': grossProfit,
+        'researchAndDevelopmentExpenses': researchAndDevelopmentExpenses,
+        'generalAndAdministrativeExpenses': generalAndAdministrativeExpenses,
+        'operatingIncome': operatingIncome,
+        'foreignCurrencyExchange': foreignCurrencyExchange,
+        'interestExpenses': interestExpenses,
+        'otherNonOperatingIncomeExpense': otherNonOperatingIncomeExpense,
+        'incomeTaxExpense': incomeTaxExpense,
+        'netIncome': netIncome,
+        'eps': eps,
+        'epsDiluted': epsDiluted,
+        'shares': shares,
+        'sharesDiluted': sharesDiluted,
+      };
 }

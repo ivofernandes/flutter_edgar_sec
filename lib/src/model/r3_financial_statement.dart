@@ -129,9 +129,9 @@ class FinancialStatement implements Comparable<FinancialStatement> {
         filedDate: DateTime.parse(json['filedDate'] as String),
         period: FinancialStatementPeriod.values
             .firstWhere((e) => e.toString() == 'FinancialStatementPeriod.${json['period'] as String}'),
-        incomeStatement: IncomeStatement.fromJson(json['incomeStatement']),
-        balanceSheet: BalanceSheet.fromJson(json['balanceSheet']),
-        cashFlowStatement: CashFlowStatement.fromJson(json['cashFlowStatement']),
+        incomeStatement: IncomeStatement.fromJson(json['incomeStatement'] as Map<String, dynamic>),
+        balanceSheet: BalanceSheet.fromJson(json['balanceSheet'] as Map<String, dynamic>),
+        cashFlowStatement: CashFlowStatement.fromJson(json['cashFlowStatement'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toJson() => {
