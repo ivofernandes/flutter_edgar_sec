@@ -7,7 +7,6 @@ void main() {
   test('Test 2022 TSMC values for income statement', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('TSM');
 
-    // Sadly, is returning empty for now
-    assert(results.years.isEmpty);
+    assert(results.years.isNotEmpty);
   });
 }

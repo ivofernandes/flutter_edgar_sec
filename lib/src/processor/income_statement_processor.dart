@@ -42,6 +42,7 @@ class IncomeStatementProcessor {
     ...costOfRevenueFields,
     ...generalAndAdministrativeFields,
     'NetIncomeLoss',
+    'ProfitLoss',
     'OperatingIncomeLoss',
     'ResearchAndDevelopmentExpense',
     'GrossProfit',
@@ -96,7 +97,7 @@ class IncomeStatementProcessor {
           final bool matchDate = endDate.year == 2022;
           final bool match = matchField && matchDate;
           if (match) {
-            AppLogger().debug('Found $field @ $endDateString = $valueBillions');
+            //AppLogger().debug('Found $field @ $endDateString = $valueBillions');
 
             final financialStatement = index[endDateString]!;
             final incomeStatement = financialStatement.incomeStatement;
@@ -112,9 +113,6 @@ class IncomeStatementProcessor {
       // Filter the quarters or the annuals, i.e. rows that are 10-Q or 10-K
       final periods = BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
 
-      if (field == 'WeightedAverageNumberOfSharesOutstandingBasic') {
-        AppLogger().debug('Found $field');
-      }
       // Map the values for each report
       for (final period in periods) {
         final endDateString = period['end'];
@@ -153,7 +151,7 @@ class IncomeStatementProcessor {
     if (revenueFields.contains(field)) {
       final endDateString = period['end'] as String;
       if (endDateString == '2021-12-31') {
-        AppLogger().debug('Found REV $field @ $endDateString = ${value.billions}');
+        //AppLogger().debug('Found REV $field @ $endDateString = ${value.billions}');
       }
       incomeStatement.revenues = value;
     } else if (costOfRevenueFields.contains(field)) {
@@ -161,13 +159,18 @@ class IncomeStatementProcessor {
     } else if (generalAndAdministrativeFields.contains(field) && !alreadyProcessed) {
       final endDateString = period['end'] as String;
       if (endDateString == '2021-12-31') {
-        AppLogger().debug('Found GAS $field @ $endDateString = ${value.billions}');
+        //AppLogger().debug('Found GAS $field @ $endDateString = ${value.billions}');
       }
       incomeStatement.generalAndAdministrativeExpenses += value;
     } else {
       switch (field) {
         case 'NetIncomeLoss':
           incomeStatement.netIncome = value;
+          break;
+        case 'ProfitLoss':
+          if (incomeStatement.netIncome == 0) {
+            incomeStatement.netIncome = value;
+          }
           break;
         case 'OperatingIncomeLoss':
           incomeStatement.operatingIncome = value;

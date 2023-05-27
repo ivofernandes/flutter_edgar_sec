@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -8,7 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('Test 2022-Q4 Shopify values for income statement', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('SHOP');
-    debugPrint(results.toString());
-    //TODO not working for foreign companies now
+
+    assert(results.yearlyResults.isNotEmpty);
+    //TODO add values
   });
 }

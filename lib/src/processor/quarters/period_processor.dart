@@ -13,7 +13,19 @@ import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 class PeriodProcessor {
   /// Returns a map of quarters and a map of annual financial statements for a given symbol
   static Map<int, YearlyResults> process(Map<String, dynamic> facts) {
-    const String referenceField = 'NetIncomeLoss';
+    const List<String> referenceFields = [
+      'NetIncomeLoss',
+      'ProfitLoss',
+    ];
+
+    String referenceField = referenceFields.first;
+    for (int i = 0; i < referenceFields.length; i++) {
+      if (facts.containsKey(referenceFields[i])) {
+        referenceField = referenceFields[i];
+        break;
+      }
+    }
+
     final Map<String, dynamic> referenceFieldMap = facts[referenceField] as Map<String, dynamic>;
     final Map<String, dynamic> coinsMap = referenceFieldMap['units'] as Map<String, dynamic>;
     final referenceUnits = coinsMap['USD'] as List;
@@ -97,8 +109,8 @@ class PeriodProcessor {
   }
 
   /// Distributes the quarters into the yearly results
-  static void _distributeByQuarter(Map<String, FinancialStatement> quarterStatements,
-      Map<int, YearlyResults> yearlyResults) {
+  static void _distributeByQuarter(
+      Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
     for (final quarterStatement in quarterStatements.values) {
       final int year = quarterStatement.year;
 

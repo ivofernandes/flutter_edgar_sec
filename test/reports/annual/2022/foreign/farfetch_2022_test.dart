@@ -7,7 +7,19 @@ void main() {
   test('Test 2022 Farfetch values for income statement', () async {
     final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('FTCH');
 
-    // Sadly, is returning empty for now
-    assert(results.years.isEmpty);
+    assert(results.years.isNotEmpty);
+
+    final YearlyResults results2022 = results.yearlyResults[2022]!;
+
+    assert(results2022.fullYear != null);
+
+    final IncomeStatement income2022 = results2022.fullYear!.incomeStatement;
+
+    final revenueBillions = income2022.revenues.billions;
+    final operatingIncomeBillions = income2022.operatingIncome.billions;
+    final netIncomeBillions = income2022.netIncome.billions;
+    final costOfRevenueBillions = income2022.costOfRevenues.billions;
+
+    assert(netIncomeBillions == 0.344855);
   });
 }
