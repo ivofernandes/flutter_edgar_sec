@@ -177,13 +177,60 @@ class BalanceSheet {
   unearnedRevenueCurrent: $unearnedRevenueCurrent,
   ''';
 
-  factory BalanceSheet.fromJson(Map<String, dynamic> json) {
-    //TODO map values
-    return BalanceSheet();
-  }
+  factory BalanceSheet.fromJson(Map<String, dynamic> json) => BalanceSheet()
+    ..equity = json['equity'] as double
+    ..cashAndCashEquivalents = json['cashAndCashEquivalents'] as double
+    ..shortTermInvestments = json['shortTermInvestments'] as double
+    ..tradingAssetSecurities = json['tradingAssetSecurities'] as double
+    ..accountsReceivable = json['accountsReceivable'] as double
+    ..otherReceivables = json['otherReceivables'] as double
+    ..inventory = json['inventory'] as double
+    ..deferredTaxAssets = json['deferredTaxAssets'] as double
+    ..restrictedCash = json['restrictedCash'] as double
+    ..otherCurrentAssets = json['otherCurrentAssets'] as double
+    ..currentAssets = json['currentAssets'] as double
+    ..grossPropertyPlantEquipment = json['grossPropertyPlantEquipment'] as double
+    ..accumulatedDepreciation = json['accumulatedDepreciation'] as double
+    ..netPropertyPlantEquipment = json['netPropertyPlantEquipment'] as double
+    ..longTermInvestments = json['longTermInvestments'] as double
+    ..goodwill = json['goodwill'] as double
+    ..otherIntangibles = json['otherIntangibles'] as double
+    ..otherLongTermAssets = json['otherLongTermAssets'] as double
+    ..totalAssets = json['totalAssets'] as double
+    ..accountsPayable = json['accountsPayable'] as double
+    ..accruedExpenses = json['accruedExpenses'] as double
+    ..shortTermBorrowings = json['shortTermBorrowings'] as double
+    ..currentPortionLtDebt = json['currentPortionLtDebt'] as double
+    ..unearnedRevenueCurrent = json['unearnedRevenueCurrent'] as double
+    ..currentLiabilities = json['currentLiabilities'] as double
+    ..totalLiabilities = json['totalLiabilities'] as double;
 
-  Map<String, dynamic> toJson() {
-    //TODO map values
-    return {};
-  }
+  Map<String, dynamic> toJson() => {
+        'equity': equity,
+        'cashAndCashEquivalents': cashAndCashEquivalents,
+        'shortTermInvestments': shortTermInvestments,
+        'tradingAssetSecurities': tradingAssetSecurities,
+        'accountsReceivable': accountsReceivable,
+        'otherReceivables': otherReceivables,
+        'inventory': inventory,
+        'deferredTaxAssets': deferredTaxAssets,
+        'restrictedCash': restrictedCash,
+        'otherCurrentAssets': otherCurrentAssets,
+        'currentAssets': currentAssets,
+        'grossPropertyPlantEquipment': grossPropertyPlantEquipment,
+        'accumulatedDepreciation': accumulatedDepreciation,
+        'netPropertyPlantEquipment': netPropertyPlantEquipment,
+        'longTermInvestments': longTermInvestments,
+        'goodwill': goodwill,
+        'otherIntangibles': otherIntangibles,
+        'otherLongTermAssets': otherLongTermAssets,
+        'totalAssets': totalAssets,
+        'accountsPayable': accountsPayable,
+        'accruedExpenses': accruedExpenses,
+        'shortTermBorrowings': shortTermBorrowings,
+        'currentPortionLtDebt': currentPortionLtDebt,
+        'unearnedRevenueCurrent': unearnedRevenueCurrent,
+        'currentLiabilities': currentLiabilities,
+        'totalLiabilities': totalLiabilities,
+      };
 }
