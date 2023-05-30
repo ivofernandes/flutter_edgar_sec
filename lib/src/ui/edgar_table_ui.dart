@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_edgar_sec/src/edgar_sec_repository.dart';
 import 'package:flutter_edgar_sec/src/edgar_sec_service.dart';
 import 'package:flutter_edgar_sec/src/model/r1_company_results.dart';
 import 'package:flutter_edgar_sec/src/ui/company_table_ui.dart';
 
 /// Widget to load a table directly from the symbol
 class EdgarTableUI extends StatefulWidget {
-
   /// Symbol to load the table
   final String symbol;
 
@@ -15,10 +15,14 @@ class EdgarTableUI extends StatefulWidget {
   /// Height of the table
   final double height;
 
+  /// Use cache
+  final bool useCache;
+
   const EdgarTableUI({
     required this.symbol,
     this.height = 400,
     this.width = 500,
+    this.useCache = false,
     super.key,
   });
 
@@ -37,7 +41,11 @@ class _EdgarTableUIState extends State<EdgarTableUI> {
   }
 
   Future<void> load() async {
-    _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(widget.symbol);
+    if (widget.useCache) {
+      _companyResults = await EdgarSecRepository.getFinancialStatementsForSymbol(symbol: widget.symbol);
+    } else {
+      _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(widget.symbol);
+    }
     loading = false;
 
     if (!mounted) {
@@ -48,14 +56,13 @@ class _EdgarTableUIState extends State<EdgarTableUI> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      loading
-          ? const Center(
-        child: CircularProgressIndicator(),
-      )
-          : CompanyTableUI(
-        companyResults: _companyResults,
-        height: widget.height,
-        width: widget.width,
-      );
+  Widget build(BuildContext context) => loading
+      ? const Center(
+          child: CircularProgressIndicator(),
+        )
+      : CompanyTableUI(
+          companyResults: _companyResults,
+          height: widget.height,
+          width: widget.width,
+        );
 }

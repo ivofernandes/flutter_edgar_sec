@@ -27,6 +27,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _textEditingController = TextEditingController(text: 'AAPL');
+  bool useRepository = false;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -51,11 +52,25 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextField(
-                  controller: _textEditingController,
-                  onSubmitted: (String value) {
-                    setState(() {});
-                  },
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _textEditingController,
+                        onSubmitted: (String value) {
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                    Checkbox(
+                      value: useRepository,
+                      onChanged: (value) {
+                        setState(() {
+                          useRepository = !useRepository;
+                        });
+                      },
+                    ),
+                  ],
                 ),
                 MaterialButton(
                   color: Colors.green,
@@ -69,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: EdgarTableUI(
                     symbol: _textEditingController.text,
                     key: UniqueKey(),
+                    useCache: useRepository,
                   ),
                 ),
               ],
