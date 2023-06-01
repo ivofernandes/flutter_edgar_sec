@@ -19,6 +19,7 @@ class IncomeStatementProcessor {
     'TotalRevenuesAndOtherIncome',
     'RevenueFromContractWithCustomerIncludingAssessedTax',
     'Revenues',
+    'Revenue'
   };
 
   // Cost of revenue fields
@@ -145,8 +146,6 @@ class IncomeStatementProcessor {
       alreadyProcessed = true;
     }
 
-    processed.add(key);
-
     // Process the field
     if (revenueFields.contains(field)) {
       final endDateString = period['end'] as String;
@@ -158,8 +157,11 @@ class IncomeStatementProcessor {
       incomeStatement.costOfRevenues = value;
     } else if (generalAndAdministrativeFields.contains(field) && !alreadyProcessed) {
       final endDateString = period['end'] as String;
-      if (endDateString == '2021-12-31') {
-        //AppLogger().debug('Found GAS $field @ $endDateString = ${value.billions}');
+      final List<String> fieldParts = key.split('_');
+
+      final b = value.billions;
+      if (processed.contains('SellingGeneralAndAdministrativeExpense_${fieldParts[1]}_${fieldParts[2]}')) {
+        return;
       }
       incomeStatement.generalAndAdministrativeExpenses += value;
     } else {
@@ -226,5 +228,7 @@ class IncomeStatementProcessor {
           break;
       }
     }
+
+    processed.add(key);
   }
 }
