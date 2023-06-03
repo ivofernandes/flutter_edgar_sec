@@ -44,6 +44,7 @@ class IncomeStatementProcessor {
     ...generalAndAdministrativeFields,
     'NetIncomeLoss',
     'ProfitLoss',
+    'ProfitLossFromOperatingActivities',
     'OperatingIncomeLoss',
     'ResearchAndDevelopmentExpense',
     'GrossProfit',
@@ -59,7 +60,10 @@ class IncomeStatementProcessor {
     'AmortizationOfIntangibleAssets',
     'ForeignCurrencyTransactionGainLossBeforeTax',
     'EarningsPerShareBasic',
+    'DilutedEarningsLossPerShare',
+    'BasicEarningsLossPerShare',
     'EarningsPerShareDiluted',
+    'WeightedAverageShares',
     'WeightedAverageNumberOfSharesOutstandingBasic',
     'WeightedAverageNumberOfSharesIssuedBasic',
     'WeightedAverageNumberOfDilutedSharesOutstanding',
@@ -174,6 +178,7 @@ class IncomeStatementProcessor {
             incomeStatement.netIncome = value;
           }
           break;
+        case 'ProfitLossFromOperatingActivities':
         case 'OperatingIncomeLoss':
           incomeStatement.operatingIncome = value;
           break;
@@ -213,12 +218,15 @@ class IncomeStatementProcessor {
         case 'AmortizationOfIntangibleAssets':
           incomeStatement.amortizationOfIntangibles = value;
           break;
+        case 'BasicEarningsLossPerShare':
         case 'EarningsPerShareBasic':
           incomeStatement.eps = value;
           break;
+        case 'DilutedEarningsLossPerShare':
         case 'EarningsPerShareDiluted':
           incomeStatement.epsDiluted = value;
           break;
+        case 'WeightedAverageShares':
         case 'WeightedAverageNumberOfSharesOutstandingBasic':
         case 'WeightedAverageNumberOfSharesIssuedBasic':
           incomeStatement.shares = value;

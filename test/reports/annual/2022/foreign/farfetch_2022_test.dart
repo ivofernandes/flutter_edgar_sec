@@ -33,5 +33,11 @@ void main() {
     assert(researchAndDevelopmentBillions == 0.000010307);
 
     final double eps = income2022.eps;
+    final double epsDiluted = income2022.epsDiluted;
+    final sharesBillions = income2022.shares.billions;
+
+    assert(eps == 0.93);
+    assert(epsDiluted == -1.85);
+    assert(sharesBillions == 0.384986092);
   });
 }
