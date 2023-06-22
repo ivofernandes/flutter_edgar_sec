@@ -36,9 +36,16 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
       'Net Margin',
       'Interest Coverage Ratio',
     };
+    final Set<String> currencyLabels = {
+      'EPS',
+      'EPS Diluted',
+    };
 
     if (percentLabels.contains(labels[index])) {
       return value?.percentFormat ?? '';
+    }
+    if (currencyLabels.contains(labels[index])) {
+      return value?.currencyFormat ?? '';
     } else {
       return value?.reportFormat ?? '';
     }

@@ -27,5 +27,7 @@ extension NumberUtils on double {
     return '${value.toStringAsFixed(decimalPlaces)}$suffix';
   }
 
+  String get currencyFormat => toStringAsFixed(2);
+
   String get percentFormat => '${toStringAsFixed(2)}%';
 }

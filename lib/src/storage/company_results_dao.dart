@@ -10,8 +10,10 @@ class CompanyResultsDAO with SembastDatabase {
 
   CompanyResultsDAO._internal();
 
+  // Name of the store
   static const String storeName = 'EDGAR_SEC_COMPANY_RESULTS';
 
+  /// Returns a list of financial statements for a given symbol
   Future<Map<String, dynamic>> getData(String ticker) async {
     final store = intMapStoreFactory.store(storeName);
 
@@ -36,6 +38,7 @@ class CompanyResultsDAO with SembastDatabase {
     return resultsList;
   }
 
+  /// Saves the financial statements data for a given symbol
   Future<void> saveData(String? ticker, Map<String, dynamic> data) async {
     final store = intMapStoreFactory.store(storeName);
     final DatabaseClient database = await getDatabase();
@@ -56,6 +59,7 @@ class CompanyResultsDAO with SembastDatabase {
     });
   }
 
+  /// Removes the financial statements data for a given symbol
   Future<int> removeData(String? ticker) async {
     final store = intMapStoreFactory.store(storeName);
     final DatabaseClient database = await getDatabase();
