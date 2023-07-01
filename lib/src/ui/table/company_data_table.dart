@@ -45,10 +45,12 @@ class _CompanyDataTableState extends State<CompanyDataTable> {
 
   @override
   Widget build(BuildContext context) {
+    final List<FinancialStatement> quarters = widget.companyResults.quarters.reversed.toList();
+    final bool isQuarterlyValid = period.isQuarter && quarters.isNotEmpty;
+
     /// Get the correct list of reports, can be quarterly or annual
-    final List<FinancialStatement> reports = period.isQuarter
-        ? widget.companyResults.quarters.reversed.toList()
-        : widget.companyResults.yearReports.reversed.toList();
+    final List<FinancialStatement> reports =
+        isQuarterlyValid ? quarters : widget.companyResults.yearReports.reversed.toList();
 
     if (reports.isEmpty) {
       return const Center(
