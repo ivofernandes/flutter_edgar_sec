@@ -6,13 +6,14 @@ import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/balance_sheet_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/cash_flow_processor.dart';
+import 'package:flutter_edgar_sec/src/processor/forex/forex_conversion_service.dart';
 import 'package:flutter_edgar_sec/src/processor/income_statement_processor.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 
 /// Logic related to process 10-Q and 10-K financial statements
 class PeriodProcessor {
   /// Returns a map of quarters and a map of annual financial statements for a given symbol
-  static Map<int, YearlyResults> process(Map<String, dynamic> facts) {
+  static Future<Map<int, YearlyResults>> process(Map<String, dynamic> facts) async {
     const List<String> referenceFields = [
       'NetIncomeLoss',
       'ProfitLoss',
@@ -27,7 +28,9 @@ class PeriodProcessor {
     }
 
     final Map<String, dynamic> referenceFieldMap = facts[referenceField] as Map<String, dynamic>;
-    final Map<String, dynamic> coinsMap = referenceFieldMap['units'] as Map<String, dynamic>;
+    Map<String, dynamic> coinsMap = referenceFieldMap['units'] as Map<String, dynamic>;
+    coinsMap = await ForexConversionService().convertToUSD(coinsMap);
+
     final referenceUnits = coinsMap['USD'] as List;
 
     // Create the quarter and annual data indexes

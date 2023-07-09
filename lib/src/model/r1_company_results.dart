@@ -29,14 +29,14 @@ class CompanyResults {
   });
 
   /// Creates a CompanyResults object from the json object that comes from the SEC
-  factory CompanyResults.fromJsonList(Map<String, dynamic> companyFactsJson) {
+  static Future<CompanyResults> fromJsonList(Map<String, dynamic> companyFactsJson) async {
     final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
     final Map<String, dynamic> facts = _getFacts(factsNode);
 
     Map<int, YearlyResults> yearlyResults = {};
 
     try {
-      yearlyResults = PeriodProcessor.process(facts);
+      yearlyResults = await PeriodProcessor.process(facts);
 
       YearlyResultsValidator().validate(yearlyResults);
     } catch (e) {
