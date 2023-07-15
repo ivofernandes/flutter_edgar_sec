@@ -30,13 +30,25 @@ class CompanyResults {
 
   /// Creates a CompanyResults object from the json object that comes from the SEC
   static Future<CompanyResults> fromJsonList(Map<String, dynamic> companyFactsJson) async {
+    const List<String> referenceFields = [
+      'NetIncomeLoss',
+      'ProfitLoss',
+    ];
     final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
-    final Map<String, dynamic> facts = _getFacts(factsNode);
+
+    Map<String, dynamic> usGaapFacts = {};
+    if (factsNode.containsKey('us-gaap')) {
+      usGaapFacts = factsNode['us-gaap'] as Map<String, dynamic>;
+    }
+    Map<String, dynamic> ifrsFullFacts = {};
+    if (factsNode.containsKey('ifrs-full')) {
+      ifrsFullFacts = factsNode['ifrs-full'] as Map<String, dynamic>;
+    }
 
     Map<int, YearlyResults> yearlyResults = {};
 
     try {
-      yearlyResults = await PeriodProcessor.process(facts);
+      yearlyResults = await PeriodProcessor.process(usGaapFacts, ifrsFullFacts, referenceFields);
 
       YearlyResultsValidator().validate(yearlyResults);
     } catch (e) {
@@ -45,25 +57,6 @@ class CompanyResults {
     return CompanyResults(
       yearlyResults: yearlyResults,
     );
-  }
-
-  /// Returns the facts node that has the most data
-  static Map<String, dynamic> _getFacts(Map<String, dynamic> factsNode) {
-    int usGaapCount = 0;
-    int ifrsFullCount = 0;
-
-    if (factsNode.containsKey('us-gaap')) {
-      usGaapCount = (factsNode['us-gaap'] as Map<String, dynamic>).length;
-    }
-    if (factsNode.containsKey('ifrs-full')) {
-      ifrsFullCount = (factsNode['ifrs-full'] as Map<String, dynamic>).length;
-    }
-
-    if (usGaapCount > ifrsFullCount) {
-      return factsNode['us-gaap'] as Map<String, dynamic>;
-    } else {
-      return factsNode['ifrs-full'] as Map<String, dynamic>;
-    }
   }
 
   factory CompanyResults.empty() => const CompanyResults(
