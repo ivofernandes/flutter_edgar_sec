@@ -30,33 +30,38 @@ class CompanyResults {
 
   /// Creates a CompanyResults object from the json object that comes from the SEC
   static Future<CompanyResults> fromJsonList(Map<String, dynamic> companyFactsJson) async {
-    const List<String> referenceFields = [
-      'NetIncomeLoss',
-      'ProfitLoss',
-    ];
-    final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
-
-    Map<String, dynamic> usGaapFacts = {};
-    if (factsNode.containsKey('us-gaap')) {
-      usGaapFacts = factsNode['us-gaap'] as Map<String, dynamic>;
-    }
-    Map<String, dynamic> ifrsFullFacts = {};
-    if (factsNode.containsKey('ifrs-full')) {
-      ifrsFullFacts = factsNode['ifrs-full'] as Map<String, dynamic>;
-    }
-
-    Map<int, YearlyResults> yearlyResults = {};
-
     try {
-      yearlyResults = await PeriodProcessor.process(usGaapFacts, ifrsFullFacts, referenceFields);
+      const List<String> referenceFields = [
+        'NetIncomeLoss',
+        'ProfitLoss',
+      ];
+      final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
 
-      YearlyResultsValidator().validate(yearlyResults);
+      Map<String, dynamic> usGaapFacts = {};
+      if (factsNode.containsKey('us-gaap')) {
+        usGaapFacts = factsNode['us-gaap'] as Map<String, dynamic>;
+      }
+      Map<String, dynamic> ifrsFullFacts = {};
+      if (factsNode.containsKey('ifrs-full')) {
+        ifrsFullFacts = factsNode['ifrs-full'] as Map<String, dynamic>;
+      }
+
+      Map<int, YearlyResults> yearlyResults = {};
+
+      try {
+        yearlyResults = await PeriodProcessor.process(usGaapFacts, ifrsFullFacts, referenceFields);
+
+        YearlyResultsValidator().validate(yearlyResults);
+      } catch (e) {
+        debugPrint('Error while processing company results: $e');
+      }
+      return CompanyResults(
+        yearlyResults: yearlyResults,
+      );
     } catch (e) {
       debugPrint('Error while processing company results: $e');
+      rethrow;
     }
-    return CompanyResults(
-      yearlyResults: yearlyResults,
-    );
   }
 
   factory CompanyResults.empty() => const CompanyResults(
