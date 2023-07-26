@@ -29,5 +29,5 @@ extension NumberUtils on double {
 
   String get currencyFormat => toStringAsFixed(2);
 
-  String get percentFormat => '${toStringAsFixed(2)}%';
+  String get percentFormat => '${(this * 100).toStringAsFixed(2)}%';
 }
