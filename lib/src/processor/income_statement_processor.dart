@@ -89,7 +89,8 @@ class IncomeStatementProcessor {
     // Auxiliar code to find the fields that are not mapped
     final List<String> factsKeys = facts.keys.toList();
     for (final field in factsKeys) {
-      final periods = BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
+      final periods =
+          BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
 
       for (final period in periods) {
         final endDateString = period['end'] as String;
@@ -116,7 +117,8 @@ class IncomeStatementProcessor {
     /// Process the supported fields
     for (final field in supportedFields) {
       // Filter the quarters or the annuals, i.e. rows that are 10-Q or 10-K
-      final periods = BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
+      final periods =
+          BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
 
       // Map the values for each report
       for (final period in periods) {
@@ -131,7 +133,8 @@ class IncomeStatementProcessor {
   }
 
   /// Map the value to the correct field
-  static void _mapValue(String field, double value, IncomeStatement incomeStatement, Map<String, dynamic> period) {
+  static void _mapValue(String field, double value,
+      IncomeStatement incomeStatement, Map<String, dynamic> period) {
     // If there is no value, return. It's not be processed anyway
     if (value == 0) {
       return;
@@ -140,7 +143,8 @@ class IncomeStatementProcessor {
     // Check if the field has been processed
     final String key = '${field}_${period['fy']}_${period['fp']}';
 
-    if (key.contains('2021_FY') && field == 'DeferredTaxAssetsInProcessResearchAndDevelopment') {
+    if (key.contains('2021_FY') &&
+        field == 'DeferredTaxAssetsInProcessResearchAndDevelopment') {
       AppLogger().debug('Field $key = $value');
     }
 
@@ -159,12 +163,14 @@ class IncomeStatementProcessor {
       incomeStatement.revenues = value;
     } else if (costOfRevenueFields.contains(field)) {
       incomeStatement.costOfRevenues = value;
-    } else if (generalAndAdministrativeFields.contains(field) && !alreadyProcessed) {
+    } else if (generalAndAdministrativeFields.contains(field) &&
+        !alreadyProcessed) {
       final endDateString = period['end'] as String;
       final List<String> fieldParts = key.split('_');
 
       final b = value.billions;
-      if (processed.contains('SellingGeneralAndAdministrativeExpense_${fieldParts[1]}_${fieldParts[2]}')) {
+      if (processed.contains(
+          'SellingGeneralAndAdministrativeExpense_${fieldParts[1]}_${fieldParts[2]}')) {
         return;
       }
       incomeStatement.generalAndAdministrativeExpenses += value;

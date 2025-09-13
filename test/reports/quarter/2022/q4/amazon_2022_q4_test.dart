@@ -5,7 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://seekingalpha.com/symbol/AMZN/income-statement
 void main() {
   test('Test 2022-Q4 Amazon values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AMZN');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('AMZN');
 
     assert(results.yearlyResults.isNotEmpty);
 

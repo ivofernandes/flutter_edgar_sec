@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://www.sec.gov/ix?doc=/Archives/edgar/data/0001318605/000095017022019867/tsla-20220930.htm
 void main() {
   test('Test 2022-Q3 Tesla values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -32,7 +33,8 @@ void main() {
   });
 
   test('Test 2022-Q3 Tesla values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -56,7 +58,8 @@ void main() {
   });
 
   test('Test 2022-Q3 Tesla values for cash flow', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
 
     assert(results.yearlyResults.isNotEmpty);
 

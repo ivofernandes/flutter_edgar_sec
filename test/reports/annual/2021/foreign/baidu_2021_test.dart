@@ -7,7 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 ///
 void main() {
   test('Test 2021 Baidu values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('BIDU');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('BIDU');
 
     final YearlyResults results2021 = results.yearlyResults[2021]!;
 
@@ -25,8 +26,10 @@ void main() {
     assert(operatingIncomeBillions == 1.651);
     assert(netIncomeBillions == 1.605);
 
-    final researchAndDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
-    final sellingGeneralAndAdminBillions = income2022.generalAndAdministrativeExpenses.billions;
+    final researchAndDevelopmentBillions =
+        income2022.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAndAdminBillions =
+        income2022.generalAndAdministrativeExpenses.billions;
 
     assert(researchAndDevelopmentBillions == 3.914);
     assert(sellingGeneralAndAdminBillions == 3.879);

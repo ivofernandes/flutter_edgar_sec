@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://www.sec.gov/ix?doc=/Archives/edgar/data/0001334036/000133403622000054/crox-20220331.htm
 void main() {
   test('Test 2022-Q1 Crocs values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('CROX');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('CROX');
 
     assert(results.yearlyResults.isNotEmpty);
 

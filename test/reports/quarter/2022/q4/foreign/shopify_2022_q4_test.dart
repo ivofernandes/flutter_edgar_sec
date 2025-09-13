@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://investors.shopify.com/financial-reports/default.aspx
 void main() {
   test('Test 2022-Q4 Shopify values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('SHOP');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('SHOP');
 
     assert(results.yearlyResults.isNotEmpty);
     //TODO add values

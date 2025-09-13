@@ -6,14 +6,15 @@ import 'package:flutter_edgar_sec/src/processor/validator/mixins/missing_quarter
 import 'package:flutter_edgar_sec/src/processor/validator/mixins/validate_annual_report.dart';
 
 /// Class that validates the raw data from SEC and do further processing to extrapolate missing data
-class YearlyResultsValidator with MissingQuarterValidator, ValidateAnnualReport {
+class YearlyResultsValidator
+    with MissingQuarterValidator, ValidateAnnualReport {
   // Singleton
-  static final YearlyResultsValidator _instance = YearlyResultsValidator._internal();
+  static final YearlyResultsValidator _instance =
+      YearlyResultsValidator._internal();
 
   factory YearlyResultsValidator() => _instance;
 
   YearlyResultsValidator._internal();
-
 
   /// Validates the data from SEC
   void validate(Map<int, YearlyResults> yearlyResults) {

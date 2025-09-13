@@ -7,7 +7,8 @@ void main() {
   /// SEC
   /// https://www.sec.gov/ix?doc=/Archives/edgar/data/1318605/000095017023001409/tsla-20221231.htm
   test('Test 2022 Tesla values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -23,14 +24,18 @@ void main() {
     final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
     final grossProfitBillions = income2022.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
-    final otherOperatingExpensesBillions = income2022.otherOperatingExpenses.billions;
+    final otherOperatingExpensesBillions =
+        income2022.otherOperatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;

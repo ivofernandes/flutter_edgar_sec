@@ -7,13 +7,17 @@ import 'package:flutter_edgar_sec/src/processor/quarters/fact_group_processor.da
 abstract class PeriodProcessor {
   /// Returns a map of quarters and a map of annual financial statements for a given symbol
   static Future<Map<int, YearlyResults>> process(
-      Map<String, dynamic> usGaapFacts, Map<String, dynamic> ifrsFullFacts, List<String> referenceFields) async {
+      Map<String, dynamic> usGaapFacts,
+      Map<String, dynamic> ifrsFullFacts,
+      List<String> referenceFields) async {
     // Create the quarter and annual data indexes
     final Map<String, FinancialStatement> quarters = {};
     final Map<String, FinancialStatement> annuals = {};
 
-    await FactGroupProcessor.processFactsGroup(quarters, annuals, usGaapFacts, referenceFields);
-    await FactGroupProcessor.processFactsGroup(quarters, annuals, ifrsFullFacts, referenceFields);
+    await FactGroupProcessor.processFactsGroup(
+        quarters, annuals, usGaapFacts, referenceFields);
+    await FactGroupProcessor.processFactsGroup(
+        quarters, annuals, ifrsFullFacts, referenceFields);
 
     //TODO for balance sheet, we don't need to stay inside the boundaries of the quarter
     //TODO we can use 6 months or 9 months reports

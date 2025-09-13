@@ -28,7 +28,8 @@ class CashFlowStatement with CashFlowValues {
   ) {
     final CashFlowStatement cashFlowStatement = CashFlowStatement();
 
-    CashFlowExtrapolate.fillMissingQuarter(cashFlowStatement, fullYear, q1, q2, q3);
+    CashFlowExtrapolate.fillMissingQuarter(
+        cashFlowStatement, fullYear, q1, q2, q3);
 
     return cashFlowStatement;
   }
@@ -77,19 +78,21 @@ class CashFlowStatement with CashFlowValues {
     }
   }
 
-  factory CashFlowStatement.fromJson(Map<String, dynamic> json) => CashFlowStatement()
-    ..buyback = json['buyback'] as double
-    ..dividends = json['dividends'] as double
-    ..shareBasedCompensation = json['shareBasedCompensation'] as double
-    ..accumulatedDepreciation = json['accumulatedDepreciation'] as double
-    ..capitalExpenditures = json['capitalExpenditures'] as double
-    ..depreciationAndAmortization = json['depreciationAndAmortization'] as double
-    ..cashFromOperations = json['cashFromOperations'] as double
-    ..cashFromInvesting = json['cashFromInvesting'] as double
-    ..cashFromFinancing = json['cashFromFinancing'] as double
-    ..deferredIncomeTax = json['deferredIncomeTax'] as double
-    ..buyMarketableSecurities = json['buyMarketableSecurities'] as double
-    ..sellMarketableSecurities = json['sellMarketableSecurities'] as double;
+  factory CashFlowStatement.fromJson(Map<String, dynamic> json) =>
+      CashFlowStatement()
+        ..buyback = json['buyback'] as double
+        ..dividends = json['dividends'] as double
+        ..shareBasedCompensation = json['shareBasedCompensation'] as double
+        ..accumulatedDepreciation = json['accumulatedDepreciation'] as double
+        ..capitalExpenditures = json['capitalExpenditures'] as double
+        ..depreciationAndAmortization =
+            json['depreciationAndAmortization'] as double
+        ..cashFromOperations = json['cashFromOperations'] as double
+        ..cashFromInvesting = json['cashFromInvesting'] as double
+        ..cashFromFinancing = json['cashFromFinancing'] as double
+        ..deferredIncomeTax = json['deferredIncomeTax'] as double
+        ..buyMarketableSecurities = json['buyMarketableSecurities'] as double
+        ..sellMarketableSecurities = json['sellMarketableSecurities'] as double;
 
   Map<String, dynamic> toJson() => {
         'buyback': buyback,

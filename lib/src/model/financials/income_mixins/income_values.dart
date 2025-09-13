@@ -78,7 +78,9 @@ mixin IncomeValues {
 
   /// Other operating expenses that are not R&D neither SG&A
   double get otherOperatingExpenses =>
-      totalOperatingExpenses - researchAndDevelopmentExpenses - generalAndAdministrativeExpenses;
+      totalOperatingExpenses -
+      researchAndDevelopmentExpenses -
+      generalAndAdministrativeExpenses;
 
   @override
   String toString() => '''

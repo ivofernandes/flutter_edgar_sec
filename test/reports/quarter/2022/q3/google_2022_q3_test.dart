@@ -7,7 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://seekingalpha.com/symbol/GOOG/income-statement
 void main() {
   test('Test 2022-Q3 Google values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -29,7 +30,8 @@ void main() {
 
   /// https://www.sec.gov/Archives/edgar/data/1652044/000165204422000090/goog-20220930.htm
   test('Test 2022-Q3 Google values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -44,8 +46,10 @@ void main() {
     final costOfRevenuesBillions = income2022Q3.costOfRevenues.billions;
 
     final grossProfitBillions = income2022Q3.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022Q3.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022Q3.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022Q3.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022Q3.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022Q3.operatingExpenses.billions;
 
     assert(revenueBillions == 69.092);

@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://www.sec.gov/ix?doc=/Archives/edgar/data/0001334036/000133403622000117/crox-20220630.htm
 void main() {
   test('Test 2022-Q2 Google values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('CROX');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('CROX');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -20,7 +21,8 @@ void main() {
     final netIncomeBillions = income2022Q2.netIncome.billions;
     final costOfRevenueBillions = income2022Q2.costOfRevenues.billions;
 
-    final foreignCurrencyTransactionGainLoss = income2022Q2.foreignCurrencyExchange.billions;
+    final foreignCurrencyTransactionGainLoss =
+        income2022Q2.foreignCurrencyExchange.billions;
 
     assert(revenueBillions == 0.964581);
     assert(operatingIncomeBillions == 0.247964);

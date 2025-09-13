@@ -13,7 +13,8 @@ class AppLogger {
 
   final bool _enableLogging = true;
 
-  final Logger _logger = Logger(printer: SimplePrinter(), output: _SplitConsoleOutput());
+  final Logger _logger =
+      Logger(printer: SimplePrinter(), output: _SplitConsoleOutput());
 
   void error(dynamic event, [dynamic error, StackTrace? stackTrace]) {
     if (_enableLogging) {

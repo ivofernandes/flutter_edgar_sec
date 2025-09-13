@@ -17,25 +17,33 @@ class CompanyResults {
   }
 
   /// Returns a list of all the quarters that are already reported for this company
-  List<FinancialStatement> get quarters =>
-      yearlyResults.values.map((e) => e.quarters).expand((element) => element).toList()..sort();
+  List<FinancialStatement> get quarters => yearlyResults.values
+      .map((e) => e.quarters)
+      .expand((element) => element)
+      .toList()
+    ..sort();
 
   /// Returns a list of all yearly reports that are already reported for this company
-  List<FinancialStatement> get yearReports =>
-      yearlyResults.values.map((e) => e.yearReport).expand((element) => element).toList()..sort();
+  List<FinancialStatement> get yearReports => yearlyResults.values
+      .map((e) => e.yearReport)
+      .expand((element) => element)
+      .toList()
+    ..sort();
 
   const CompanyResults({
     required this.yearlyResults,
   });
 
   /// Creates a CompanyResults object from the json object that comes from the SEC
-  static Future<CompanyResults> fromJsonList(Map<String, dynamic> companyFactsJson) async {
+  static Future<CompanyResults> fromJsonList(
+      Map<String, dynamic> companyFactsJson) async {
     try {
       const List<String> referenceFields = [
         'NetIncomeLoss',
         'ProfitLoss',
       ];
-      final Map<String, dynamic> factsNode = companyFactsJson['facts'] as Map<String, dynamic>;
+      final Map<String, dynamic> factsNode =
+          companyFactsJson['facts'] as Map<String, dynamic>;
 
       Map<String, dynamic> usGaapFacts = {};
       if (factsNode.containsKey('us-gaap')) {
@@ -49,7 +57,8 @@ class CompanyResults {
       Map<int, YearlyResults> yearlyResults = {};
 
       try {
-        yearlyResults = await PeriodProcessor.process(usGaapFacts, ifrsFullFacts, referenceFields);
+        yearlyResults = await PeriodProcessor.process(
+            usGaapFacts, ifrsFullFacts, referenceFields);
 
         YearlyResultsValidator().validate(yearlyResults);
       } catch (e) {
@@ -71,7 +80,8 @@ class CompanyResults {
   /// Creates a CompanyResults object from the json object that comes from the storage
   /// This method is used to create a CompanyResults object from the storage
   factory CompanyResults.fromJsonStorage(Map<String, dynamic> jsonData) {
-    final Map<int, YearlyResults> yearlyResults = (jsonData['yearlyResults'] as Map<String, dynamic>).map(
+    final Map<int, YearlyResults> yearlyResults =
+        (jsonData['yearlyResults'] as Map<String, dynamic>).map(
       (key, value) => MapEntry(
         int.parse(key),
         YearlyResults.fromJson(value as Map<String, dynamic>),
@@ -86,7 +96,8 @@ class CompanyResults {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> jsonData = {};
 
-    jsonData['yearlyResults'] = yearlyResults.map((key, value) => MapEntry(key.toString(), value.toJson()));
+    jsonData['yearlyResults'] = yearlyResults
+        .map((key, value) => MapEntry(key.toString(), value.toJson()));
 
     return jsonData;
   }

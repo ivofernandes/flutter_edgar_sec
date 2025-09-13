@@ -121,22 +121,26 @@ class IncomeStatement with IncomeValues, IncomeExtrapolate {
     return incomeStatement;
   }
 
-  factory IncomeStatement.fromJson(Map<String, dynamic> json) => IncomeStatement()
-    ..revenues = json['revenues'] as double
-    ..costOfRevenues = json['costOfRevenues'] as double
-    ..grossProfit = json['grossProfit'] as double
-    ..researchAndDevelopmentExpenses = json['researchAndDevelopmentExpenses'] as double
-    ..generalAndAdministrativeExpenses = json['generalAndAdministrativeExpenses'] as double
-    ..operatingIncome = json['operatingIncome'] as double
-    ..foreignCurrencyExchange = json['foreignCurrencyExchange'] as double
-    ..interestExpenses = json['interestExpenses'] as double
-    ..otherNonOperatingIncomeExpense = json['otherNonOperatingIncomeExpense'] as double
-    ..incomeTaxExpense = json['incomeTaxExpense'] as double
-    ..netIncome = json['netIncome'] as double
-    ..eps = json['eps'] as double
-    ..epsDiluted = json['epsDiluted'] as double
-    ..shares = json['shares'] as double
-    ..sharesDiluted = json['sharesDiluted'] as double;
+  factory IncomeStatement.fromJson(Map<String, dynamic> json) =>
+      IncomeStatement()
+        ..revenues = json['revenues'] as double
+        ..costOfRevenues = json['costOfRevenues'] as double
+        ..grossProfit = json['grossProfit'] as double
+        ..researchAndDevelopmentExpenses =
+            json['researchAndDevelopmentExpenses'] as double
+        ..generalAndAdministrativeExpenses =
+            json['generalAndAdministrativeExpenses'] as double
+        ..operatingIncome = json['operatingIncome'] as double
+        ..foreignCurrencyExchange = json['foreignCurrencyExchange'] as double
+        ..interestExpenses = json['interestExpenses'] as double
+        ..otherNonOperatingIncomeExpense =
+            json['otherNonOperatingIncomeExpense'] as double
+        ..incomeTaxExpense = json['incomeTaxExpense'] as double
+        ..netIncome = json['netIncome'] as double
+        ..eps = json['eps'] as double
+        ..epsDiluted = json['epsDiluted'] as double
+        ..shares = json['shares'] as double
+        ..sharesDiluted = json['sharesDiluted'] as double;
 
   Map<String, dynamic> toJson() => {
         'revenues': revenues,

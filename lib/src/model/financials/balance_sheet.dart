@@ -146,7 +146,8 @@ class BalanceSheet {
   double equity = 0;
 
   // Calculated total cash n cash equivalents
-  double get totalCashAndShortTermInvestments => cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
+  double get totalCashAndShortTermInvestments =>
+      cashAndCashEquivalents + shortTermInvestments + tradingAssetSecurities;
 
   double get capitalEmployed => totalAssets - currentLiabilities;
 
@@ -189,7 +190,8 @@ class BalanceSheet {
     ..restrictedCash = json['restrictedCash'] as double
     ..otherCurrentAssets = json['otherCurrentAssets'] as double
     ..currentAssets = json['currentAssets'] as double
-    ..grossPropertyPlantEquipment = json['grossPropertyPlantEquipment'] as double
+    ..grossPropertyPlantEquipment =
+        json['grossPropertyPlantEquipment'] as double
     ..accumulatedDepreciation = json['accumulatedDepreciation'] as double
     ..netPropertyPlantEquipment = json['netPropertyPlantEquipment'] as double
     ..longTermInvestments = json['longTermInvestments'] as double

@@ -7,7 +7,8 @@ void main() {
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/CROX/income-statement
   test('Test 2021 Crocs values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('CROX');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('CROX');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -23,13 +24,16 @@ void main() {
     final costOfRevenueBillions = income2021.costOfRevenues.billions;
 
     final grossProfitBillions = income2021.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2021.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2021.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2021.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2021.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2021.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2021.interestExpenses.billions;
-    final totalNonOperatingIncomeExpenseBillions = income2021.totalNonOperatingIncomeExpense.billions;
+    final totalNonOperatingIncomeExpenseBillions =
+        income2021.totalNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2021.incomeTaxExpense.billions;
 
     final ebitBillions = income2021.EBIT.billions;

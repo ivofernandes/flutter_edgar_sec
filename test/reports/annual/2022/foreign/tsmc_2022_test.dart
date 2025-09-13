@@ -5,7 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://seekingalpha.com/symbol/TSM/income-statement
 void main() {
   test('Test 2022 TSMC values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('TSM');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('TSM');
 
     assert(results.years.isNotEmpty);
 

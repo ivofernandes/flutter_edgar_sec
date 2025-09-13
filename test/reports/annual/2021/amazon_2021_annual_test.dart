@@ -13,7 +13,8 @@ void main() {
   /// html:
   /// https://www.sec.gov/Archives/edgar/data/1018724/000101872422000005/amzn-20211231.htm
   test('Test 2021 Amazon values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AMZN');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('AMZN');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -29,13 +30,16 @@ void main() {
     final costOfRevenueBillions = income2021.costOfRevenues.billions;
 
     final grossProfitBillions = income2021.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2021.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2021.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2021.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2021.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2021.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2021.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2021.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2021.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2021.incomeTaxExpense.billions;
 
     final ebitBillions = income2021.EBIT.billions;
@@ -68,7 +72,8 @@ void main() {
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/AMZN/cash-flow-statement
   test('Test 2021 Amazon values for cash flow', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AMZN');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('AMZN');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -76,9 +81,11 @@ void main() {
 
     assert(results2021.fullYear != null);
 
-    final CashFlowStatement cashFlowStatement2021 = results2021.fullYear!.cashFlowStatement;
+    final CashFlowStatement cashFlowStatement2021 =
+        results2021.fullYear!.cashFlowStatement;
 
-    final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
+    final repurchaseofCommonStockBillions =
+        cashFlowStatement2021.buyback.billions;
 
     final dividends = cashFlowStatement2021.dividends.billions;
     assert(repurchaseofCommonStockBillions == 0);

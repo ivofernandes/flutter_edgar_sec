@@ -7,7 +7,8 @@ void main() {
   /// https://d18rn0p25nwr6d.cloudfront.net/CIK-0001334036/f61c8670-c9e2-4aab-bf47-374a5ab5092b.html#
   /// https://www.sec.gov/ix?doc=/Archives/edgar/data/0001334036/000133403623000015/crox-20221231.htm
   test('Test 2022 Crocs values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('CROX');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('CROX');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -23,13 +24,16 @@ void main() {
     final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
     final grossProfitBillions = income2022.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;
@@ -66,7 +70,8 @@ void main() {
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/CROX/cash-flow-statement
   test('Test 2022 Crocs values for cash flow', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('CROX');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('CROX');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -74,15 +79,20 @@ void main() {
 
     assert(results2021.fullYear != null);
 
-    final CashFlowStatement cashFlowStatement2021 = results2021.fullYear!.cashFlowStatement;
+    final CashFlowStatement cashFlowStatement2021 =
+        results2021.fullYear!.cashFlowStatement;
 
-    final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
+    final repurchaseofCommonStockBillions =
+        cashFlowStatement2021.buyback.billions;
 
     final dividends = cashFlowStatement2021.dividends.billions;
 
-    final sharedBasedCompensationBillions = cashFlowStatement2021.shareBasedCompensation.billions;
-    final accumulatedDepreciationBillions = cashFlowStatement2021.accumulatedDepreciation.billions;
-    final capitalExpendituresBillions = cashFlowStatement2021.capitalExpenditures.billions;
+    final sharedBasedCompensationBillions =
+        cashFlowStatement2021.shareBasedCompensation.billions;
+    final accumulatedDepreciationBillions =
+        cashFlowStatement2021.accumulatedDepreciation.billions;
+    final capitalExpendituresBillions =
+        cashFlowStatement2021.capitalExpenditures.billions;
 
     //assert(repurchaseofCommonStockBillions == 0.0115);
     assert(dividends == 0);

@@ -46,10 +46,12 @@ class FinancialStatement implements Comparable<FinancialStatement> {
   double get ROCE => incomeStatement.EBIT / balanceSheet.capitalEmployed;
 
   /// https://www.investopedia.com/terms/p/payoutratio.asp
-  double get payoutRatio => cashFlowStatement.dividends / incomeStatement.netIncome;
+  double get payoutRatio =>
+      cashFlowStatement.dividends / incomeStatement.netIncome;
 
   /// Buybacks plus dividends divided by net income
-  double get totalShareholderReturn => cashFlowStatement.shareBasedCompensation / incomeStatement.netIncome;
+  double get totalShareholderReturn =>
+      cashFlowStatement.shareBasedCompensation / incomeStatement.netIncome;
 
   FinancialStatement({
     required this.startDate,
@@ -123,15 +125,20 @@ class FinancialStatement implements Comparable<FinancialStatement> {
   @override
   int compareTo(FinancialStatement other) => endDate.compareTo(other.endDate);
 
-  factory FinancialStatement.fromJson(Map<String, dynamic> json) => FinancialStatement(
+  factory FinancialStatement.fromJson(Map<String, dynamic> json) =>
+      FinancialStatement(
         startDate: DateTime.parse(json['startDate'] as String),
         endDate: DateTime.parse(json['endDate'] as String),
         filedDate: DateTime.parse(json['filedDate'] as String),
-        period: FinancialStatementPeriod.values
-            .firstWhere((e) => e.toString() == 'FinancialStatementPeriod.${json['period'] as String}'),
-        incomeStatement: IncomeStatement.fromJson(json['incomeStatement'] as Map<String, dynamic>),
-        balanceSheet: BalanceSheet.fromJson(json['balanceSheet'] as Map<String, dynamic>),
-        cashFlowStatement: CashFlowStatement.fromJson(json['cashFlowStatement'] as Map<String, dynamic>),
+        period: FinancialStatementPeriod.values.firstWhere((e) =>
+            e.toString() ==
+            'FinancialStatementPeriod.${json['period'] as String}'),
+        incomeStatement: IncomeStatement.fromJson(
+            json['incomeStatement'] as Map<String, dynamic>),
+        balanceSheet:
+            BalanceSheet.fromJson(json['balanceSheet'] as Map<String, dynamic>),
+        cashFlowStatement: CashFlowStatement.fromJson(
+            json['cashFlowStatement'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toJson() => {

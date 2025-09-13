@@ -42,9 +42,12 @@ class _EdgarTableUIState extends State<EdgarTableUI> {
 
   Future<void> load() async {
     if (widget.useCache) {
-      _companyResults = await EdgarSecRepository.getFinancialStatementsForSymbol(symbol: widget.symbol);
+      _companyResults =
+          await EdgarSecRepository.getFinancialStatementsForSymbol(
+              symbol: widget.symbol);
     } else {
-      _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(widget.symbol);
+      _companyResults =
+          await EdgarSecService.getFinancialStatementsForSymbol(widget.symbol);
     }
     loading = false;
 

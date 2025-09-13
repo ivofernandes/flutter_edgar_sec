@@ -28,7 +28,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _textEditingController = TextEditingController(text: 'AAPL');
+  final TextEditingController _textEditingController =
+      TextEditingController(text: 'AAPL');
   bool useRepository = true;
 
   @override

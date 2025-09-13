@@ -5,7 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://seekingalpha.com/symbol/CROX/income-statement
 void main() {
   test('Test 2022-Q4 Crocs values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('CROX');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('CROX');
 
     assert(results.yearlyResults.isNotEmpty);
 

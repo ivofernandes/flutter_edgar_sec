@@ -219,8 +219,10 @@ class BalanceSheetProcessor {
         final financialStatement = index[endDateString]!;
         final balanceSheet = financialStatement.balanceSheet;
 
-        if (financialStatement.period == FinancialStatementPeriod.annual && field == 'AccruedLiabilitiesCurrent') {
-          AppLogger().debug('period -> ${financialStatement.period} ${financialStatement.year}   ->>> $value');
+        if (financialStatement.period == FinancialStatementPeriod.annual &&
+            field == 'AccruedLiabilitiesCurrent') {
+          AppLogger().debug(
+              'period -> ${financialStatement.period} ${financialStatement.year}   ->>> $value');
         }
 
         _mapValue(field, value.toDouble(), balanceSheet);
@@ -273,10 +275,12 @@ class BalanceSheetProcessor {
         balanceSheet.currentAssets = value;
         break;
       case 'PropertyPlantAndEquipmentGross':
-        balanceSheet.grossPropertyPlantEquipment = balanceSheet.grossPropertyPlantEquipment + value;
+        balanceSheet.grossPropertyPlantEquipment =
+            balanceSheet.grossPropertyPlantEquipment + value;
         break;
       case 'OperatingLeaseRightOfUseAsset':
-        balanceSheet.grossPropertyPlantEquipment = balanceSheet.grossPropertyPlantEquipment + value;
+        balanceSheet.grossPropertyPlantEquipment =
+            balanceSheet.grossPropertyPlantEquipment + value;
         break;
       case 'AccumulatedDepreciationDepletionAndAmortizationPropertyPlantAndEquipment':
         balanceSheet.accumulatedDepreciation = value;

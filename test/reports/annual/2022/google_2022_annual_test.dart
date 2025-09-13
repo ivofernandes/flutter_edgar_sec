@@ -10,7 +10,8 @@ void main() {
   /// https://www.sec.gov/Archives/edgar/data/1652044/000165204423000016/goog-20221231.htm#ia96e4fb0476549c99dc3a2b2368f643f_343
 
   test('Test 2022 Google values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -26,13 +27,16 @@ void main() {
     final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
     final grossProfitBillions = income2022.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;
@@ -65,7 +69,8 @@ void main() {
   /// https://seekingalpha.com/symbol/GOOG/cash-flow-statement
   /// https://www.sec.gov/Archives/edgar/data/1652044/000165204423000016/goog-20221231.htm#ia96e4fb0476549c99dc3a2b2368f643f_208
   test('Test 2022 Google values for cash flow', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -73,26 +78,38 @@ void main() {
 
     assert(results2022.fullYear != null);
 
-    final CashFlowStatement cashFlowStatement2022 = results2022.fullYear!.cashFlowStatement;
+    final CashFlowStatement cashFlowStatement2022 =
+        results2022.fullYear!.cashFlowStatement;
 
     // Operations
-    final accumulatedDepreciationBillions = cashFlowStatement2022.accumulatedDepreciation.billions;
-    final depreciationAndAmortizationBillions = cashFlowStatement2022.depreciationAndAmortization.billions;
-    final sharedBasedCompensationBillions = cashFlowStatement2022.shareBasedCompensation.billions;
-    final deferredIncomeTaxBillions = cashFlowStatement2022.deferredIncomeTax.billions;
-    final cashFromOperationsBillions = cashFlowStatement2022.cashFromOperations.billions;
+    final accumulatedDepreciationBillions =
+        cashFlowStatement2022.accumulatedDepreciation.billions;
+    final depreciationAndAmortizationBillions =
+        cashFlowStatement2022.depreciationAndAmortization.billions;
+    final sharedBasedCompensationBillions =
+        cashFlowStatement2022.shareBasedCompensation.billions;
+    final deferredIncomeTaxBillions =
+        cashFlowStatement2022.deferredIncomeTax.billions;
+    final cashFromOperationsBillions =
+        cashFlowStatement2022.cashFromOperations.billions;
 
     // Financing
     final dividends = cashFlowStatement2022.dividends.billions;
-    final cashFromFinancingBillions = cashFlowStatement2022.cashFromFinancing.billions;
-    final buyPropertyPlantEquipmentBillions = cashFlowStatement2022.sellMarketableSecurities.billions;
+    final cashFromFinancingBillions =
+        cashFlowStatement2022.cashFromFinancing.billions;
+    final buyPropertyPlantEquipmentBillions =
+        cashFlowStatement2022.sellMarketableSecurities.billions;
     final buyBackBillions = cashFlowStatement2022.buyback.billions;
 
     // Investing
-    final capitalExpendituresBillions = cashFlowStatement2022.capitalExpenditures.billions;
-    final buySecuritiesBillions = cashFlowStatement2022.buyMarketableSecurities.billions;
-    final sellSecuritiesBillions = cashFlowStatement2022.sellMarketableSecurities.billions;
-    final cashFromInvestingBillions = cashFlowStatement2022.cashFromInvesting.billions;
+    final capitalExpendituresBillions =
+        cashFlowStatement2022.capitalExpenditures.billions;
+    final buySecuritiesBillions =
+        cashFlowStatement2022.buyMarketableSecurities.billions;
+    final sellSecuritiesBillions =
+        cashFlowStatement2022.sellMarketableSecurities.billions;
+    final cashFromInvestingBillions =
+        cashFlowStatement2022.cashFromInvesting.billions;
 
     // Operations validations
     assert(sharedBasedCompensationBillions == 19.362);

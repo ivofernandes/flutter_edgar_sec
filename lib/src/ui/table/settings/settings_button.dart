@@ -12,7 +12,8 @@ class SettingsButton extends StatefulWidget {
   final FinancialType financialType;
 
   /// The callback to be called when the financial statement period is changed.
-  final ValueChanged<FinancialStatementPeriod> onFinancialStatementPeriodChanged;
+  final ValueChanged<FinancialStatementPeriod>
+      onFinancialStatementPeriodChanged;
 
   /// The callback to be called when the financial type is changed.
   final ValueChanged<FinancialType> onFinancialTypeChanged;
@@ -42,7 +43,8 @@ class _SettingsButtonState extends State<SettingsButton> {
       builder: (context) => SettingsWidget(
         financialStatementPeriod: widget.financialStatementPeriod,
         financialType: widget.financialType,
-        onFinancialStatementPeriodChanged: widget.onFinancialStatementPeriodChanged,
+        onFinancialStatementPeriodChanged:
+            widget.onFinancialStatementPeriodChanged,
         onFinancialTypeChanged: widget.onFinancialTypeChanged,
       ),
     );

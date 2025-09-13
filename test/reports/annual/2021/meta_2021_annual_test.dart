@@ -11,7 +11,8 @@ void main() {
   /// SEC:
   /// https://www.sec.gov/Archives/edgar/data/1326801/000132680122000018/fb-20211231.htm
   test('Test 2021 Meta values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('META');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('META');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -27,13 +28,16 @@ void main() {
     final costOfRevenueBillions = income2021.costOfRevenues.billions;
 
     final grossProfitBillions = income2021.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2021.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2021.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2021.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2021.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2021.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2021.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2021.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2021.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2021.incomeTaxExpense.billions;
 
     final ebitBillions = income2021.EBIT.billions;
@@ -67,7 +71,8 @@ void main() {
   /// https://seekingalpha.com/symbol/META/cash-flow-statement
   /// https://www.sec.gov/Archives/edgar/data/1326801/000132680122000018/fb-20211231.htm#i0e2f35c4e2f2407493e331b6cc85a047_97
   test('Test 2021 Meta values for cash flow', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('META');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('META');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -75,12 +80,17 @@ void main() {
 
     assert(results2021.fullYear != null);
 
-    final CashFlowStatement cashFlowStatement2021 = results2021.fullYear!.cashFlowStatement;
+    final CashFlowStatement cashFlowStatement2021 =
+        results2021.fullYear!.cashFlowStatement;
 
-    final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
-    final capitalExpendituresBillions = cashFlowStatement2021.capitalExpenditures.billions;
-    final shareBasedCompensationBillions = cashFlowStatement2021.shareBasedCompensation.billions;
-    final depreciationAndAmortizationBillions = cashFlowStatement2021.depreciationAndAmortization.billions;
+    final repurchaseofCommonStockBillions =
+        cashFlowStatement2021.buyback.billions;
+    final capitalExpendituresBillions =
+        cashFlowStatement2021.capitalExpenditures.billions;
+    final shareBasedCompensationBillions =
+        cashFlowStatement2021.shareBasedCompensation.billions;
+    final depreciationAndAmortizationBillions =
+        cashFlowStatement2021.depreciationAndAmortization.billions;
 
     final dividends = cashFlowStatement2021.dividends.billions;
     assert(repurchaseofCommonStockBillions == 44.537);

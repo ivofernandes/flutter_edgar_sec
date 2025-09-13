@@ -10,8 +10,11 @@ import 'package:flutter_edgar_sec/src/processor/income_statement_processor.dart'
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
 
 abstract class FactGroupProcessor {
-  static Future<void> processFactsGroup(Map<String, FinancialStatement> quarters,
-      Map<String, FinancialStatement> annuals, Map<String, dynamic> facts, List<String> referenceFields) async {
+  static Future<void> processFactsGroup(
+      Map<String, FinancialStatement> quarters,
+      Map<String, FinancialStatement> annuals,
+      Map<String, dynamic> facts,
+      List<String> referenceFields) async {
     String referenceField = referenceFields.first;
     for (int i = 0; i < referenceFields.length; i++) {
       if (facts.containsKey(referenceFields[i])) {
@@ -24,8 +27,10 @@ abstract class FactGroupProcessor {
     if (!facts.containsKey(referenceField)) {
       return;
     }
-    final Map<String, dynamic> referenceFieldMap = facts[referenceField] as Map<String, dynamic>;
-    Map<String, dynamic> coinsMap = referenceFieldMap['units'] as Map<String, dynamic>;
+    final Map<String, dynamic> referenceFieldMap =
+        facts[referenceField] as Map<String, dynamic>;
+    Map<String, dynamic> coinsMap =
+        referenceFieldMap['units'] as Map<String, dynamic>;
     coinsMap = await ForexConversionService().convertToUSD(coinsMap);
 
     final referenceUnits = coinsMap['USD'] as List;
@@ -46,18 +51,26 @@ abstract class FactGroupProcessor {
 
     // these should be changed to quarters and annual
     // so we can iterate only 1 time
-    IncomeStatementProcessor.process(facts, quarters, FinancialStatementPeriod.quarterly);
-    BalanceSheetProcessor.process(facts, quarters, FinancialStatementPeriod.quarterly);
-    CashFlowProcessor.process(facts, quarters, FinancialStatementPeriod.quarterly);
+    IncomeStatementProcessor.process(
+        facts, quarters, FinancialStatementPeriod.quarterly);
+    BalanceSheetProcessor.process(
+        facts, quarters, FinancialStatementPeriod.quarterly);
+    CashFlowProcessor.process(
+        facts, quarters, FinancialStatementPeriod.quarterly);
 
     // Process the annuals
-    IncomeStatementProcessor.process(facts, annuals, FinancialStatementPeriod.annual);
-    BalanceSheetProcessor.process(facts, annuals, FinancialStatementPeriod.annual);
+    IncomeStatementProcessor.process(
+        facts, annuals, FinancialStatementPeriod.annual);
+    BalanceSheetProcessor.process(
+        facts, annuals, FinancialStatementPeriod.annual);
     CashFlowProcessor.process(facts, annuals, FinancialStatementPeriod.annual);
   }
 
-  static void _processPeriod(Map<String, FinancialStatement> quarters, Map<String, FinancialStatement> annuals,
-      List<Map<String, dynamic>> quartersRawData, Map<String, dynamic> period) {
+  static void _processPeriod(
+      Map<String, FinancialStatement> quarters,
+      Map<String, FinancialStatement> annuals,
+      List<Map<String, dynamic>> quartersRawData,
+      Map<String, dynamic> period) {
     final startDateString = period['start'] as String;
     final endDateString = period['end'] as String;
     final filedDateString = period['filed'] as String;
@@ -88,10 +101,12 @@ abstract class FactGroupProcessor {
     }
   }
 
-  static FinancialStatement _createFinancialStatement(DateTime startDate,
-      DateTime endDate,
-      DateTime filedDate,
-      FinancialStatementPeriod period,) =>
+  static FinancialStatement _createFinancialStatement(
+    DateTime startDate,
+    DateTime endDate,
+    DateTime filedDate,
+    FinancialStatementPeriod period,
+  ) =>
       FinancialStatement(
         startDate: startDate,
         endDate: endDate,

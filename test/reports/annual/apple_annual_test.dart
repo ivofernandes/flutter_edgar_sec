@@ -7,7 +7,8 @@ void main() {
   /// https://seekingalpha.com/symbol/AAPL/income-statement
   /// https://www.sec.gov/ix?doc=/Archives/edgar/data/320193/000032019322000108/aapl-20220924.htm
   test('Test 2022 apple values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -23,8 +24,10 @@ void main() {
     final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
     final grossProfitBillions = income2022.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
     // -------------- BalanceSheet's fields --------------------- //
@@ -33,7 +36,8 @@ void main() {
     final cashAndCashEquivalents = balance2022.cashAndCashEquivalents.billions;
     final shortTermInvestments = balance2022.shortTermInvestments.billions;
     final tradingAssetSecurities = balance2022.tradingAssetSecurities.billions;
-    final totalCashAndCashEquivalents = balance2022.totalCashAndShortTermInvestments.billions;
+    final totalCashAndCashEquivalents =
+        balance2022.totalCashAndShortTermInvestments.billions;
 
     // Receivables
     final accountsReceivable = balance2022.accountsReceivable.billions;
@@ -48,9 +52,12 @@ void main() {
     final totalCurrentAssets = balance2022.currentAssets.billions;
 
     // Long Term Assets
-    final grossPropertyPlantEquipment = balance2022.grossPropertyPlantEquipment.billions;
-    final accumulatedDepreciation = balance2022.accumulatedDepreciation.billions;
-    final netPropertyPlantEquipment = balance2022.netPropertyPlantEquipment.billions;
+    final grossPropertyPlantEquipment =
+        balance2022.grossPropertyPlantEquipment.billions;
+    final accumulatedDepreciation =
+        balance2022.accumulatedDepreciation.billions;
+    final netPropertyPlantEquipment =
+        balance2022.netPropertyPlantEquipment.billions;
     final longTermInvestments = balance2022.longTermInvestments.billions;
     final goodwill = balance2022.goodwill.billions;
     final otherIntangibles = balance2022.otherIntangibles.billions;
@@ -68,7 +75,8 @@ void main() {
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;

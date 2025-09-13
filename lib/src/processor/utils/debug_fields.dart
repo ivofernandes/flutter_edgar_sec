@@ -19,11 +19,14 @@ class DebugFields {
     final Map<String, num> fieldToCurrentValue = {};
 
     for (final String field in fields) {
-      final Map<String, dynamic> fieldFacts = facts[field] as Map<String, dynamic>;
-      final Map<String, dynamic> fieldUnits = fieldFacts['units'] as Map<String, dynamic>;
+      final Map<String, dynamic> fieldFacts =
+          facts[field] as Map<String, dynamic>;
+      final Map<String, dynamic> fieldUnits =
+          fieldFacts['units'] as Map<String, dynamic>;
       final String unit = fieldUnits.keys.first;
       final List<dynamic> reports = fieldUnits[unit] as List<dynamic>;
-      final Map<String, dynamic> lastReport = reports.last as Map<String, dynamic>;
+      final Map<String, dynamic> lastReport =
+          reports.last as Map<String, dynamic>;
 
       final String lastDate = lastReport['end'] as String;
       final int lastYear = DateTime.parse(lastDate).year;
@@ -34,7 +37,8 @@ class DebugFields {
       fieldToCurrentValue[field] = lastReport['val'] as num;
     }
 
-    final Map<String, num> fieldToBillions = fieldToCurrentValue.map((key, value) {
+    final Map<String, num> fieldToBillions =
+        fieldToCurrentValue.map((key, value) {
       return MapEntry(key, value / (1000 * 1000 * 1000));
     });
 

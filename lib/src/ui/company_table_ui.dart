@@ -38,8 +38,7 @@ class _CompanyTableUIState extends State<CompanyTableUI> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      SizedBox(
+  Widget build(BuildContext context) => SizedBox(
         height: widget.height,
         width: widget.width,
         child: SizedBox(

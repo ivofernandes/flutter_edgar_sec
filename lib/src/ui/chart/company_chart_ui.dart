@@ -53,7 +53,8 @@ class _CompanyChartUIState extends State<CompanyChartUI> {
   }
 
   Future<void> load() async {
-    _companyResults = await EdgarSecService.getFinancialStatementsForSymbol(widget.symbol);
+    _companyResults =
+        await EdgarSecService.getFinancialStatementsForSymbol(widget.symbol);
     loading = false;
     setState(() {});
   }
@@ -63,14 +64,13 @@ class _CompanyChartUIState extends State<CompanyChartUI> {
   /// If the financial data is still being fetched, a [CircularProgressIndicator] is shown.
   /// Once the data is available, an [IncomeFunnelUI] widget is created with the fetched data.
   @override
-  Widget build(BuildContext context) =>
-      loading
-          ? const Center(
-        child: CircularProgressIndicator(),
-      )
-          : IncomeFunnelUI(
-        companyResults: _companyResults,
-        negativeColor: widget.negativeColor,
-        positiveColor: widget.positiveColor,
-      );
+  Widget build(BuildContext context) => loading
+      ? const Center(
+          child: CircularProgressIndicator(),
+        )
+      : IncomeFunnelUI(
+          companyResults: _companyResults,
+          negativeColor: widget.negativeColor,
+          positiveColor: widget.positiveColor,
+        );
 }

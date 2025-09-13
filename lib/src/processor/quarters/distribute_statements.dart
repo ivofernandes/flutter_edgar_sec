@@ -4,7 +4,8 @@ import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 abstract class DistributeStatements {
   /// Distributes the quarters into the yearly results
   static void distributeByQuarter(
-      Map<String, FinancialStatement> quarterStatements, Map<int, YearlyResults> yearlyResults) {
+      Map<String, FinancialStatement> quarterStatements,
+      Map<int, YearlyResults> yearlyResults) {
     for (final quarterStatement in quarterStatements.values) {
       final int year = quarterStatement.year;
 
@@ -30,7 +31,8 @@ abstract class DistributeStatements {
     }
   }
 
-  static void distributeByYear(Map<String, FinancialStatement> annuals, Map<int, YearlyResults> yearlyResults) {
+  static void distributeByYear(Map<String, FinancialStatement> annuals,
+      Map<int, YearlyResults> yearlyResults) {
     for (final annualStatement in annuals.values) {
       final int year = annualStatement.year;
 

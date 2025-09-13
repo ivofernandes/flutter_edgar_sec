@@ -5,7 +5,8 @@ void main() {
   /// Come to this url and select the quarterly period to
   /// https://seekingalpha.com/symbol/AAPL/income-statement
   test('Test 2022-Q3 apple values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -20,8 +21,10 @@ void main() {
     final costOfRevenueBillions = income2022Q2.costOfRevenues.billions;
 
     final grossProfitBillions = income2022Q2.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022Q2.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022Q2.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022Q2.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022Q2.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022Q2.operatingExpenses.billions;
 
     assert(revenueBillions == 82.959);

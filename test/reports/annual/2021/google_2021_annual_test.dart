@@ -10,7 +10,8 @@ void main() {
   /// https://www.sec.gov/Archives/edgar/data/1652044/000165204423000016/goog-20221231.htm#ia96e4fb0476549c99dc3a2b2368f643f_343
 
   test('Test 2021 Google values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -26,13 +27,16 @@ void main() {
     final costOfRevenueBillions = income2021.costOfRevenues.billions;
 
     final grossProfitBillions = income2021.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2021.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2021.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2021.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2021.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2021.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2021.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2021.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2021.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2021.incomeTaxExpense.billions;
 
     final ebitBillions = income2021.EBIT.billions;
@@ -66,7 +70,8 @@ void main() {
   /// https://seekingalpha.com/symbol/GOOG/cash-flow-statement
   /// https://www.sec.gov/Archives/edgar/data/1652044/000165204423000016/goog-20221231.htm#ia96e4fb0476549c99dc3a2b2368f643f_343
   test('Test 2021 Google values for cash flow', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -74,15 +79,20 @@ void main() {
 
     assert(results2021.fullYear != null);
 
-    final CashFlowStatement cashFlowStatement2021 = results2021.fullYear!.cashFlowStatement;
+    final CashFlowStatement cashFlowStatement2021 =
+        results2021.fullYear!.cashFlowStatement;
 
-    final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
+    final repurchaseofCommonStockBillions =
+        cashFlowStatement2021.buyback.billions;
 
     final dividends = cashFlowStatement2021.dividends.billions;
 
-    final sharedBasedCompensationBillions = cashFlowStatement2021.shareBasedCompensation.billions;
-    final capitalExpendituresBillions = cashFlowStatement2021.capitalExpenditures.billions;
-    final cashFromOperationsBillions = cashFlowStatement2021.cashFromOperations.billions;
+    final sharedBasedCompensationBillions =
+        cashFlowStatement2021.shareBasedCompensation.billions;
+    final capitalExpendituresBillions =
+        cashFlowStatement2021.capitalExpenditures.billions;
+    final cashFromOperationsBillions =
+        cashFlowStatement2021.cashFromOperations.billions;
 
     assert(repurchaseofCommonStockBillions == 50.274);
     assert(dividends == 0);

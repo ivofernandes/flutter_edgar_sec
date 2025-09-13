@@ -42,7 +42,8 @@ class CashFlowProcessor {
     // Auxiliar code to find the fields that are not mapped
     final List<String> factsKeys = facts.keys.toList();
     for (final field in factsKeys) {
-      final periods = BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
+      final periods =
+          BaseProcessor.getRows(facts, field, index, typeOfForm: typeOfForm);
 
       for (final period in periods) {
         final String endDateString = period['end'] as String;
@@ -51,7 +52,8 @@ class CashFlowProcessor {
 
         if (BaseProcessor.calculateIsAnnualReport(period)) {
           final DateTime endDate = DateTime.parse(endDateString);
-          final bool matchField = field.toLowerCase().contains('repurchase') || field.toLowerCase().contains('stock');
+          final bool matchField = field.toLowerCase().contains('repurchase') ||
+              field.toLowerCase().contains('stock');
           final bool matchDate = endDate.year == 2021;
           final bool match = matchField && matchDate;
           if (match) {
@@ -87,7 +89,8 @@ class CashFlowProcessor {
     }
   }
 
-  static void _mapValue(String field, double value, CashFlowStatement cashFlowStatement) {
+  static void _mapValue(
+      String field, double value, CashFlowStatement cashFlowStatement) {
     if (dividendsFields.contains(field)) {
       cashFlowStatement.dividends += value;
       return;

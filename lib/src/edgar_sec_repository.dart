@@ -8,7 +8,8 @@ class EdgarSecRepository {
     bool useStorage = true,
   }) async {
     if (useStorage) {
-      final Map<String, dynamic> jsonData = await CompanyResultsDAO().getData(symbol);
+      final Map<String, dynamic> jsonData =
+          await CompanyResultsDAO().getData(symbol);
 
       if (jsonData.isNotEmpty) {
         return CompanyResults.fromJsonStorage(jsonData);
@@ -16,7 +17,8 @@ class EdgarSecRepository {
     }
 
     // If we arrived here, it means that we don't have the data in the local database
-    final CompanyResults companyResults = await EdgarSecService.getFinancialStatementsForSymbol(symbol);
+    final CompanyResults companyResults =
+        await EdgarSecService.getFinancialStatementsForSymbol(symbol);
 
     if (useStorage) {
       await CompanyResultsDAO().saveData(symbol, companyResults.toJson());

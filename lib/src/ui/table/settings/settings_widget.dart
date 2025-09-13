@@ -6,7 +6,8 @@ class SettingsWidget extends StatefulWidget {
   final FinancialStatementPeriod financialStatementPeriod;
   final FinancialType financialType;
 
-  final ValueChanged<FinancialStatementPeriod> onFinancialStatementPeriodChanged;
+  final ValueChanged<FinancialStatementPeriod>
+      onFinancialStatementPeriodChanged;
   final ValueChanged<FinancialType> onFinancialTypeChanged;
 
   const SettingsWidget({

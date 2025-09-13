@@ -82,7 +82,8 @@ class BaseProcessor {
   }
 
   /// Prepare the periods to be processed, avoid duplicated periods
-  static List<Map<String, dynamic>> _finallizePeriods(List<Map<String, dynamic>> periods) {
+  static List<Map<String, dynamic>> _finallizePeriods(
+      List<Map<String, dynamic>> periods) {
     // Reverse so the last periods are processed first
     final periodsReversed = periods.reversed.toList();
 

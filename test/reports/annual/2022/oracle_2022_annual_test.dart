@@ -7,7 +7,8 @@ void main() {
   /// Seeking alpha have a wrong operating income
   /// https://www.sec.gov/ix?doc=/Archives/edgar/data/1341439/000156459022023675/orcl-10k_20220531.htm
   test('Test 2022 Oracle values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('ORCL');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('ORCL');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -23,14 +24,18 @@ void main() {
     final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
     final grossProfitBillions = income2022.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
-    final otherOperatingExpensesBillions = income2022.otherOperatingExpenses.billions;
+    final otherOperatingExpensesBillions =
+        income2022.otherOperatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;

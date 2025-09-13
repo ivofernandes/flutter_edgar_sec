@@ -8,7 +8,8 @@ void main() {
   /// Come to this url and select the quarterly period to
   /// https://seekingalpha.com/symbol/AAPL/income-statement
   test('Test 2022-Q4 apple values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -23,8 +24,10 @@ void main() {
     final costOfRevenueBillions = income2022Q4.costOfRevenues.billions;
 
     final grossProfitBillions = income2022Q4.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022Q4.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022Q4.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022Q4.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022Q4.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022Q4.operatingExpenses.billions;
 
     assert(revenueBillions == 117.154);
@@ -49,7 +52,8 @@ void main() {
   /// Come to this url and select the quarterly period to
   /// https://seekingalpha.com/symbol/AAPL/cash-flow-statement
   test('Test 2022-Q4 apple values for cash flow statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('AAPL');
 
     assert(results.yearlyResults.isNotEmpty);
 

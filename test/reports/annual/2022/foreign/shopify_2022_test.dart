@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://d18rn0p25nwr6d.cloudfront.net/CIK-0001594805/007bace5-ef05-4562-981e-84d927316c28.html#
 void main() {
   test('Test 2022 Shopify values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('SHOP');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('SHOP');
 
     final YearlyResults results2022 = results.yearlyResults[2022]!;
 

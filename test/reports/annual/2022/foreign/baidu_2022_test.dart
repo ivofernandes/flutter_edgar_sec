@@ -8,7 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://ir.baidu.com/financial-information/sec-filings
 void main() {
   test('Test 2022 Baidu values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('BIDU');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('BIDU');
 
     final YearlyResults results2022 = results.yearlyResults[2022]!;
 

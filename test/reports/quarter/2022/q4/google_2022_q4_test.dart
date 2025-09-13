@@ -5,7 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://seekingalpha.com/symbol/GOOG/income-statement
 void main() {
   test('Test 2022-Q4 Google values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('GOOG');
 
     assert(results.yearlyResults.isNotEmpty);
 

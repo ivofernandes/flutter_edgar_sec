@@ -8,7 +8,8 @@ void main() {
     final testDirectory = Directory('test');
     int totalAsserts = 0;
 
-    await for (final entity in testDirectory.list(recursive: true, followLinks: false)) {
+    await for (final entity
+        in testDirectory.list(recursive: true, followLinks: false)) {
       if (entity is File && entity.path.endsWith('.dart')) {
         final content = await entity.readAsString();
         final assertCount = _countAsserts(content);

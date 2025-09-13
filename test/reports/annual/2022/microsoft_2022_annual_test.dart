@@ -7,7 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   /// https://seekingalpha.com/symbol/MSFT/income-statement
   test('Test 2022 Microsoft values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('MSFT');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('MSFT');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -23,13 +24,16 @@ void main() {
     final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
     final grossProfitBillions = income2022.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions = income2022.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    final sellingGeneralAdministrativeBillions =
+        income2022.generalAndAdministrativeExpenses.billions;
+    final researchDevelopmentBillions =
+        income2022.researchAndDevelopmentExpenses.billions;
     final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
+    final otherNonOperatingIncomeExpenseBillions =
+        income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;
@@ -58,7 +62,8 @@ void main() {
   /// Come to this url to get the correct values for the test
   /// https://seekingalpha.com/symbol/MSFT/cash-flow-statement
   test('Test 2022 Microsoft values for cash flow', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('MSFT');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('MSFT');
 
     assert(results.yearlyResults.isNotEmpty);
 
@@ -66,18 +71,26 @@ void main() {
 
     assert(results2022.fullYear != null);
 
-    final CashFlowStatement cashFlowStatement2022 = results2022.fullYear!.cashFlowStatement;
+    final CashFlowStatement cashFlowStatement2022 =
+        results2022.fullYear!.cashFlowStatement;
 
-    final repurchaseofCommonStockBillions = cashFlowStatement2022.buyback.billions;
+    final repurchaseofCommonStockBillions =
+        cashFlowStatement2022.buyback.billions;
 
     final dividends = cashFlowStatement2022.dividends.billions;
 
-    final sharedBasedCompensationBillions = cashFlowStatement2022.shareBasedCompensation.billions;
-    final capitalExpendituresBillions = cashFlowStatement2022.capitalExpenditures.billions;
-    final cashFromOperationsBillions = cashFlowStatement2022.cashFromOperations.billions;
-    final cashFromInvestingBillions = cashFlowStatement2022.cashFromInvesting.billions;
-    final depreciationBillions = cashFlowStatement2022.depreciationAndAmortization.billions;
-    final cashFromFinancingBillions = cashFlowStatement2022.cashFromFinancing.billions;
+    final sharedBasedCompensationBillions =
+        cashFlowStatement2022.shareBasedCompensation.billions;
+    final capitalExpendituresBillions =
+        cashFlowStatement2022.capitalExpenditures.billions;
+    final cashFromOperationsBillions =
+        cashFlowStatement2022.cashFromOperations.billions;
+    final cashFromInvestingBillions =
+        cashFlowStatement2022.cashFromInvesting.billions;
+    final depreciationBillions =
+        cashFlowStatement2022.depreciationAndAmortization.billions;
+    final cashFromFinancingBillions =
+        cashFlowStatement2022.cashFromFinancing.billions;
 
     assert(repurchaseofCommonStockBillions == 32.696);
     //assert(dividends == 18.135);

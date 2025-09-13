@@ -5,7 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// https://seekingalpha.com/symbol/TSLA/income-statement
 void main() {
   test('Test 2022-Q4 Tesla values for income statement', () async {
-    final CompanyResults results = await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
+    final CompanyResults results =
+        await EdgarSecService.getFinancialStatementsForSymbol('TSLA');
 
     assert(results.yearlyResults.isNotEmpty);
 

@@ -25,19 +25,27 @@ class SingleReportFunnel extends StatelessWidget {
     final IncomeStatement incomeStatement = financialStatement.incomeStatement;
     final cashFlowStatement = financialStatement.cashFlowStatement;
 
-    final LinkedHashMap<String, Tuple<double, Color>> data = LinkedHashMap.from({
+    final LinkedHashMap<String, Tuple<double, Color>> data =
+        LinkedHashMap.from({
       'Revenues': Tuple(incomeStatement.revenues, positiveColor),
       'Cost of Revenue': Tuple(incomeStatement.costOfRevenues, negativeColor),
       'Gross Profit': Tuple(incomeStatement.grossProfit, positiveColor),
-      'R&D': Tuple(incomeStatement.researchAndDevelopmentExpenses, negativeColor),
-      'General & Admin': Tuple(incomeStatement.generalAndAdministrativeExpenses, negativeColor),
-      'Operating Expenses': Tuple(incomeStatement.totalOperatingExpenses, negativeColor),
+      'R&D':
+          Tuple(incomeStatement.researchAndDevelopmentExpenses, negativeColor),
+      'General & Admin': Tuple(
+          incomeStatement.generalAndAdministrativeExpenses, negativeColor),
+      'Operating Expenses':
+          Tuple(incomeStatement.totalOperatingExpenses, negativeColor),
       'Operating Income': Tuple(incomeStatement.operatingIncome, positiveColor),
-      'Interest Expense': Tuple(incomeStatement.interestExpenses, negativeColor),
-      'Income Tax Expense': Tuple(incomeStatement.incomeTaxExpense, negativeColor),
-      'Other Expenses': Tuple(incomeStatement.otherNonOperatingIncomeExpense.abs(), negativeColor),
+      'Interest Expense':
+          Tuple(incomeStatement.interestExpenses, negativeColor),
+      'Income Tax Expense':
+          Tuple(incomeStatement.incomeTaxExpense, negativeColor),
+      'Other Expenses': Tuple(
+          incomeStatement.otherNonOperatingIncomeExpense.abs(), negativeColor),
       'Net Income': Tuple(incomeStatement.netIncome, positiveColor),
-      'Total shareholder return': Tuple(cashFlowStatement.totalShareholderReturn, deliveredToHolders),
+      'Total shareholder return':
+          Tuple(cashFlowStatement.totalShareholderReturn, deliveredToHolders),
       'Buybacks': Tuple(cashFlowStatement.buyback, deliveredToHolders),
       'Dividend': Tuple(cashFlowStatement.dividends, deliveredToHolders),
     });
