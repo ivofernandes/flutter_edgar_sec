@@ -2,7 +2,6 @@ import 'package:flutter_edgar_sec/src/model/enums/financial_statment_period.dart
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r3_financial_statement.dart';
 import 'package:flutter_edgar_sec/src/processor/utils/base_processor.dart';
-import 'package:flutter_edgar_sec/src/utils/number_utils.dart';
 
 /// Cash flow processor
 /// https://seekingalpha.com/symbol/AAPL/cash-flow-statement
@@ -48,7 +47,6 @@ class CashFlowProcessor {
       for (final period in periods) {
         final String endDateString = period['end'] as String;
         final double value = (period['val'] as num).toDouble();
-        final valueBillions = value.billions;
 
         if (BaseProcessor.calculateIsAnnualReport(period)) {
           final DateTime endDate = DateTime.parse(endDateString);

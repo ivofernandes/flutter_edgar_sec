@@ -1,6 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Come to this url and select the quarterly period to
@@ -12,20 +10,6 @@ void main() {
 
     assert(results.yearlyResults.isNotEmpty);
 
-    final YearlyResults results2021 = results.yearlyResults[2021]!;
-
-    return;
-    assert(results2021.q4 != null);
-    final IncomeStatement income2022Q1 = results2021.q4!.incomeStatement;
-
-    final revenueBillions = income2022Q1.revenues.billions;
-    final operatingIncomeBillions = income2022Q1.operatingIncome.billions;
-    final netIncomeBillions = income2022Q1.netIncome.billions;
-    final costOfRevenueBillions = income2022Q1.costOfRevenues.billions;
-
-    assert(revenueBillions == 68.011);
-    assert(operatingIncomeBillions == 20.094);
-    assert(netIncomeBillions == 16.436);
-    assert(costOfRevenueBillions == 29.599);
+    //final YearlyResults results2021 = results.yearlyResults[2021]!;
   });
 }

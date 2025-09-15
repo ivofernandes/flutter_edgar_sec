@@ -35,7 +35,7 @@ void main() {
     // Cash and Equivalents
     final cashAndCashEquivalents = balance2022.cashAndCashEquivalents.billions;
     final shortTermInvestments = balance2022.shortTermInvestments.billions;
-    final tradingAssetSecurities = balance2022.tradingAssetSecurities.billions;
+    //final tradingAssetSecurities = balance2022.tradingAssetSecurities.billions;
     final totalCashAndCashEquivalents =
         balance2022.totalCashAndShortTermInvestments.billions;
 
@@ -52,8 +52,7 @@ void main() {
     final totalCurrentAssets = balance2022.currentAssets.billions;
 
     // Long Term Assets
-    final grossPropertyPlantEquipment =
-        balance2022.grossPropertyPlantEquipment.billions;
+    //final grossPropertyPlantEquipment = balance2022.grossPropertyPlantEquipment.billions;
     final accumulatedDepreciation =
         balance2022.accumulatedDepreciation.billions;
     final netPropertyPlantEquipment =
@@ -75,8 +74,7 @@ void main() {
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions =
-        income2022.otherNonOperatingIncomeExpense.billions;
+    //final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;

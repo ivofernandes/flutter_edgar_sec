@@ -1,6 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Come to this url and select the quarterly period to
@@ -45,12 +43,12 @@ void main() {
     final netIncomeBillions = income2022Q3.netIncome.billions;
     final costOfRevenuesBillions = income2022Q3.costOfRevenues.billions;
 
-    final grossProfitBillions = income2022Q3.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions =
-        income2022Q3.generalAndAdministrativeExpenses.billions;
+    //final grossProfitBillions = income2022Q3.grossProfit.billions;
+    //final sellingGeneralAdministrativeBillions =
+    income2022Q3.generalAndAdministrativeExpenses.billions;
     final researchDevelopmentBillions =
         income2022Q3.researchAndDevelopmentExpenses.billions;
-    final operatingExpenseBillions = income2022Q3.operatingExpenses.billions;
+    //final operatingExpenseBillions = income2022Q3.operatingExpenses.billions;
 
     assert(revenueBillions == 69.092);
     assert(operatingIncomeBillions == 17.135);

@@ -1,7 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -28,12 +25,11 @@ void main() {
         income2022.generalAndAdministrativeExpenses.billions;
     final researchDevelopmentBillions =
         income2022.researchAndDevelopmentExpenses.billions;
-    final operatingExpenseBillions = income2022.operatingExpenses.billions;
+    //final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions =
-        income2022.otherNonOperatingIncomeExpense.billions;
+    //final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;
@@ -77,7 +73,7 @@ void main() {
     final repurchaseofCommonStockBillions =
         cashFlowStatement2022.buyback.billions;
 
-    final dividends = cashFlowStatement2022.dividends.billions;
+    //final dividends = cashFlowStatement2022.dividends.billions;
 
     final sharedBasedCompensationBillions =
         cashFlowStatement2022.shareBasedCompensation.billions;
@@ -87,8 +83,7 @@ void main() {
         cashFlowStatement2022.cashFromOperations.billions;
     final cashFromInvestingBillions =
         cashFlowStatement2022.cashFromInvesting.billions;
-    final depreciationBillions =
-        cashFlowStatement2022.depreciationAndAmortization.billions;
+    //final depreciationBillions =cashFlowStatement2022.depreciationAndAmortization.billions;
     final cashFromFinancingBillions =
         cashFlowStatement2022.cashFromFinancing.billions;
 

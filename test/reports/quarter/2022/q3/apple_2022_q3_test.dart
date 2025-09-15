@@ -20,12 +20,10 @@ void main() {
     final netIncomeBillions = income2022Q3.netIncome.billions;
     final costOfRevenueBillions = income2022Q3.costOfRevenues.billions;
 
-    final grossProfitBillions = income2022Q3.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions =
-        income2022Q3.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions =
-        income2022Q3.researchAndDevelopmentExpenses.billions;
-    final operatingExpenseBillions = income2022Q3.operatingExpenses.billions;
+    //final grossProfitBillions = income2022Q3.grossProfit.billions;
+    //final sellingGeneralAdministrativeBillions = income2022Q3.generalAndAdministrativeExpenses.billions;
+    //final researchDevelopmentBillions = income2022Q3.researchAndDevelopmentExpenses.billions;
+    //final operatingExpenseBillions = income2022Q3.operatingExpenses.billions;
 
     // Annual 2022 - Q1 - Q2 - Q4
     // 394.328 - 97.278 - 82.959 - 117.154

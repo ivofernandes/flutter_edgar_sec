@@ -1,7 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -35,10 +32,9 @@ void main() {
     final operatingExpenseBillions = income2021.operatingExpenses.billions;
 
     // Income Statement's asserts
-    final interestExpensesBillions = income2021.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions =
-        income2021.otherNonOperatingIncomeExpense.billions;
-    final incomeTaxExpenseBillions = income2021.incomeTaxExpense.billions;
+    //final interestExpensesBillions = income2021.interestExpenses.billions;
+    //final otherNonOperatingIncomeExpenseBillions = income2021.otherNonOperatingIncomeExpense.billions;
+    //final incomeTaxExpenseBillions = income2021.incomeTaxExpense.billions;
 
     final ebitBillions = income2021.EBIT.billions;
     assert(ebitBillions == operatingIncomeBillions);

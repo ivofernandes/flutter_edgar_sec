@@ -16,9 +16,9 @@ void main() {
     final IncomeStatement income2022 = results2022.fullYear!.incomeStatement;
 
     final revenueBillions = income2022.revenues.billions;
-    final operatingIncomeBillions = income2022.operatingIncome.billions;
-    final netIncomeBillions = income2022.netIncome.billions;
-    final costOfRevenueBillions = income2022.costOfRevenues.billions;
+    //final operatingIncomeBillions = income2022.operatingIncome.billions;
+    //final netIncomeBillions = income2022.netIncome.billions;
+    //final costOfRevenueBillions = income2022.costOfRevenues.billions;
 
     assert(revenueBillions == 73.6704);
   });

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
 import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 
@@ -16,7 +17,7 @@ mixin ValidateAnnualReport {
         q4Income.revenues;
 
     if (fullYearIncome.revenues != calculatedYearRevenues) {
-      print(
+      debugPrint(
           '${yearlyResult.fullYear!.year} Yearly revenues do not match the sum of the quarterly revenues');
     }
   }

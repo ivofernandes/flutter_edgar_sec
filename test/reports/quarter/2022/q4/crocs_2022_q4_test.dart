@@ -16,7 +16,7 @@ void main() {
     final IncomeStatement income2022Q4 = results2022.q4!.incomeStatement;
 
     final revenueBillions = income2022Q4.revenues.billions;
-    final operatingIncomeBillions = income2022Q4.operatingIncome.billions;
+    //final operatingIncomeBillions = income2022Q4.operatingIncome.billions;
     final netIncomeBillions = income2022Q4.netIncome.billions;
     final costOfRevenueBillions = income2022Q4.costOfRevenues.billions;
 

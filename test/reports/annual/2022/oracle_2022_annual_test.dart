@@ -34,8 +34,7 @@ void main() {
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions =
-        income2022.otherNonOperatingIncomeExpense.billions;
+    //final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;

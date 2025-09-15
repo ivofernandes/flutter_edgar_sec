@@ -94,8 +94,8 @@ class IncomeStatementProcessor {
 
       for (final period in periods) {
         final endDateString = period['end'] as String;
-        final double value = (period['val'] as num).toDouble();
-        final valueBillions = value.billions;
+        //final double value = (period['val'] as num).toDouble();
+        //final valueBillions = value.billions;
 
         if (BaseProcessor.calculateIsAnnualReport(period)) {
           final DateTime endDate = DateTime.parse(endDateString);
@@ -105,8 +105,8 @@ class IncomeStatementProcessor {
           if (match) {
             //AppLogger().debug('Found $field @ $endDateString = $valueBillions');
 
-            final financialStatement = index[endDateString]!;
-            final incomeStatement = financialStatement.incomeStatement;
+            //final financialStatement = index[endDateString]!;
+            //final incomeStatement = financialStatement.incomeStatement;
 
             //_mapValue(field, value, incomeStatement, endDateString);
           }
@@ -165,10 +165,8 @@ class IncomeStatementProcessor {
       incomeStatement.costOfRevenues = value;
     } else if (generalAndAdministrativeFields.contains(field) &&
         !alreadyProcessed) {
-      final endDateString = period['end'] as String;
       final List<String> fieldParts = key.split('_');
 
-      final b = value.billions;
       if (processed.contains(
           'SellingGeneralAndAdministrativeExpense_${fieldParts[1]}_${fieldParts[2]}')) {
         return;

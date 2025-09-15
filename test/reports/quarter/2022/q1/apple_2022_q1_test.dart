@@ -20,12 +20,10 @@ void main() {
     final netIncomeBillions = income2022Q1.netIncome.billions;
     final costOfRevenueBillions = income2022Q1.costOfRevenues.billions;
 
-    final grossProfitBillions = income2022Q1.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions =
-        income2022Q1.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions =
-        income2022Q1.researchAndDevelopmentExpenses.billions;
-    final operatingExpenseBillions = income2022Q1.operatingExpenses.billions;
+    //final grossProfitBillions = income2022Q1.grossProfit.billions;
+    //final sellingGeneralAdministrativeBillions = income2022Q1.generalAndAdministrativeExpenses.billions;
+    //final researchDevelopmentBillions = income2022Q1.researchAndDevelopmentExpenses.billions;
+    //final operatingExpenseBillions = income2022Q1.operatingExpenses.billions;
 
     assert(revenueBillions == 97.278);
     assert(operatingIncomeBillions == 29.979);

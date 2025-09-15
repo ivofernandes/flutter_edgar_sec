@@ -1,7 +1,6 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
+// ignore: unnecessary_import
 import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -29,17 +28,14 @@ void main() {
     final netIncomeBillions = income2021.netIncome.billions;
     final costOfRevenueBillions = income2021.costOfRevenues.billions;
 
-    final grossProfitBillions = income2021.grossProfit.billions;
-    final sellingGeneralAdministrativeBillions =
-        income2021.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions =
-        income2021.researchAndDevelopmentExpenses.billions;
-    final operatingExpenseBillions = income2021.operatingExpenses.billions;
+    //final grossProfitBillions = income2021.grossProfit.billions;
+    //final sellingGeneralAdministrativeBillions = income2021.generalAndAdministrativeExpenses.billions;
+    //final researchDevelopmentBillions = income2021.researchAndDevelopmentExpenses.billions;
+    //final operatingExpenseBillions = income2021.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2021.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions =
-        income2021.otherNonOperatingIncomeExpense.billions;
+    //final otherNonOperatingIncomeExpenseBillions = income2021.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2021.incomeTaxExpense.billions;
 
     final ebitBillions = income2021.EBIT.billions;

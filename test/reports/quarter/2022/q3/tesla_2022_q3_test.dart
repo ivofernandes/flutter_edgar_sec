@@ -45,7 +45,7 @@ void main() {
 
     final totalAssetsBillions = balanceSheet.totalAssets.billions;
     final totalLiabilitiesBillions = balanceSheet.totalLiabilities.billions;
-    final totalEquityBillions = balanceSheet.equity.billions;
+    //final totalEquityBillions = balanceSheet.equity.billions;
     final inventoryBillions = balanceSheet.inventory.billions;
     final currentAssetsBillions = balanceSheet.currentAssets.billions;
     final currentLiabilitiesBillions = balanceSheet.currentLiabilities.billions;
@@ -66,6 +66,6 @@ void main() {
     final YearlyResults results2022 = results.yearlyResults[2022]!;
 
     assert(results2022.q3 != null);
-    final CashFlowStatement cashFlow = results2022.q3!.cashFlowStatement;
+    //final CashFlowStatement cashFlow = results2022.q3!.cashFlowStatement;
   });
 }

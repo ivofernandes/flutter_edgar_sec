@@ -1,7 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -82,10 +79,8 @@ void main() {
         results2022.fullYear!.cashFlowStatement;
 
     // Operations
-    final accumulatedDepreciationBillions =
-        cashFlowStatement2022.accumulatedDepreciation.billions;
-    final depreciationAndAmortizationBillions =
-        cashFlowStatement2022.depreciationAndAmortization.billions;
+    //final accumulatedDepreciationBillions = cashFlowStatement2022.accumulatedDepreciation.billions;
+    //final depreciationAndAmortizationBillions = cashFlowStatement2022.depreciationAndAmortization.billions;
     final sharedBasedCompensationBillions =
         cashFlowStatement2022.shareBasedCompensation.billions;
     final deferredIncomeTaxBillions =
@@ -97,8 +92,7 @@ void main() {
     final dividends = cashFlowStatement2022.dividends.billions;
     final cashFromFinancingBillions =
         cashFlowStatement2022.cashFromFinancing.billions;
-    final buyPropertyPlantEquipmentBillions =
-        cashFlowStatement2022.sellMarketableSecurities.billions;
+    //final buyPropertyPlantEquipmentBillions = cashFlowStatement2022.sellMarketableSecurities.billions;
     final buyBackBillions = cashFlowStatement2022.buyback.billions;
 
     // Investing

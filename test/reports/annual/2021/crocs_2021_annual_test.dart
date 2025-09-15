@@ -1,6 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -28,7 +26,7 @@ void main() {
         income2021.generalAndAdministrativeExpenses.billions;
     final researchDevelopmentBillions =
         income2021.researchAndDevelopmentExpenses.billions;
-    final operatingExpenseBillions = income2021.operatingExpenses.billions;
+    //final operatingExpenseBillions = income2021.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2021.interestExpenses.billions;

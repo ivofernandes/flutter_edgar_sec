@@ -1,7 +1,4 @@
 import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
-import 'package:flutter_edgar_sec/src/model/financials/cash_flow_statement.dart';
-import 'package:flutter_edgar_sec/src/model/financials/income_statement.dart';
-import 'package:flutter_edgar_sec/src/model/r2_yearly_results.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -60,11 +57,11 @@ void main() {
     final YearlyResults results2022 = results.yearlyResults[2022]!;
 
     assert(results2022.q4 != null);
-    final CashFlowStatement cashFlow2022Q4 = results2022.q4!.cashFlowStatement;
+    //final CashFlowStatement cashFlow2022Q4 = results2022.q4!.cashFlowStatement;
 
-    final repurchaseofCommonStockBillions = cashFlow2022Q4.buyback.billions;
+    //final repurchaseofCommonStockBillions = cashFlow2022Q4.buyback.billions;
 
-    final dividends = cashFlow2022Q4.dividends.billions;
+    //final dividends = cashFlow2022Q4.dividends.billions;
     //TODO not sure why not matches seeking alpha
     //assert(repurchaseofCommonStockBillions == 21.791);
     //assert(dividends == 3.768);

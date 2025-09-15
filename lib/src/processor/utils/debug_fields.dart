@@ -13,7 +13,6 @@ class DebugFields {
   ) {
     final List<String> fields = facts.keys.toList();
 
-    final fieldsFacts = json.encode(fields);
     final int currentYear = DateTime.now().year;
 
     final Map<String, num> fieldToCurrentValue = {};
