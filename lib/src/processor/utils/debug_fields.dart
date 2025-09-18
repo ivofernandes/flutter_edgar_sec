@@ -37,11 +37,7 @@ class DebugFields {
     }
 
     final Map<String, num> fieldToBillions =
-        fieldToCurrentValue.map((key, value) {
-      return MapEntry(key, value / (1000 * 1000 * 1000));
-    });
-
-    final String jsonCode = json.encode(fieldToBillions);
+        fieldToCurrentValue.map((key, value) => MapEntry(key, value / (1000 * 1000 * 1000)));
 
     final Map<String, num> fieldOverOneBillion = Map.from(fieldToBillions);
     fieldOverOneBillion.removeWhere((key, value) => value < 1);

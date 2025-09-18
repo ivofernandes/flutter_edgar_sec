@@ -32,9 +32,9 @@ class _CompanyTableUIState extends State<CompanyTableUI> {
         return BalanceSheet.labels.length;
       case FinancialType.incomeStatement:
         return IncomeStatement.labels.length;
+      case FinancialType.cashFlowStatement:
+        return CashFlowStatement.labels.length;
     }
-
-    return CashFlowStatement.labels.length;
   }
 
   @override

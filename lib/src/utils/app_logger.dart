@@ -19,7 +19,7 @@ class AppLogger {
   void error(dynamic event, [dynamic error, StackTrace? stackTrace]) {
     if (_enableLogging) {
       if (kDebugMode) {
-        print('ERROR: $event $error $stackTrace');
+        _logger.e('ERROR: $event $error $stackTrace');
       }
     }
   }
@@ -27,7 +27,7 @@ class AppLogger {
   void warning(dynamic event) {
     if (_enableLogging) {
       if (kDebugMode) {
-        print('WARNING: $event');
+        _logger.w('WARNING: $event');
       }
     }
   }
@@ -35,7 +35,7 @@ class AppLogger {
   void debug(dynamic event) {
     if (_enableLogging) {
       if (kDebugMode) {
-        print('DEBUG: $event');
+        _logger.d('DEBUG: $event');
       }
     }
   }
@@ -43,7 +43,7 @@ class AppLogger {
   void trace(dynamic event) {
     if (_enableLogging) {
       if (kDebugMode) {
-        print('TRACE: $event');
+        _logger.d('TRACE: $event');
       }
     }
   }
