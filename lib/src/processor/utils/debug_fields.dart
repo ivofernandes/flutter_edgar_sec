@@ -34,8 +34,8 @@ class DebugFields {
       fieldToCurrentValue[field] = lastReport['val'] as num;
     }
 
-    final Map<String, num> fieldToBillions =
-        fieldToCurrentValue.map((key, value) => MapEntry(key, value / (1000 * 1000 * 1000)));
+    final Map<String, num> fieldToBillions = fieldToCurrentValue
+        .map((key, value) => MapEntry(key, value / (1000 * 1000 * 1000)));
 
     final Map<String, num> fieldOverOneBillion = Map.from(fieldToBillions);
     fieldOverOneBillion.removeWhere((key, value) => value < 1);
