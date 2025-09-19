@@ -26,14 +26,12 @@ void main() {
     final grossProfitBillions = income2022.grossProfit.billions;
     final sellingGeneralAdministrativeBillions =
         income2022.generalAndAdministrativeExpenses.billions;
-    final researchDevelopmentBillions =
-        income2022.researchAndDevelopmentExpenses.billions;
-    final operatingExpenseBillions = income2022.operatingExpenses.billions;
+    //final researchDevelopmentBillions = income2022.researchAndDevelopmentExpenses.billions;
+    //final operatingExpenseBillions = income2022.operatingExpenses.billions;
 
     // Income Statement's asserts
     final interestExpensesBillions = income2022.interestExpenses.billions;
-    final otherNonOperatingIncomeExpenseBillions =
-        income2022.otherNonOperatingIncomeExpense.billions;
+    //final otherNonOperatingIncomeExpenseBillions = income2022.otherNonOperatingIncomeExpense.billions;
     final incomeTaxExpenseBillions = income2022.incomeTaxExpense.billions;
 
     final ebitBillions = income2022.EBIT.billions;
@@ -82,15 +80,13 @@ void main() {
     final CashFlowStatement cashFlowStatement2021 =
         results2021.fullYear!.cashFlowStatement;
 
-    final repurchaseofCommonStockBillions =
-        cashFlowStatement2021.buyback.billions;
+    //final repurchaseofCommonStockBillions = cashFlowStatement2021.buyback.billions;
 
     final dividends = cashFlowStatement2021.dividends.billions;
 
     final sharedBasedCompensationBillions =
         cashFlowStatement2021.shareBasedCompensation.billions;
-    final accumulatedDepreciationBillions =
-        cashFlowStatement2021.accumulatedDepreciation.billions;
+    //final accumulatedDepreciationBillions = cashFlowStatement2021.accumulatedDepreciation.billions;
     final capitalExpendituresBillions =
         cashFlowStatement2021.capitalExpenditures.billions;
 

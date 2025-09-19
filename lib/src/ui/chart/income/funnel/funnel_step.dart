@@ -46,7 +46,7 @@ class FunnelStep extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  color: color.withOpacity(0.2),
+                  color: color.withAlpha(50),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * widthPercentage,

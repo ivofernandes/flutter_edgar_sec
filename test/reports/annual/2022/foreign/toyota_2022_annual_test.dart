@@ -8,6 +8,6 @@ void main() {
     final CompanyResults results =
         await EdgarSecService.getFinancialStatementsForSymbol('TM');
 
-    //assert(results.yearlyResults.isNotEmpty);
+    assert(results.yearlyResults.isNotEmpty);
   });
 }

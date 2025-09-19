@@ -43,7 +43,7 @@ class FinancialStatement implements Comparable<FinancialStatement> {
   String get annualPeriod => year.toString();
 
   /// https://gocardless.com/guides/posts/return-on-capital-employed-formula
-  double get ROCE => incomeStatement.EBIT / balanceSheet.capitalEmployed;
+  double get roce => incomeStatement.EBIT / balanceSheet.capitalEmployed;
 
   /// https://www.investopedia.com/terms/p/payoutratio.asp
   double get payoutRatio =>
